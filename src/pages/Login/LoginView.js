@@ -14,19 +14,15 @@ export default function LoginView(props) {
   return (
     
     <VerticalContainer>
-
+       <Title>Log in to StudNet</Title>
         <LoginContainer>
-            <Title>Login:</Title>
-
-            <InputLbl>Email:</InputLbl>
+            <InputLbl>Email address</InputLbl>
             <TextInput ref={email}/>
-
-            <InputLbl>Password:</InputLbl>
-            <TextInput ref={password}/>    
-
-            <SubmitBtn onClick={() => submitHandler()} >Submit</SubmitBtn>
+            <InputLbl>Password</InputLbl>
+            <TextInput ref={password}/>
+            <SubmitBtn onClick={() => submitHandler()} >Log in</SubmitBtn>
         </LoginContainer>
-
+        
     </VerticalContainer>
     
   )

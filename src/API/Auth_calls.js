@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const BASE_URL = "http://localhost:4000/Auth"
+const BASE_URL = "https://studnet.onrender.com/Auth"
 
 export const sendLoginRequest = async(params) => {
     const result = await axios.get(BASE_URL,{
