@@ -6,8 +6,9 @@ function App(props) {
 
   return (
     <>
-      <Login/>
       <Navbar/>
+      <Login/>
+      
     </>
   );
 }
