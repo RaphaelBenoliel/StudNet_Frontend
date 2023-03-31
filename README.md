@@ -2,15 +2,17 @@
 
 <p id="description">Web site for sharing academic information for students .</p>
 
-<h2>🛠️ Installation Steps:</h2>
+<h2>🛠️ Quick Start:</h2>
 
 <p>1. Clone the repository </p>
 
-```
+```sh
 git clone https://github.com/RaphaelBenoliel/StudNet_Frontend.git
 ```
-
-  
+<p>2. run on consule</p>
+```
+npm start
+```
   
 <h2>💻 Built with</h2>
 
