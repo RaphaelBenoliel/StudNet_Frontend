@@ -1,4 +1,4 @@
-<h1 align="center" id="title">StudNet Frontent</h1>
+<h1 align="center" id="title">StudNet Frontend</h1>
 
 <p id="description">Web site for sharing academic information for students .</p>
 
