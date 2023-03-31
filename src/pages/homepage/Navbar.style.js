@@ -17,9 +17,7 @@ export const BottonContainer = styled.nav`
     height: 80px;
     background-color: blue;
     display: flex;
-    flex-direction: column;
-  
-    
+    flex-direction: column;    
 `
 
 export const LeftContainer = styled.div`
