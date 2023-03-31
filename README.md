@@ -4,10 +4,10 @@
 
 <h2>🛠️ Installation Steps:</h2>
 
-<p>1. create a react app</p>
+<p>1. Clone the repository </p>
 
 ```
-npx create-react-app
+git clone https://github.com/RaphaelBenoliel/StudNet_Frontend.git
 ```
 
   
