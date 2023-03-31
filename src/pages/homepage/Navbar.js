@@ -1,5 +1,5 @@
 import React, {useState}  from 'react'
-import { NavbarContainer,LeftContainer, RightContainer, NavbarInnerContainer, NavbarExtendedContainer, NavbarLinkContainer, NavbarLink, SubmitBtn ,OpenLinksButton, NavbarLinkExtended} from './Navbar.style';
+import { NavbarContainer,LeftContainer, RightContainer, NavbarInnerContainer, NavbarExtendedContainer, NavbarLinkContainer, NavbarLink, SubmitBtn ,OpenLinksButton, NavbarLinkExtended, BottonContainer} from './Navbar.style';
 function Navbar() {
 
     const [extendNavbar, setExtendNavbar] = useState(false);
@@ -10,31 +10,33 @@ function Navbar() {
           <LeftContainer>
             <NavbarLinkContainer>
               <NavbarLink to="/"> Home</NavbarLink>
-              <NavbarLink to="/products"> News</NavbarLink>
+              <NavbarLink to="/news"> News</NavbarLink>
               <NavbarLink to="/contact"> Contacts</NavbarLink>
               <NavbarLink to="/about"> About</NavbarLink>
               <OpenLinksButton
                 onClick={() => {
                   setExtendNavbar((curr) => !curr);
                 }}
-              >
-                {extendNavbar ? <>&#10005;</> : <> &#8801;</>}
+                >
+                 {extendNavbar ? <>&#10005;</> : <> &#8801;</>}
               </OpenLinksButton>
             </NavbarLinkContainer>
           </LeftContainer>
           <RightContainer>
-            <SubmitBtn>Login</SubmitBtn>
+            <NavbarLinkExtended to="/auth"><SubmitBtn> Login</SubmitBtn></NavbarLinkExtended>
           </RightContainer>
         </NavbarInnerContainer>
         {extendNavbar && (
-          <NavbarExtendedContainer>
+        <NavbarExtendedContainer>
             <NavbarLinkExtended to="/"> Home</NavbarLinkExtended>
-            <NavbarLinkExtended to="/products"> News</NavbarLinkExtended>
+            <NavbarLinkExtended to="/news"> News</NavbarLinkExtended>
             <NavbarLinkExtended to="/contact"> Contacts</NavbarLinkExtended>
             <NavbarLinkExtended to="/about"> About</NavbarLinkExtended>
-          </NavbarExtendedContainer>
+        </NavbarExtendedContainer>
+                
         )}
       </NavbarContainer>
+      
     );
   }
   

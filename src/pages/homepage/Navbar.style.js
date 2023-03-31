@@ -12,6 +12,16 @@ export const NavbarContainer = styled.nav`
   }
 `;
 
+export const BottonContainer = styled.nav`
+    width: 100%;
+    height: 80px;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+  
+    
+`
+
 export const LeftContainer = styled.div`
   flex: 70%;
   display: flex;
@@ -41,7 +51,7 @@ export const NavbarLinkContainer = styled.div`
 export const NavbarLinkExtended = styled(Link)`
   color: white;
   font-size: x-large;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: fantasy;
   text-decoration: none;
   margin: 10px;
   &:hover{
@@ -53,13 +63,12 @@ export const NavbarLinkExtended = styled(Link)`
 export const NavbarLink = styled(Link)`
   color: white;
   font-size: x-large;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: fantasy;
   text-decoration: none;
   margin: 10px;
   &:hover{
         cursor: pointer;
         color: #2da042;
-       
     }
   @media (max-width: 700px) {
     display: none;
@@ -108,6 +117,5 @@ export const SubmitBtn = styled.button`
     &:hover{
         cursor: pointer;
         background-color: #2da042;
-       
     }
 `
