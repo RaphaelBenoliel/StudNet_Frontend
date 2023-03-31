@@ -6,10 +6,12 @@
 
 <p>1. Clone the repository </p>
 
-```sh
+```
 git clone https://github.com/RaphaelBenoliel/StudNet_Frontend.git
 ```
+
 <p>2. run on consule</p>
+
 ```
 npm start
 ```
