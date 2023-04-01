@@ -14,7 +14,7 @@ git clone https://github.com/RaphaelBenoliel/StudNet_Frontend.git
 ```
 npm install
 ```
-<p>3. To start run: /p>
+<p>3. To start run: </p>
 
 ```
 npm start
