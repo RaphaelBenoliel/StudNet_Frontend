@@ -9,8 +9,12 @@
 ```
 git clone https://github.com/RaphaelBenoliel/StudNet_Frontend.git
 ```
-
 <p>2. run on consule</p>
+
+```
+npm install
+```
+<p>3. run on consule</p>
 
 ```
 npm start
