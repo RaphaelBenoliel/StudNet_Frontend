@@ -1,20 +1,20 @@
-import React from 'react'
-import { sendLoginRequest } from '../../API/Auth_calls'
-import LoginView from './LoginView'
+import React from 'react';
+import { sendLoginRequest } from '../../API/Auth_calls';
+import LoginView from './LoginView';
 
-export default function Login() {
-
+ function Login() {
   const login = async (email, password) => {
-     console.log(`EMAIL:\t${email}\nPASSWORD:\t${password}`)
+    console.log(`EMAIL:\t${email}\nPASSWORD:\t${password}`);
     await sendLoginRequest({
-      email: email,
-      password: password
-    })
-  }
-  
+      email,
+      password,
+    });
+  };
   return (
     <LoginView
       login={login}
     />
-  )
+  );
 }
+
+export default Login;

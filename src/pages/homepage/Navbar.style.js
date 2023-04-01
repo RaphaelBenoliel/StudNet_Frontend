@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const NavbarContainer = styled.nav`
   width: 100%;
-  height: ${(props) => (props.extendNavbar ? "100vh" : "80px")};
+  height: ${(props) => (props.extendNavbar ? '100vh' : '80px')};
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@ export const BottonContainer = styled.nav`
     background-color: blue;
     display: flex;
     flex-direction: column;    
-`
+`;
 
 export const LeftContainer = styled.div`
   flex: 70%;
@@ -43,8 +43,6 @@ export const NavbarInnerContainer = styled.div`
 export const NavbarLinkContainer = styled.div`
   display: flex;
 `;
-
-
 
 export const NavbarLinkExtended = styled(Link)`
   color: white;
@@ -72,7 +70,6 @@ export const NavbarLink = styled(Link)`
     display: none;
   }
 `;
-
 
 export const Logo = styled.img`
   margin: 10px;
@@ -116,4 +113,4 @@ export const SubmitBtn = styled.button`
         cursor: pointer;
         background-color: #2da042;
     }
-`
+`;

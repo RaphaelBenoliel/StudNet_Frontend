@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 export const LoginContainer = styled.div`
     /* display: flex;
@@ -25,7 +24,7 @@ export const LoginContainer = styled.div`
     flex-direction: column;
     
     
-`
+`;
 
 export const VerticalContainer = styled.div`
     display: flex;
@@ -34,27 +33,25 @@ export const VerticalContainer = styled.div`
     /* justify-content: center; */
     height: 100vh;
     background-color: #0d1116;
-`
+`;
 
 export const InputGrid = styled.div`
     display: block;
     grid-template-columns: 1fr 1fr;
     
-`
+`;
 
 export const Title = styled.h1`
     
     color: #fff;
     line-height: 4;
     font-family: fantasy;
-`
-
+`;
 
 export const InputLbl = styled.label`
   font-size: 15px;
   color:#fff;
-`
-
+`;
 
 export const SubmitBtn = styled.button`
     
@@ -72,7 +69,7 @@ export const SubmitBtn = styled.button`
         background-color: #2da042;
        
     }
-`
+`;
 
 export const TextInput = styled.input`
     border: 2px solid #21262d;
@@ -83,4 +80,4 @@ export const TextInput = styled.input`
     margin-bottom: 8px;
     background-color: #0d1116;
     color: white;
-`
+`;

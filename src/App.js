@@ -1,28 +1,22 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Routes, Route
+  Routes, Route,
 } from 'react-router-dom';
 import Navbar from './pages/homepage/Navbar';
 import Login from './pages/Login';
 
 function App(props) {
-
   return (
-    <>
     <Router>
-    <Navbar></Navbar>
+      <Navbar />
       <Routes>
-      
-      <Route path="/auth" element={<Login />}></Route>
+
+        <Route path="/auth" element={<Login />} />
 
       </Routes>
 
-      
     </Router>
-     
-      
-    </>
   );
 }
 
