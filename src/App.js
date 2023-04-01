@@ -6,16 +6,13 @@ import {
 import Navbar from './pages/homepage/Navbar';
 import Login from './pages/Login';
 
-function App(props) {
+function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-
         <Route path="/auth" element={<Login />} />
-
       </Routes>
-
     </Router>
   );
 }

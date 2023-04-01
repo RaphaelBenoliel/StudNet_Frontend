@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {
-  NavbarContainer, LeftContainer, RightContainer, NavbarInnerContainer, NavbarExtendedContainer, NavbarLinkContainer, NavbarLink, SubmitBtn, OpenLinksButton, NavbarLinkExtended, BottonContainer,
+  NavbarContainer, LeftContainer, RightContainer, NavbarInnerContainer,
+  NavbarExtendedContainer, NavbarLinkContainer, NavbarLink, SubmitBtn,
+  OpenLinksButton, NavbarLinkExtended,
 } from './Navbar.style';
 
 function Navbar() {

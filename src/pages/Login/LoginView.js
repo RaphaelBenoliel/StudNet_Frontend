@@ -6,7 +6,6 @@ import {
 export default function LoginView(props) {
   const email = useRef(null);
   const password = useRef(null);
-
   const submitHandler = () => {
     props.login(email.current.value, password.current.value);
   };

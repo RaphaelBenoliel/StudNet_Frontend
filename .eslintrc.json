@@ -8,16 +8,23 @@
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
+    "settings": {
+        "react":{
+            "version":"detect"
+        }
+    },
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": false
         },
-        "ecmaVersion": 2018,
+        "ecmaVersion": 2020,
         "sourceType": "module"
     },
     "plugins": [
         "react"
     ],
     "rules": {
-    }
+        "import/no-named-as-default-member": "off",
+        "react/jsx-filename-extension" : "off"
+      }
 }

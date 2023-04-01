@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
+/* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
 const BASE_URL = 'https://studnet.onrender.com/Auth';
