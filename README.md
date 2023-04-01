@@ -4,17 +4,17 @@
 
 <h2>🛠️ Quick Start:</h2>
 
-<p>1. Clone the repository </p>
+<p>1. Clone the repository: </p>
 
 ```
 git clone https://github.com/RaphaelBenoliel/StudNet_Frontend.git
 ```
-<p>2. run on consule</p>
+<p>2. Run on terminal to install npm packages: </p>
 
 ```
 npm install
 ```
-<p>3. run on consule</p>
+<p>3. To start run: /p>
 
 ```
 npm start
