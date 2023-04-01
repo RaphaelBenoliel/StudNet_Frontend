@@ -24,6 +24,7 @@ function Navbar() {
           </LeftContainer>
           <RightContainer>
             <NavbarLinkExtended to="/auth"><SubmitBtn> Login</SubmitBtn></NavbarLinkExtended>
+            <NavbarLinkExtended to="/signUp"><SubmitBtn> SignUp</SubmitBtn></NavbarLinkExtended>
           </RightContainer>
         </NavbarInnerContainer>
         {extendNavbar && (

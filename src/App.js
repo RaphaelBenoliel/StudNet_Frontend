@@ -17,7 +17,7 @@ function App(props) {
       <Route path="/auth" element={<Login />}></Route>
 
       </Routes>
-      
+
       
     </Router>
      
