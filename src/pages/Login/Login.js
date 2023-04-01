@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { sendLoginRequest } from '../../API/Auth_calls';
 
