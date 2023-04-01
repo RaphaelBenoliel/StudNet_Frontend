@@ -9,12 +9,12 @@
 ```
 git clone https://github.com/RaphaelBenoliel/StudNet_Frontend.git
 ```
-<p>2. Run on terminal to install npm packages: </p>
+<p>2. run on terminal to install npm packages: </p>
 
 ```
 npm install
 ```
-<p>3. To start run: </p>
+<p>3. to start the app run: </p>
 
 ```
 npm start
