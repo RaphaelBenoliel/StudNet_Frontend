@@ -45,7 +45,7 @@ export const Title = styled.h1`
     
     color: #fff;
     line-height: 4;
-    font-family: fantasy;
+    font-family: monospace, sans-serif;
 `;
 
 export const InputLbl = styled.label`
@@ -80,4 +80,11 @@ export const TextInput = styled.input`
     margin-bottom: 8px;
     background-color: #0d1116;
     color: white;
+`;
+export const EyeLab = styled.label`
+    font-size: 14px;
+    font-family: monospace, sans-serif;
+    align-self: end;
+    color: rgb(45, 160, 66);
+    align: right;
 `;

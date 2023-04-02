@@ -47,7 +47,7 @@ export const NavbarLinkContainer = styled.div`
 export const NavbarLinkExtended = styled(Link)`
   color: white;
   font-size: x-large;
-  font-family: fantasy;
+  font-family: monospace, sans-serif;
   text-decoration: none;
   margin: 10px;
   &:hover{
@@ -59,7 +59,7 @@ export const NavbarLinkExtended = styled(Link)`
 export const NavbarLink = styled(Link)`
   color: white;
   font-size: x-large;
-  font-family: fantasy;
+  font-family: monospace, sans-serif;
   text-decoration: none;
   margin: 10px;
   &:hover{
@@ -108,7 +108,7 @@ export const SubmitBtn = styled.button`
     background-color: #238636;
     color:#fff;
     font-size: x-large;
-    font-family:fantasy;
+    font-family: monospace, sans-serif;
     &:hover{
         cursor: pointer;
         background-color: #2da042;
