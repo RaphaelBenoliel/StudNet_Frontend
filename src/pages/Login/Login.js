@@ -7,10 +7,14 @@ import LoginView from './LoginView';
 function Login() {
   const login = async (email, password) => {
     console.log(`EMAIL:\t${email}\nPASSWORD:\t${password}`);
-    await sendLoginRequest({
-      email,
-      password,
-    });
+    try {
+      await sendLoginRequest({
+        email,
+        password,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <LoginView
