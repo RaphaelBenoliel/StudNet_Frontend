@@ -9,7 +9,7 @@ import {
   Title,
   VerticalContainer,
   EyeLab,
-} from './LoginStyle.style';
+} from './Login.style';
 
 export default function LoginView(props) {
   const email = useRef(null);

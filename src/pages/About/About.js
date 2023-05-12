@@ -5,7 +5,7 @@ import {
   STitle,
   Title,
   HomeWrapper,
-} from './About.styled';
+} from './About.style';
 
 export default function About() {
   return (
