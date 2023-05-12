@@ -4,7 +4,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5001/';
+const BASE_URL = 'https://studnet.onrender.com/';
 
 export const sendLoginRequest = async (params) => {
   try {
