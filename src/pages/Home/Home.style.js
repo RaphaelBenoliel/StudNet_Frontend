@@ -19,7 +19,8 @@ export const STitle = styled.h2`
 `;
 export const Title = styled.h1`
     font-family: monospace, sans-serif;
-    font-size: 70px;
+    text-align: center;
+    font-size: 50px;
     color: #fff;
     margin: 0;
     padding: 0;

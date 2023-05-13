@@ -39,11 +39,8 @@ export default function LoginView(props) {
     window.alert("Password must be at least 8 characters as well as contain at least one uppercase, one lowercase, and one number.");
     return;
   }
-  
   props.login(email.current.value, password.current.value);
-  
   };
-
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
