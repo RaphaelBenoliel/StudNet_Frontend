@@ -3,20 +3,18 @@
 /* eslint-disable no-alert */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-
-const BASE_URL = 'https://studnet.onrender.com/';
-
+//
+// https://studnet.onrender.com/
+const BASE_URL = 'http://localhost:5002/';
 export const sendLoginRequest = async (params) => {
   try {
     const result = await axios.post(`${BASE_URL}log`, params);
-    if (result.status === 200) {
-      alert(result.data.message);
-      return result.data.firstName;
-    } if (result.status === 201) {
-      alert(result.data.message);
-    } else if (result.status === 202) {
-      alert(result.data.message);
+    // console.log(result);
+    if (result.data.success) {
+      alert(result.data.data.message);
+      return result.data.data.firstName;
     }
+    alert(result.data.data.message);
   } catch (error) {
     console.error(error);
     alert('An error occurred while processing your request. Please try again later.');
@@ -27,14 +25,18 @@ export const sendLoginRequest = async (params) => {
 export const sendSignUpRequest = async (params) => {
   try {
     const result = await axios.post(`${BASE_URL}auth`, params);
-    if (result.status === 200) {
-      alert(result.data.message);
+    if (result.data.success) {
+      alert(result.data.data.message);
+      return result.data.data.firstName;
     }
-    if (result.status === 201) {
-      alert(result.data.message);
+    if (result.data.data.message === 'User already exists') {
+      alert(result.data.data.message);
+      return null;
     }
+    alert(result.data.data.message);
   } catch (error) {
     console.error(error);
     alert('An error occurred while processing your request. Please try again later.');
   }
+  return null;
 };
