@@ -12,7 +12,7 @@ export const sendLoginRequest = async (params) => {
     console.log(result);
     if (result.status === 200) {
       alert(result.data.message);
-    } else if (result.status === 'email exists') {
+    } else if (result.status === 201) {
       alert(result.data.message);
     } else if (result.status === 202) {
       alert(result.data.message);
