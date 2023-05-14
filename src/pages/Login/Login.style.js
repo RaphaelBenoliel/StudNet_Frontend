@@ -88,3 +88,9 @@ export const EyeLab = styled.label`
     color: rgb(45, 160, 66);
     align: right;
 `;
+
+export const TextMesasge = styled.h3`
+  font-size: 12px;
+  font-family: monospace, sans-serif;
+  color: red;
+`;

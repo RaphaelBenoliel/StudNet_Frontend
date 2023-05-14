@@ -3,7 +3,8 @@
 /* eslint-disable no-alert */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-
+// https://studnet.onrender.com/
+// http://localhost:5002/
 const BASE_URL = 'https://studnet.onrender.com/';
 export const sendLoginRequest = async (params) => {
   try {
