@@ -2,7 +2,6 @@
 import eyeClosed from '../../icons/eye-off.png';
 import eyeOpen from '../../icons/eye-on.png';
 import React, { useRef, useState } from 'react';
-
 import {
   InputLbl,
   LoginContainer,
@@ -28,21 +27,25 @@ export default function LoginView(props) {
     // Check if the email is empty
     if (email.current.value === "") {
       setMessage("• Email field must be filled out");
+      props.setMessage('');
       isRegex = true;
       // Check if the email is in the correct format
     }else if (!email.current.value.match(emailRegex)) {
       setMessage("• Please enter a valid email address");
+      props.setMessage('');
       isRegex = true;
     }else setMessage("");
     // Check if the password is empty
     if (password.current.value === "") {
       setMessagePass1("");
       setMessagePass("• Password field must be filled out");
+      props.setMessage('');
       isRegex = true;
       // Check if the password is in the correct format
     }else if (!password.current.value.match(passRegex)) {
       setMessagePass("• Password must be at least 8 characters.");
       setMessagePass1("• At least one uppercase, lowercase and number.");
+      props.setMessage('');
       isRegex = true;
     } else{
       setMessagePass("");
@@ -63,6 +66,7 @@ export default function LoginView(props) {
         <TextInput type={show ? 'text' : 'password'} id="password" ref={password} placeholder="Password"/>
         <TextMesasge>{messagePass}<br/>{messagePass1}</TextMesasge>
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>
+        <TextMesasge>{props.message }</TextMesasge>
       </LoginContainer>
     </VerticalContainer>
 
