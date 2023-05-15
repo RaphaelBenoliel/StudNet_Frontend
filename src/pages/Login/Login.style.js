@@ -1,3 +1,5 @@
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable arrow-parens */
 import styled from 'styled-components';
 
 export const LoginContainer = styled.div`
@@ -81,16 +83,14 @@ export const TextInput = styled.input`
     background-color: #0d1116;
     color: white;
 `;
-export const EyeLab = styled.label`
-    font-size: 14px;
-    font-family: monospace, sans-serif;
-    align-self: end;
-    color: rgb(45, 160, 66);
-    align: right;
+
+export const EyeLab = styled.span`
+    cursor: pointer;
 `;
 
 export const TextMesasge = styled.h3`
-  font-size: 12px;
+  font-size: 13px;
   font-family: monospace, sans-serif;
-  color: red;
+  font-style: italic;
+  color: rgb(200 , 0, 0);
 `;

@@ -1,5 +1,6 @@
 /* eslint-disable */
-
+import eyeClosed from '../../icons/eye-off.png';
+import eyeOpen from '../../icons/eye-on.png';
 import React, { useRef, useState } from 'react';
 
 import {
@@ -26,16 +27,17 @@ export default function LoginView(props) {
     var isRegex = false;
     // Check if the email is empty
     if (email.current.value === "") {
-      setMessage("Email field must be filled out");
+      setMessage("• Email field must be filled out");
       isRegex = true;
       // Check if the email is in the correct format
     }else if (!email.current.value.match(emailRegex)) {
-      setMessage("Please enter a valid email address");
+      setMessage("• Please enter a valid email address");
       isRegex = true;
     }else setMessage("");
     // Check if the password is empty
     if (password.current.value === "") {
-      setMessagePass("Password field must be filled out");
+      setMessagePass1("");
+      setMessagePass("• Password field must be filled out");
       isRegex = true;
       // Check if the password is in the correct format
     }else if (!password.current.value.match(passRegex)) {
@@ -49,23 +51,19 @@ export default function LoginView(props) {
     if (!isRegex) props.login(email.current.value, password.current.value);
   };
   const [show, setShow] = useState(false);
-  const handleShow = () => {
-    setShow(!show);
-  };
+  const handleShow = () => { setShow(!show); };
   return (
     <VerticalContainer>
       <Title>Log in to StudNet</Title>
       <LoginContainer>
         <InputLbl>Email address&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</InputLbl>
-        <TextInput type="email" ref={email} placeholder="Email"/>
+        <TextInput type="email" ref={email} placeholder="Email"></TextInput>
         <TextMesasge>{message}</TextMesasge>
-        <InputLbl>Password&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<EyeLab onClick={handleShow}>{show ? 'Hide' : 'Show'} </EyeLab></InputLbl>
+        <InputLbl>Password&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<EyeLab onClick={handleShow}> <img src={show ? eyeClosed : eyeOpen} alt={show ? 'Hide' : 'Show'} /></EyeLab></InputLbl>
         <TextInput type={show ? 'text' : 'password'} id="password" ref={password} placeholder="Password"/>
         <TextMesasge>{messagePass}<br/>{messagePass1}</TextMesasge>
-        
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>
       </LoginContainer>
-
     </VerticalContainer>
 
   );
