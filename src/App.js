@@ -8,8 +8,10 @@ import Login from './pages/Login';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import SignUp from './pages/SignUp/SignUp';
-
+// import { useLocation } from 'react-router-dom';
+// let user = {};
 function App() {
+  // const location = useLocation();
   return (
     <Router>
       <Navbar />

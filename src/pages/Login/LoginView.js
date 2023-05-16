@@ -62,12 +62,14 @@ export default function LoginView(props) {
         <InputLbl>Email address&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</InputLbl>
         <TextInput type="email" ref={email} placeholder="Email"></TextInput>
         <TextMesasge>{message}</TextMesasge>
-        <InputLbl>Password&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<EyeLab onClick={handleShow}> <img src={show ? eyeClosed : eyeOpen} alt={show ? 'Hide' : 'Show'} /></EyeLab></InputLbl>
+        <InputLbl>Password<EyeLab onClick={handleShow}> <img src={show ? eyeClosed : eyeOpen} alt={show ? 'Hide' : 'Show'} /></EyeLab></InputLbl>
         <TextInput type={show ? 'text' : 'password'} id="password" ref={password} placeholder="Password"/>
         <TextMesasge>{messagePass}<br/>{messagePass1}</TextMesasge>
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>
         <TextMesasge>{props.message }</TextMesasge>
+        <InputLbl>Don't have an account? <a href="/signup">Sign up</a></InputLbl>
       </LoginContainer>
+     
     </VerticalContainer>
 
   );

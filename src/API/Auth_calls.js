@@ -11,18 +11,13 @@ export const sendLoginRequest = async (params, setMessage) => {
   setMessage('');
   try {
     const result = await axios.post(`${BASE_URL}log`, params);
-    // console.log(result);
+    console.log(result);
     if (result.data.success) {
-      alert(result.data.data.message);
-      return result.data.data.firstName;
+      alert(`Hello ${result.data.data.user.firstName}, You are now logged in!`);
+      return result.data.data.user;
     }
     // alert(result.data.data.message);
     setMessage(result.data.data.message);
-    // const errorElement = document.createElement('span');
-    // errorElement.textContent = result.data.data.message;
-    // eslint-disable-next-line max-len
-    // const inputText = document.getElementById('TextMesasge'); // replace this with the ID of your input text element
-    // inputText.parentNode.appendChild(errorElement);
   } catch (error) {
     console.error(error);
     alert('An error occurred while processing your request. Please try again later.');

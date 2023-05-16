@@ -98,7 +98,8 @@ export default function SignUpView(props) {
         <InputLbl>Password</InputLbl>
         <TextInput type={show ? 'text' : 'password'} id="password" ref={password} placeholder="Password"/>
         <EyeLab onClick={handleShow}>{show ? 'Hide' : 'Show'} </EyeLab>
-        <SubmitBtn onClick={() => submitHandler()}>Sign Up</SubmitBtn>
+        <SubmitBtn onClick={() => submitHandler()}>Sign up</SubmitBtn>
+        <InputLbl>Already have an account? <a href="/login">log in</a></InputLbl>
       </LoginContainer>
 
     </VerticalContainer>

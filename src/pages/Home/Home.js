@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* eslint max-len: ["error", { "code": 400 }] */
 import { useLocation } from 'react-router-dom';
 import React from 'react';
@@ -7,17 +8,21 @@ import {
   Title,
   HomeWrapper,
 } from './Home.style';
+// import Navbar from '../Navbar/Navbar';
+// import { myUser } from '../Login/Login';
 
 export default function Home() {
   const location = useLocation();
+  // const user = myUser;
+  // console.log(`sssss${myUser}`);
   return (
     <HomeWrapper>
       <TextContainer>
-        {location.state && location.state.firstName ? (
+        {location.state && location.state.user.firstName ? (
           <Title>
             Hello
             {' '}
-            {location.state.firstName}
+            {location.state.user.firstName}
             ! Welcome to StudNet
           </Title>
         ) : (
