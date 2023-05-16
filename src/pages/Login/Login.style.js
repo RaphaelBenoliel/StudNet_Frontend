@@ -2,30 +2,35 @@
 /* eslint-disable arrow-parens */
 import styled from 'styled-components';
 
+export const InputLbl = styled.label`
+  font-size: 15px;
+  color:#fff;
+  align-items: center;
+  /* display: block; */
+  /* margin-bottom: 8px; */
+`;
+export const EyeLab = styled.span`
+    margin-left: 160px;
+    cursor: pointer;
+
+`;
 export const LoginContainer = styled.div`
-    /* display: flex;
-    flex-direction: column;
-    height: fit-content;
-    width: fit-content;
-    padding: 16px;
-    border: 2px solid black;
-    align-items: center;
     
-    margin-top: 0%;
-    gap: 16px;
-    border-radius: 16px;
-    background-color: white; */
     padding: 50px 20px;
-    height: fit-content;
+    /* height: fit-content; */
     border: 2px solid #21262d;
     border-radius: 6px;
     background-color: #161b22;
     gap: 10px;
-    align-items: center;
+    /* align-items: auto; */
     display: flex;
     flex-direction: column;
-    
-    
+    margin-top: 30px;
+    */
+   ${InputLbl} {
+    display: flex;
+    align-items: center;
+  }  
 `;
 
 export const VerticalContainer = styled.div`
@@ -37,26 +42,18 @@ export const VerticalContainer = styled.div`
     background-color: #0d1116;
 `;
 
-export const InputGrid = styled.div`
-    display: block;
-    grid-template-columns: 1fr 1fr;
-    
-`;
+// export const InputGrid = styled.div`
+//     display: block;
+//     grid-template-columns: 1fr 1fr;
+// `;
 
 export const Title = styled.h1`
-    
     color: #fff;
     line-height: 4;
     font-family: monospace, sans-serif;
 `;
 
-export const InputLbl = styled.label`
-  font-size: 15px;
-  color:#fff;
-`;
-
 export const SubmitBtn = styled.button`
-    
     border: 1px solid #2da042;
     border-radius: 8px;
     width: 250px;
@@ -69,7 +66,6 @@ export const SubmitBtn = styled.button`
     &:hover{
         cursor: pointer;
         background-color: #2da042;
-       
     }
 `;
 
@@ -78,14 +74,11 @@ export const TextInput = styled.input`
     width: 250px;
     height: 25px;
     border-radius: 5px;
-    text-align: left;
+    /* text-align: left; */
+    align-items: left;
     margin-bottom: 8px;
     background-color: #0d1116;
     color: white;
-`;
-
-export const EyeLab = styled.span`
-    cursor: pointer;
 `;
 
 export const TextMesasge = styled.h3`
@@ -93,4 +86,5 @@ export const TextMesasge = styled.h3`
   font-family: monospace, sans-serif;
   font-style: italic;
   color: rgb(200 , 0, 0);
+  text-align: left
 `;
