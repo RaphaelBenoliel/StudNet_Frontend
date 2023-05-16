@@ -51,6 +51,5 @@ export const NavbarLinkExtended = styled(Link)`
         color: #fff;
         border: 2px solid #238636;
         background-color: #238636;
-       
     }
 `;
