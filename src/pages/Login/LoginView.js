@@ -67,7 +67,7 @@ export default function LoginView(props) {
         <TextMesasge>{messagePass}<br/>{messagePass1}</TextMesasge>
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>
         <TextMesasge>{props.message }</TextMesasge>
-        <InputLbl>Don't have an account? <a href="/signup">Sign up</a></InputLbl>
+        <InputLbl>Don't have an account? <a to="/signUp">Sign up</a></InputLbl>
       </LoginContainer>
      
     </VerticalContainer>
