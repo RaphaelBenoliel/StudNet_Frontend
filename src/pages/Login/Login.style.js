@@ -1,9 +1,10 @@
 /* eslint-disable no-confusing-arrow */
 /* eslint-disable arrow-parens */
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const InputLbl = styled.label`
-  font-size: 15px;
+  font-size: 16px;
   color:#fff;
   align-items: center;
   /* display: block; */
@@ -87,4 +88,13 @@ export const TextMesasge = styled.h3`
   font-style: italic;
   color: rgb(200 , 0, 0);
   text-align: left
+`;
+
+export const NavLink = styled(Link)`
+    color: #238636;
+    text-decoration: none;
+    &:hover{
+        cursor: pointer;
+        color: #2da042;
+    }
 `;
