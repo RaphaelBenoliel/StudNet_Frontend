@@ -11,6 +11,7 @@ import {
   VerticalContainer,
   EyeLab,
   TextMesasge,
+  NavLink,
 } from './Login.style';
 
 export default function LoginView(props) {
@@ -67,9 +68,8 @@ export default function LoginView(props) {
         <TextMesasge>{messagePass}<br/>{messagePass1}</TextMesasge>
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>
         <TextMesasge>{props.message }</TextMesasge>
-        <InputLbl>Don't have an account? <a to="/signUp">Sign up</a></InputLbl>
+        <InputLbl>Don't have an account? <NavLink to="/signUp">Sign Up</NavLink> </InputLbl>
       </LoginContainer>
-     
     </VerticalContainer>
 
   );
