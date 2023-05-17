@@ -1,13 +1,14 @@
 import styled from 'styled-components';
-
+import Mybackground from '../../icons/background.jpg';
 // eslint-disable-next-line import/prefer-default-export
 export const HomeWrapper = styled.div`
-    display: block;
-    padding: 20px 20px;
-    flex-direction: column;
-    justify-content: center;
+    background-image: url(${Mybackground});
     height: 100vh;
-    background-color: #fff;
+    background-position: center;
+    background-size: cover;
+    /* align-items:center;
+    text-align: center; */
+    margin-top: 0px;
     
   
 `;
@@ -16,12 +17,13 @@ export const STitle = styled.h2`
     font-family: monospace;
     text-align: center;
     margin: 8px 350px;
-    
+    color: white;
+    font-family: fantasy;
 `;
 export const Title = styled.h1`
     font-family: monospace, sans-serif;
     font-size: 70px;
-    color: black;
+    color: #fff;
     margin: 0 0 20px;
     padding: 0;
 
