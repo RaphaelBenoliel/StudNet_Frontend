@@ -44,6 +44,7 @@ export const VerticalContainer = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: fixed;
 `;
 
 // export const InputGrid = styled.div`
