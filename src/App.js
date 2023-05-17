@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Routes, Route,
+  Routes, Route, Navigate,
 } from 'react-router-dom';
 import Navbar from './pages/Navbar/Navbar';
 import Login from './pages/Login';
@@ -21,7 +21,8 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
     </Router>
   );
