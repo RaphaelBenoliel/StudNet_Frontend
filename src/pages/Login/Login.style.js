@@ -16,7 +16,6 @@ export const EyeLab = styled.span`
 
 `;
 export const LoginContainer = styled.div`
-    
     padding: 20px 20px;
     /* height: fit-content; */
     border: 2px solid #21262d;
@@ -35,13 +34,13 @@ export const LoginContainer = styled.div`
 `;
 
 export const VerticalContainer = styled.div`
+    background-image: url("../../icons/background.jpg");
     display: flex;
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
     height: 100vh;
     background-color: #0d1116;
-    background-image: 'url(./icons/background.jpg)';
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
