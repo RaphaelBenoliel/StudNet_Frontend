@@ -17,16 +17,16 @@ export const EyeLab = styled.span`
 `;
 export const LoginContainer = styled.div`
     
-    padding: 50px 20px;
+    padding: 20px 20px;
     /* height: fit-content; */
     border: 2px solid #21262d;
     border-radius: 6px;
     background-color: #161b22;
-    gap: 10px;
+    gap: 1px;
     /* align-items: auto; */
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: -50px;
     */
    ${InputLbl} {
     display: flex;
@@ -41,6 +41,10 @@ export const VerticalContainer = styled.div`
     /* justify-content: center; */
     height: 100vh;
     background-color: #0d1116;
+    background-image: 'url(./icons/background.jpg)';
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 `;
 
 // export const InputGrid = styled.div`
@@ -52,6 +56,8 @@ export const Title = styled.h1`
     color: #fff;
     line-height: 4;
     font-family: monospace, sans-serif;
+    margin-bottom: 30px;
+    margin-top: -20px;
 `;
 
 export const SubmitBtn = styled.button`
@@ -87,7 +93,7 @@ export const TextMesasge = styled.h3`
   font-family: monospace, sans-serif;
   font-style: italic;
   color: rgb(200 , 0, 0);
-  text-align: left
+  text-align: left;
 `;
 
 export const NavLink = styled(Link)`

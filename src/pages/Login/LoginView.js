@@ -17,9 +17,11 @@ import {
 export default function LoginView(props) {
   const email = useRef(null);
   const password = useRef(null);
-  const [ message,setMessage ] = useState("");
+  const [ message, setMessage ] = useState("");
   const [ messagePass ,setMessagePass ]= useState("")
   const [ messagePass1 ,setMessagePass1 ]= useState("")
+  const [ messagePass2 ,setMessagePass2 ]= useState("")
+
   const submitHandler = () => {
     // Regular expression to check if the email is in the correct format
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -27,30 +29,33 @@ export default function LoginView(props) {
     var isRegex = false;
     // Check if the email is empty
     if (email.current.value === "") {
-      setMessage("• Email field must be filled out");
+      setMessage("Email field must be filled out");
       props.setMessage('');
       isRegex = true;
       // Check if the email is in the correct format
     }else if (!email.current.value.match(emailRegex)) {
-      setMessage("• Please enter a valid email address");
+      setMessage("Please enter a valid email address");
       props.setMessage('');
       isRegex = true;
     }else setMessage("");
     // Check if the password is empty
     if (password.current.value === "") {
       setMessagePass1("");
-      setMessagePass("• Password field must be filled out");
+      setMessagePass("Password field must be filled out");
       props.setMessage('');
       isRegex = true;
       // Check if the password is in the correct format
     }else if (!password.current.value.match(passRegex)) {
-      setMessagePass("• Password must be at least 8 characters.");
-      setMessagePass1("• At least one uppercase, lowercase and number.");
+      setMessagePass("Password must be at least 8 characters.");
+      setMessagePass1("At least one uppercase,");
+      setMessagePass2("lowercase and number.");
       props.setMessage('');
       isRegex = true;
     } else{
       setMessagePass("");
       setMessagePass1("");
+      setMessagePass2("");
+
     }
     if (!isRegex) props.login(email.current.value, password.current.value);
   };
@@ -60,17 +65,16 @@ export default function LoginView(props) {
     <VerticalContainer>
       <Title>Log in to StudNet</Title>
       <LoginContainer>
-        <InputLbl>Email address&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</InputLbl>
+        <InputLbl>Email address</InputLbl>
         <TextInput type="email" ref={email} placeholder="Email"></TextInput>
         <TextMesasge>{message}</TextMesasge>
         <InputLbl>Password<EyeLab onClick={handleShow}> <img src={show ? eyeClosed : eyeOpen} alt={show ? 'Hide' : 'Show'} /></EyeLab></InputLbl>
         <TextInput type={show ? 'text' : 'password'} id="password" ref={password} placeholder="Password"/>
-        <TextMesasge>{messagePass}<br/>{messagePass1}</TextMesasge>
+        <TextMesasge>{messagePass}<br/>{messagePass1}<br/>{messagePass2}</TextMesasge>
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>
         <TextMesasge>{props.message }</TextMesasge>
         <InputLbl>Don't have an account? <NavLink to="/signUp">Sign up</NavLink> </InputLbl>
       </LoginContainer>
     </VerticalContainer>
-
   );
 }

@@ -25,7 +25,7 @@ export const sendLoginRequest = async (params, setMessage) => {
   return null;
 };
 
-export const sendSignUpRequest = async (params) => {
+export const sendSignUpRequest = async (params, setMessage) => {
   try {
     const result = await axios.post(`${BASE_URL}auth`, params);
     if (result.data.success) {
@@ -36,7 +36,7 @@ export const sendSignUpRequest = async (params) => {
       alert(result.data.data.message);
       return null;
     }
-    alert(result.data.data.message);
+    setMessage(result.data.data.message);
   } catch (error) {
     console.error(error);
     alert('An error occurred while processing your request. Please try again later.');
