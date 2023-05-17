@@ -62,8 +62,8 @@ export default function LoginView(props) {
   const [show, setShow] = useState(false);
   const handleShow = () => { setShow(!show); };
   return (
-    <VerticalContainer>
-      <Title>Log in to StudNet</Title>
+       <VerticalContainer>
+        <Title>Log in to StudNet</Title>
       <LoginContainer>
         <InputLbl>Email address</InputLbl>
         <TextInput type="email" ref={email} placeholder="Email"></TextInput>
@@ -73,7 +73,7 @@ export default function LoginView(props) {
         <TextMesasge>{messagePass}<br/>{messagePass1}<br/>{messagePass2}</TextMesasge>
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>
         <TextMesasge>{props.message }</TextMesasge>
-        <InputLbl>Don't have an account? <NavLink to="/signUp">Sign up</NavLink> </InputLbl>
+        <InputLbl>&emsp;&emsp;Don't have an account?&nbsp;&nbsp;<NavLink to="/signUp">Sign up</NavLink> </InputLbl>
       </LoginContainer>
     </VerticalContainer>
   );

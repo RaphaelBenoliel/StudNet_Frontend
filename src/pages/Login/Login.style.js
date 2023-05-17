@@ -2,49 +2,54 @@
 /* eslint-disable arrow-parens */
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Mybackground from '../../icons/background.jpg';
 
 export const InputLbl = styled.label`
   font-size: 16px;
   color:#fff;
   align-items: center;
-  /* display: block; */
-  /* margin-bottom: 8px; */
+  display: block;
+  margin-bottom: 8px;
 `;
 export const EyeLab = styled.span`
-    margin-left: 160px;
+    margin-left: 60%;
+    
+    display: block;
     cursor: pointer;
 
 `;
 export const LoginContainer = styled.div`
-    padding: 20px 20px;
-    /* height: fit-content; */
+    padding: 30px 30px;
+    height: fit-content;
+    width: 17%;
     border: 2px solid #21262d;
-    border-radius: 6px;
+    border-radius: 8px;
     background-color: #161b22;
     gap: 1px;
-    /* align-items: auto; */
-    display: flex;
+    margin-left: 40%;
+    display: block;
     flex-direction: column;
-    margin-top: -50px;
-    */
+    /* margin-top: -50px; */
    ${InputLbl} {
-    display: flex;
-    align-items: center;
-  }  
+      display: flex;
+      align-items: center;
+  }
 `;
 
 export const VerticalContainer = styled.div`
-    background-image: url("../../icons/background.jpg");
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-image: url(${Mybackground});
+    /* display: flex; */
+    /* flex-direction: column; */
     /* justify-content: center; */
     height: 100vh;
-    background-color: #0d1116;
+    /* background-color: #0d1116; */
     background-position: center;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat width 250px; */
     background-size: cover;
-    position: fixed;
+    /* position: fixed; */
+    align-items:center;
+    text-align: center;
+    margin-top: 19px;
 `;
 
 // export const InputGrid = styled.div`
@@ -63,9 +68,10 @@ export const Title = styled.h1`
 export const SubmitBtn = styled.button`
     border: 1px solid #2da042;
     border-radius: 8px;
-    width: 250px;
+    width: fit-content;
     height: 40px;
     padding: 10px;
+    margin-bottom: 10px;
     background-color: #238636;
     color:#fff;
     font-size: 15px;
@@ -78,7 +84,7 @@ export const SubmitBtn = styled.button`
 
 export const TextInput = styled.input`
     border: 2px solid #21262d;
-    width: 250px;
+    width: 100%;
     height: 25px;
     border-radius: 5px;
     /* text-align: left; */

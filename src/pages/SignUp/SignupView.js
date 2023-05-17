@@ -140,7 +140,7 @@ export default function SignUpView(props) {
         <TextInput type={show ? 'text' : 'password'} id="password" ref={password} placeholder="Password"/>
         <TextMesasge>{messagePass}<br/>{messagePass1}<br/>{messagePass2}</TextMesasge>
         <SubmitBtn onClick={() => submitHandler()}>Sign up</SubmitBtn>
-        <InputLbl>Already have an account? <NavLink to="/login">Sign in</NavLink></InputLbl>
+        <InputLbl>&emsp;&emsp;Already have an account?&nbsp;&nbsp;<NavLink to="/login">Sign in</NavLink></InputLbl>
       </LoginContainer>
     </VerticalContainer>
   );
