@@ -21,19 +21,19 @@ export const EyeLab = styled.span`
 export const LoginContainer = styled.div`
     padding: 20px 30px;
     height: fit-content;
-    width: 17%;
-    border: 2px solid #21262d;
+    width: 19%;
+    border: 1px solid #21262d;
     border-radius: 10px;
     //background-color: #161b22;
     background-color: rgba(200, 200, 200, 0.2);
     gap: 1px;
-    margin-left: 40%;
-    display: block;
+    margin-left: 39%;
     flex-direction: column;
+    display: flex;
+    justify-content: center;
     margin-top: -20px;
    ${InputLbl} {
       display: flex;
-      align-items: center;
   }
 `;
 
