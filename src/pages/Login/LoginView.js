@@ -39,8 +39,8 @@ export default function LoginView(props) {
       isRegex = true;
     }else setMessage("");
     // Check if the password is empty
-    if (password.current.value === "") {
-      setMessagePass1("");
+    if (password.current.value === '') {
+      setMessagePass1('');
       setMessagePass("Password cannot be empty.");
       props.setMessage('');
       isRegex = true;
@@ -55,7 +55,6 @@ export default function LoginView(props) {
       setMessagePass("");
       setMessagePass1("");
       setMessagePass2("");
-
     }
     if (!isRegex) props.login(email.current.value, password.current.value);
   };

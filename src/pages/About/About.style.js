@@ -3,12 +3,12 @@ import Mybackground from '../../icons/background2.png';
 // eslint-disable-next-line import/prefer-default-export
 export const HomeWrapper = styled.div`
     background-image: url(${Mybackground});
-    height: 120vh;
     background-position: center;
     background-size: cover;
-    /* align-items:center;
-    text-align: center; */
+    text-align: center;
     margin-top: 0px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     
   
 `;

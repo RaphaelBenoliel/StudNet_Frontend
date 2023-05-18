@@ -6,7 +6,7 @@ import axios from 'axios';
 // https://studnet.onrender.com/
 // http://localhost:5002/
 
-const BASE_URL = 'https://studnet.onrender.com/';
+const BASE_URL = 'http://localhost:5002/';
 export const sendLoginRequest = async (params, setMessage) => {
   setMessage('');
   try {
@@ -26,15 +26,12 @@ export const sendLoginRequest = async (params, setMessage) => {
 };
 
 export const sendSignUpRequest = async (params, setMessage) => {
+  setMessage('');
   try {
     const result = await axios.post(`${BASE_URL}auth`, params);
     if (result.data.success) {
-      alert(result.data.data.message);
-      return result.data.data.firstName;
-    }
-    if (result.data.data.message === 'User already exists') {
-      alert(result.data.data.message);
-      return null;
+      alert(`Hello ${result.data.data.newUser.firstName}, You are now registered!`);
+      return result.data.data.user;
     }
     setMessage(result.data.data.message);
   } catch (error) {

@@ -75,7 +75,7 @@ export default function SignUpView(props) {
       setMessageUser('Username must be alphanumeric.');
       props.setMessage('');
       isRegex = true;
-    }
+    }else setMessageUser('');
     // Check if the first name is empty
     if (firstName.current.value === '') {
       setMessageFirst('First name cannot be empty.');
@@ -86,7 +86,7 @@ export default function SignUpView(props) {
       setMessageFirst('First name must be alphabetic.');
       props.setMessage('');
       isRegex = true;
-    }
+    } else setMessageFirst('');
     // Check if the last name is empty
     if (lastName.current.value === '') {
       setMessageLast('Last name cannot be empty.');
@@ -97,7 +97,7 @@ export default function SignUpView(props) {
       setMessageLast('Last name must be alphabetic.');
       props.setMessage('');
       isRegex = true;
-    }
+    } else setMessageLast('');
     if (!isRegex) {
       props.signup(email.current.value, password.current.value, userName.current.value, firstName.current.value, lastName.current.value);
     }
@@ -120,7 +120,6 @@ export default function SignUpView(props) {
         <TextInput type="text" ref={userName} placeholder="Username" />
         <TextMesasge>
           {messageUser}
-          {props.message}
         </TextMesasge>
         <InputLbl>First name</InputLbl>
         <TextInput type="text" ref={firstName} placeholder="First name" />
