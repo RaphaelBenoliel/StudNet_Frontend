@@ -2,7 +2,7 @@
 /* eslint-disable arrow-parens */
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Mybackground from '../../icons/background.jpg';
+import Mybackground from '../../icons/background2.png';
 
 export const InputLbl = styled.label`
   font-size: 16px;
@@ -22,9 +22,10 @@ export const LoginContainer = styled.div`
     padding: 30px 30px;
     height: fit-content;
     width: 17%;
-    border: 2px solid #21262d;
+    border: 1px solid #21262d;
     border-radius: 8px;
-    background-color: #161b22;
+    //background-color: #161b22;
+    background-color: rgba(255, 255, 255, 0.2);
     gap: 1px;
     margin-left: 40%;
     display: block;
