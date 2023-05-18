@@ -64,6 +64,7 @@ export const NavbarLink = styled(Link)`
   text-decoration: none;
   margin: 10px;
   &:hover{
+        margin-top: 5px;
         cursor: pointer;
         color: #2da042;
     }
@@ -101,19 +102,22 @@ export const NavbarExtendedContainer = styled.div`
 `;
 
 export const SubmitBtn = styled.button`
-    margin: 18px;
-    border: 1px solid #2da042;
-    border-radius: 8px;
-    width: 100px;
-    height: 40px;
-    background-color: #238636;
-    color:#fff;
-    font-size: 16px;
-    font-family: monospace, sans-serif;
-    &:hover{
-        cursor: pointer;
-        background-color: #2da042;
-    }
+  border: 1px solid #2da042;
+  border-radius: 8px;
+  width: 100px;
+  height: 40px;
+  background-color: #238636;
+  color: #fff;
+  font-size: 16px;
+  font-family: monospace, sans-serif;
+  outline: none;
+  padding: 0; /* Remove any padding */
+  display: inline-block;
+  margin-top: 10px;
+  &:hover {
+    cursor: pointer;
+    background-color: #2da042;
+  }
 `;
 
 export const TextAuth = styled.h1`

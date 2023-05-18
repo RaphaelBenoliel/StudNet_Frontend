@@ -91,6 +91,7 @@ export const SubmitBtn = styled.button`
     margin-bottom: 10px;
     background-color: #238636;
     color:#fff;
+    outline: none;
     font-size: 15px;
 
     &:hover{
