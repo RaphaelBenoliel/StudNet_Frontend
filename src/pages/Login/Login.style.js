@@ -30,7 +30,7 @@ export const LoginContainer = styled.div`
     margin-left: 40%;
     display: block;
     flex-direction: column;
-    /* margin-top: -50px; */
+    margin-top: -20px;
    ${InputLbl} {
       display: flex;
       align-items: center;
@@ -41,7 +41,7 @@ export const VerticalContainer = styled.div`
     background-image: url(${Mybackground});
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 125vh;
+    height: 120vh;
     background-size: cover;
     text-align: center;
     margin-top: 19px;
