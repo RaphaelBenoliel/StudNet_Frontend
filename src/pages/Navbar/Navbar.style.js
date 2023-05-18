@@ -123,7 +123,7 @@ export const SubmitBtn = styled.button`
 export const TextAuth = styled.h1`
   font-size: 17px;
   font-family: monospace, sans-serif;
-  color: #fff;
+  color: #2da042;
   text-align: center; /* Align the text to the center */
   letter-spacing: 2px; /* Add some letter spacing */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Apply a subtle text shadow */
