@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import Mybackground from '../../icons/background.jpg';
+import Mybackground from '../../icons/background2.png';
 // eslint-disable-next-line import/prefer-default-export
 export const HomeWrapper = styled.div`
     background-image: url(${Mybackground});
-    height: 100vh;
+    height: 120vh;
     background-position: center;
     background-size: cover;
     /* align-items:center;
@@ -16,9 +16,9 @@ export const STitle = styled.h2`
     color: black;
     font-family: monospace;
     text-align: center;
-    margin: 8px 350px;
+    margin: 3px 150px;
     color: white;
-    font-family: fantasy;
+    //font-family: fantasy;
 `;
 export const Title = styled.h1`
     font-family: monospace, sans-serif;

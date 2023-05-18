@@ -9,7 +9,7 @@ export const InputLbl = styled.label`
   color:#fff;
   align-items: center;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 `;
 export const EyeLab = styled.span`
     margin-left: 60%;
@@ -19,13 +19,13 @@ export const EyeLab = styled.span`
 
 `;
 export const LoginContainer = styled.div`
-    padding: 30px 30px;
+    padding: 20px 30px;
     height: fit-content;
     width: 17%;
-    border: 1px solid #21262d;
-    border-radius: 8px;
+    border: 2px solid #21262d;
+    border-radius: 10px;
     //background-color: #161b22;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(200, 200, 200, 0.2);
     gap: 1px;
     margin-left: 40%;
     display: block;
@@ -41,15 +41,15 @@ export const VerticalContainer = styled.div`
     background-image: url(${Mybackground});
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 100vh;
+    height: 125vh;
     background-size: cover;
     text-align: center;
     margin-top: 19px;
     /* background-color: #0d1116; */
     /* display: flex; */
     /* position: fixed; */
-    /* flex-direction: column; */
-    /* justify-content: center; */
+    flex-direction: column;
+    justify-content: center;
 `;
 
 // export const InputGrid = styled.div`
@@ -59,9 +59,9 @@ export const VerticalContainer = styled.div`
 
 export const Title = styled.h1`
     color: #fff;
-    line-height: 4;
+    line-height: 3;
     font-family: monospace, sans-serif;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     margin-top: -20px;
 `;
 
@@ -89,7 +89,7 @@ export const TextInput = styled.input`
     border-radius: 5px;
     /* text-align: left; */
     align-items: left;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     background-color: #0d1116;
     color: white;
 `;
