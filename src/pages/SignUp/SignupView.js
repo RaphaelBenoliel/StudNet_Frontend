@@ -38,7 +38,7 @@ export default function SignUpView(props) {
 
     // Check if the email is empty
     if (email.current.value === '') {
-      setMessage('Email field must be filled out');
+      setMessage('Email cannot be empty.');
       props.setMessage('');
       isRegex = true;
     } else if (!email.current.value.match(emailRegex)) {
@@ -50,7 +50,7 @@ export default function SignUpView(props) {
     // Check if the password is empty
     if (password.current.value === '') {
       setMessagePass1('');
-      setMessagePass('Password field must be filled out');
+      setMessagePass('Password cannot be empty.');
       props.setMessage('');
       isRegex = true;
     } else if (!password.current.value.match(passRegex)) {
@@ -67,34 +67,34 @@ export default function SignUpView(props) {
     }
     // Check if the userName is empty
     if (userName.current.value === '') {
-      setMessageUser('Username field must be filled out');
+      setMessageUser('Username cannot be empty.');
       props.setMessage('');
       isRegex = true;
     } else if (!userName.current.value.match(userNameRegex)) {
       // Check if the usernName is in the correct format
-      setMessageUser('Username must be alphanumeric');
+      setMessageUser('Username must be alphanumeric.');
       props.setMessage('');
       isRegex = true;
     }
     // Check if the first name is empty
     if (firstName.current.value === '') {
-      setMessageFirst('First name field must be filled out');
+      setMessageFirst('First name cannot be empty.');
       props.setMessage('');
       isRegex = true;
     } else if (!firstName.current.value.match(nameRegex)) {
     // Check if the first name is in the correct format
-      setMessageFirst('First name must be alphabetic');
+      setMessageFirst('First name must be alphabetic.');
       props.setMessage('');
       isRegex = true;
     }
     // Check if the last name is empty
     if (lastName.current.value === '') {
-      setMessageLast('Last name field must be filled out');
+      setMessageLast('Last name cannot be empty.');
       props.setMessage('');
       isRegex = true;
     } else if (!lastName.current.value.match(nameRegex)) {
     // Check if the last name is in the correct format
-      setMessageLast('Last name must be alphabetic');
+      setMessageLast('Last name must be alphabetic.');
       props.setMessage('');
       isRegex = true;
     }

@@ -29,7 +29,7 @@ export default function LoginView(props) {
     var isRegex = false;
     // Check if the email is empty
     if (email.current.value === "") {
-      setMessage("Email field must be filled out");
+      setMessage("Email cannot be empty.");
       props.setMessage('');
       isRegex = true;
       // Check if the email is in the correct format
@@ -41,7 +41,7 @@ export default function LoginView(props) {
     // Check if the password is empty
     if (password.current.value === "") {
       setMessagePass1("");
-      setMessagePass("Password field must be filled out");
+      setMessagePass("Password cannot be empty.");
       props.setMessage('');
       isRegex = true;
       // Check if the password is in the correct format
