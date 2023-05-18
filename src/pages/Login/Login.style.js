@@ -38,18 +38,17 @@ export const LoginContainer = styled.div`
 
 export const VerticalContainer = styled.div`
     background-image: url(${Mybackground});
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: center; */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100vh;
-    /* background-color: #0d1116; */
-    background-position: center;
-    /* background-repeat: no-repeat width 250px; */
     background-size: cover;
-    /* position: fixed; */
-    align-items:center;
     text-align: center;
     margin-top: 19px;
+    /* background-color: #0d1116; */
+    /* display: flex; */
+    /* position: fixed; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
 `;
 
 // export const InputGrid = styled.div`
