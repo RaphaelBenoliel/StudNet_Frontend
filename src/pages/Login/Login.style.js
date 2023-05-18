@@ -19,7 +19,7 @@ export const EyeLab = styled.span`
 
 `;
 export const LoginContainer = styled.div`
-    padding: 20px 30px;
+    /* padding: 20px 30px;
     height: fit-content;
     width: 19%;
     border: 1px solid #21262d;
@@ -34,6 +34,23 @@ export const LoginContainer = styled.div`
     margin-top: -20px;
    ${InputLbl} {
       display: flex;
+  }*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 30px;
+  width: 300px;
+  height: fit-content;
+  border: 1px solid #21262d;
+  border-radius: 10px;
+  background-color: rgba(200, 200, 200, 0.2);
+  margin: 0 auto;
+  margin-top: -20px;
+
+  ${InputLbl} {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
   }
 `;
 
@@ -83,15 +100,33 @@ export const SubmitBtn = styled.button`
 `;
 
 export const TextInput = styled.input`
-    border: 2px solid #21262d;
+    /* border: 2px solid #21262d;
     width: 100%;
     height: 25px;
     border-radius: 5px;
-    /* text-align: left; */
     align-items: left;
     margin-bottom: 3px;
     background-color: #0d1116;
-    color: white;
+    color: white; */
+    border: 2px solid #21262d;
+  width: 90%;
+  height: 25px;
+  border-radius: 5px;
+  margin-bottom: 3px;
+  background-color: #0d1116;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  outline: none;
+  
+  ::placeholder {
+    color: #8c8c8c;
+  }
+  
+  &:focus {
+    border-color: #2ea043;
+  }
 `;
 
 export const TextMesasge = styled.h3`

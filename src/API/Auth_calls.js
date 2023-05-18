@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
@@ -16,7 +17,6 @@ export const sendLoginRequest = async (params, setMessage) => {
       alert(`Hello ${result.data.data.user.firstName}, You are now logged in!`);
       return result.data.data.user;
     }
-    // alert(result.data.data.message);
     setMessage(result.data.data.message);
   } catch (error) {
     console.error(error);

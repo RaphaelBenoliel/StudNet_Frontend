@@ -107,7 +107,7 @@ export const SubmitBtn = styled.button`
     height: 40px;
     background-color: #238636;
     color:#fff;
-    font-size: 20px;
+    font-size: 16px;
     font-family: monospace, sans-serif;
     &:hover{
         cursor: pointer;
