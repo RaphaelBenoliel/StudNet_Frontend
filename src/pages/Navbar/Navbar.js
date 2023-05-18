@@ -2,11 +2,10 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { UserContext } from '../../UserContext';
 import {
   NavbarContainer, LeftContainer, RightContainer, NavbarInnerContainer,
   NavbarExtendedContainer, NavbarLinkContainer, NavbarLink, SubmitBtn,
-  OpenLinksButton, NavbarLinkExtended,
+  OpenLinksButton, NavbarLinkExtended, TextAuth,
 } from './Navbar.style';
 
 function Navbar() {
@@ -58,9 +57,16 @@ function Navbar() {
         </LeftContainer>
         <RightContainer>
           {auth ? (
-            <NavbarLinkExtended onClick={signOut} to="/">
-              <SubmitBtn>Sign out</SubmitBtn>
-            </NavbarLinkExtended>
+            <>
+              <TextAuth>
+                {JSON.parse(auth).firstName}
+                &nbsp;
+                {JSON.parse(auth).lastName}
+              </TextAuth>
+              <NavbarLinkExtended onClick={signOut} to="/">
+                <SubmitBtn>Sign out</SubmitBtn>
+              </NavbarLinkExtended>
+            </>
           ) : (
             <>
               <NavbarLinkExtended to="/"><SubmitBtn> Sign in</SubmitBtn></NavbarLinkExtended>
@@ -87,5 +93,4 @@ function Navbar() {
     </NavbarContainer>
   );
 }
-
 export default Navbar;

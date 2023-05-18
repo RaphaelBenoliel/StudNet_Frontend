@@ -1,6 +1,7 @@
 /* eslint-disable */
 /* eslint max-len: ["error", { "code": 400 }] */
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import {
   TextContainer,
@@ -12,18 +13,28 @@ import {
 // import { myUser } from '../Login/Login';
 
 export default function Home() {
-  const location = useLocation();
-  // const user = myUser;
-  // console.log(`sssss${myUser}`);
+  const [auth, setAuth] = useState(null);
+  const history = useNavigate();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const authData = localStorage.getItem('user');
+      if (authData) {
+        setAuth(authData);
+        history('/home'); // Redirect to home after setting auth
+      }
+    }
+  }, [history]);
+
   return (
     <HomeWrapper>
       <TextContainer>
-        {location.state && location.state.user.firstName ? (
+        {auth ? (
           <Title>
             Hello
             {' '}
-            {location.state.user.firstName}
-            ! Welcome to StudNet
+            {JSON.parse(auth).firstName}
+            !<br />Welcome to StudNet
           </Title>
         ) : (
           <Title>

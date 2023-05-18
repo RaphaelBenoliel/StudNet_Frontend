@@ -5,6 +5,7 @@ export const NavbarContainer = styled.nav`
   width: 100%;
   height: ${(props) => (props.extendNavbar ? '100vh' : '80px')};
   background-color: black;
+  flex-wrap: wrap;
   display: flex;
   flex-direction: column;
   @media (min-width: 700px) {
@@ -113,4 +114,14 @@ export const SubmitBtn = styled.button`
         cursor: pointer;
         background-color: #2da042;
     }
+`;
+
+export const TextAuth = styled.h1`
+  font-size: 17px;
+  font-family: monospace, sans-serif;
+  color: #fff;
+  text-align: center; /* Align the text to the center */
+  letter-spacing: 2px; /* Add some letter spacing */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Apply a subtle text shadow */
+  margin-top: 35px;
 `;
