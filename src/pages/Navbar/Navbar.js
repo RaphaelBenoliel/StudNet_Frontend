@@ -12,23 +12,23 @@ function Navbar() {
   const [extendNavbar, setExtendNavbar] = useState(false);
   // const [open, setOpen] = useState(false);
   const [auth, setAuth] = useState(null);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const authData = localStorage.getItem('user');
       if (authData) {
         setAuth(authData);
-        history('/home'); // Redirect to home after setting auth
+        // navigate('/home'); // Redirect to home after setting auth
       }
     }
-  }, [history]);
+  }, [navigate]);
 
   const signOut = () => {
     if (typeof window !== 'undefined') {
       localStorage.clear();
       setAuth(null); // Update auth state to null
-      history('/');
+      navigate('/');
     }
   };
   return (
@@ -43,6 +43,7 @@ function Navbar() {
                 <NavbarLink to="/Search">Search</NavbarLink>
                 <NavbarLink to="/tools">Tools</NavbarLink>
                 <NavbarLink to="/terms">Conditions & Terms</NavbarLink>
+                <NavbarLink to="/about"> About</NavbarLink>
               </>
             ) : (
               <NavbarLink to="/about"> About</NavbarLink>
@@ -85,6 +86,7 @@ function Navbar() {
               <NavbarLinkExtended to="/Search">Search</NavbarLinkExtended>
               <NavbarLinkExtended to="/tools">Tools</NavbarLinkExtended>
               <NavbarLinkExtended to="/terms">Conditions & Terms</NavbarLinkExtended>
+              <NavbarLinkExtended to="/about"> About</NavbarLinkExtended>
             </>
           ) : (
             <NavbarLinkExtended to="/about"> About</NavbarLinkExtended>
