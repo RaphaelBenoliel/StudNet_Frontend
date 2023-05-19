@@ -10,6 +10,7 @@ import {
 
 function Navbar() {
   const [extendNavbar, setExtendNavbar] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [auth, setAuth] = useState(null);
   const history = useNavigate();
 

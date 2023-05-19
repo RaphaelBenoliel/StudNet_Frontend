@@ -8,6 +8,9 @@ export const NavbarContainer = styled.nav`
   flex-wrap: wrap;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 0;
+  z-index: 999;
   @media (min-width: 700px) {
     height: 80px;
   }

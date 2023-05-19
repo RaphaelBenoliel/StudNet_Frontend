@@ -1,15 +1,19 @@
 import styled from 'styled-components';
-
+import Mybackground from '../../icons/background2.png';
 // eslint-disable-next-line import/prefer-default-export
 export const HomeWrapper = styled.div`
-  display: block;
-  padding: 50px 20px;
-  flex-direction: column;
- 
-  justify-content: center;
-  height: 100vh;
-  background-color: #0d1116;
-  
+    background-image: url(${Mybackground});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 120vh;
+    background-size: cover;
+    text-align: center;
+    margin-top: 75px;
+    /* background-color: #0d1116; */
+    /* display: flex; */
+    /* position: fixed; */
+    flex-direction: column;
+    justify-content: center;
 `;
 export const STitle = styled.h2`
     color: white;

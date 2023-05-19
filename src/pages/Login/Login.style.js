@@ -30,7 +30,6 @@ export const LoginContainer = styled.div`
   background-color: rgba(200, 200, 200, 0.2);
   margin: 0 auto;
   margin-top: -20px;
-
   ${InputLbl} {
     display: flex;
     align-items: center;
@@ -45,7 +44,7 @@ export const VerticalContainer = styled.div`
     height: 120vh;
     background-size: cover;
     text-align: center;
-    margin-top: 19px;
+    margin-top: 75px;
     /* background-color: #0d1116; */
     /* display: flex; */
     /* position: fixed; */

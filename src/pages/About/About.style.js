@@ -18,7 +18,7 @@ export const HomeWrapper = styled.div`
     background-repeat: no-repeat;
     min-height: 100vh; /* Use min-height instead of a fixed height */
     text-align: center;
-    margin-top: 0;
+    margin-top: 75px;
 `;
 export const STitle = styled.h2`
     color: black;
