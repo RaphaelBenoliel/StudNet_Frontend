@@ -9,28 +9,42 @@ import {
   Title,
   HomeWrapper,
 } from './Home.style';
+import sendPostRequest from '../../API/Home_calls';
 // import Navbar from '../Navbar/Navbar';
 // import { myUser } from '../Login/Login';
 
 export default function Home() {
   const [auth, setAuth] = useState(null);
+  const [postCon, setPost] = useState(null);
   const history = useNavigate();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const authData = localStorage.getItem('user');
+      const posts = localStorage.getItem('post');
       if (authData) {
+        setPost(post);
         setAuth(authData);
         history('/home'); // Redirect to home after setting auth
       }
     }
   }, [history]);
-
+  const post = async(content) => {
+    try {
+      const result = await sendPostRequest(content);
+      if (result === null) return;
+      localStorage.setItem('post', JSON.stringify(result));
+    } catch(error) {
+      console.error(error);
+    }
+  };
+  post('Hello this is a post!!!!');
   return (
     <HomeWrapper>
       <TextContainer>
         {auth ? (
           <Title>
+            {postCon}
             Hello
             {' '}
             {JSON.parse(auth).firstName}
