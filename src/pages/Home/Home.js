@@ -45,17 +45,16 @@ export default function Home() {
         if (auth) {
           const result = await sendGetRequest();
           if (result && result.data) {
-            localStorage.setItem('posts', JSON.stringify(result.data));
-            // const updatedPostData = JSON.parse(localStorage.getItem('posts')); // Parse the JSON string
-            // setPostData(updatedPostData);
+            // const updatedPosts = result.data.posts ? result.data.posts : [];
             setPostData(result.data);
-            // console.log('result.data: ', updatedPostData); // Use updatedPostData instead of postData
+            localStorage.setItem('posts', JSON.stringify(result.data));
           }
         }
       } catch (error) {
         console.error(error);
       }
     };
+  
     getPosts();
   }, [auth]);
 
@@ -76,21 +75,35 @@ export default function Home() {
       if (result === null) return;
   
       const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
-      localStorage.setItem('posts', JSON.stringify(updatedPosts));
-      setPostData(updatedPosts);
+  
+      // Parse the auth object from the string stored in local storage
+      const parsedAuth = JSON.parse(auth);
+  
+      // Initialize auth.posts as an array if it's not already
+      if (!Array.isArray(parsedAuth.posts)) {
+        parsedAuth.posts = [];
+      }
+  
+      // Update the auth.posts array with the new posts
+      parsedAuth.posts.push(...updatedPosts);
+  
+      // Stringify the updated auth object before storing it back in local storage
+      const updatedAuth = JSON.stringify(parsedAuth);
+      localStorage.setItem('user', updatedAuth);
+  
+      setPostData([...postData, ...updatedPosts]);
+      localStorage.setItem('posts', JSON.stringify([...postData, ...updatedPosts]));
   
       // Reset the new post content
       setNewPostContent('');
-      window.location.reload();
     } catch (error) {
       console.error(error);
     }
   };
-  
-  
+
   const handleDeletePost = async (postId) => {
     try {
-      await sendDeleteRequest(postId);
+      await sendDeleteRequest( {postId, auth} ); //good
       const updatedPostData = postData.filter((post) => post._id !== postId);
       setPostData(updatedPostData);
     } catch (error) {
@@ -102,10 +115,12 @@ export default function Home() {
     try {
       const result = await sendPutRequest(postId, { content: updatedContent });
       if (result === null) return;
-      localStorage.setItem('posts', JSON.stringify(result.data));
+      
       const updatedPostData = JSON.parse(localStorage.getItem('posts'));
-      window.location.reload();
       setPostData(updatedPostData);
+      localStorage.setItem('posts', JSON.stringify(result.data));
+      
+      window.location.reload();
       setEditingPostId(null); // Reset the editing post id
       setUpdatedPostContent({}); // Reset the updated post content
     } catch (error) {
