@@ -5,7 +5,9 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import {
   TextContainer,
-  STitle,
+  CreatePostContainer,
+  PostInput,
+  PostButton,
   Title,
   HomeWrapper,
   PostContainer,
@@ -14,13 +16,14 @@ import {
   UserDetails,
   UserPicture,
 } from './Home.style';
-import sendGetRequest from '../../API/Home_calls';
+import { sendGetRequest, sendPostRequest } from '../../API/Home_calls';
 // import Navbar from '../Navbar/Navbar';
 // import { myUser } from '../Login/Login';
 
 export default function Home() {
   const [auth, setAuth] = useState(null);
   const [postData, setPostData] = useState([]);
+  const [newPostContent, setNewPostContent] = useState('');
   // const [postCon, setPost] = useState(null);
   const history = useNavigate();
   useEffect(() => {
@@ -55,22 +58,23 @@ export default function Home() {
     const date = new Date(dateString);
     return date.toLocaleString();
   };
-  // const post = async(content) => {
-  //   console.log(`CONTENT:\t${content}`);
-  //   if (!auth) {
-  //     console.log('Not logged in');
-  //     return;
-  //   }
-  //   try {
-  //     const result = await sendPostRequest({ auth, content });
-  //     if (result === null) return;
-  //     localStorage.setItem('posts', JSON.stringify(result.data));
-  //     console.log(result.data);
-  //   } catch(error) {
-  //     console.error(error);
-  //   }
-  // };
-  // post('Hello this is a post!!!!');
+  const handlePostSubmission = async () => {
+    if (!auth) {
+      console.log('Not logged in');
+      return;
+    }
+    try {
+      console.log(`CONTENT:\t${newPostContent}`);
+      const result = await sendPostRequest({ auth, content: newPostContent });
+      if (result === null) return;
+      localStorage.setItem('posts', JSON.stringify(result.data));
+      console.log(result.data);
+      // Reset the new post content
+      setNewPostContent('');
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
 <HomeWrapper>
       <TextContainer>
@@ -80,8 +84,17 @@ export default function Home() {
               Hello {JSON.parse(auth).firstName}!<br />
               Welcome to StudNet
             </Title>
+            <Post>
+              <CreatePostContainer>
+                <PostInput
+                  type="text"
+                  value={newPostContent}
+                  onChange={(e) => setNewPostContent(e.target.value)}
+                  placeholder="Write your post..."/><PostButton onClick={handlePostSubmission}>Post</PostButton>
+              </CreatePostContainer>
+            </Post>
             <PostContainer>
-              {postData.map((post) => (
+              {postData.sort((a, b) => new Date(b.date) - new Date(a.date)).map((post) => (
                 <Post key={post._id}>
                   <UserDetails>
                     <UserPicture src={post.userID.picture} alt="User Profile" />

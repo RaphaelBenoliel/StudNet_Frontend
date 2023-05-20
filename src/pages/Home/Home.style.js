@@ -77,3 +77,27 @@ export const DateContainer = styled.div`
 flex-shrink: 0;
 margin-left: 10px;
 `;
+
+export const CreatePostContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+export const PostInput = styled.input`
+  flex: 1;
+  padding: 15px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+`;
+
+export const PostButton = styled.button`
+  padding: 10px 20px;
+  background: #2196F3;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+`;
