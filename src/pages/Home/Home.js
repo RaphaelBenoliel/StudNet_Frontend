@@ -54,7 +54,6 @@ export default function Home() {
         console.error(error);
       }
     };
-  
     getPosts();
   }, [auth]);
 
@@ -71,7 +70,6 @@ export default function Home() {
     try {
       console.log(`CONTENT:\t${newPostContent}`);
       const result = await sendPostRequest({ auth, content: newPostContent });
-  
       if (result === null) return;
   
       const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
@@ -93,9 +91,10 @@ export default function Home() {
   
       setPostData([...postData, ...updatedPosts]);
       localStorage.setItem('posts', JSON.stringify([...postData, ...updatedPosts]));
-  
+
       // Reset the new post content
       setNewPostContent('');
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
