@@ -40,7 +40,7 @@ function Navbar() {
               <>
                 <NavbarLink to="/home"> Home</NavbarLink>
                 <NavbarLink to="/profile"> Profile</NavbarLink>
-                <NavbarLink to="/Search">Search</NavbarLink>
+                <NavbarLink to="/search">Search</NavbarLink>
                 <NavbarLink to="/tools">Tools</NavbarLink>
                 <NavbarLink to="/terms">Conditions & Terms</NavbarLink>
                 <NavbarLink to="/about"> About</NavbarLink>
@@ -83,7 +83,7 @@ function Navbar() {
             <>
               <NavbarLinkExtended to="/home"> Home</NavbarLinkExtended>
               <NavbarLinkExtended to="/profile"> Profile</NavbarLinkExtended>
-              <NavbarLinkExtended to="/Search">Search</NavbarLinkExtended>
+              <NavbarLinkExtended to="/search">Search</NavbarLinkExtended>
               <NavbarLinkExtended to="/tools">Tools</NavbarLinkExtended>
               <NavbarLinkExtended to="/terms">Conditions & Terms</NavbarLinkExtended>
               <NavbarLinkExtended to="/about"> About</NavbarLinkExtended>

@@ -25,3 +25,25 @@ export const sendGetRequest = async (params) => {
   }
   return null;
 };
+
+export const sendDeleteRequest = async (postId) => {
+  try {
+    const result = await axios.delete(`${BASE_URL}posts/${postId}`);
+    console.log('result', result.data);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
+export const sendPutRequest = async (postId, updatedData) => {
+  try {
+    const result = await axios.put(`${BASE_URL}posts/${postId}`, updatedData);
+    console.log('result', result.data);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};

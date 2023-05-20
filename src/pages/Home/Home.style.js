@@ -94,7 +94,8 @@ export const PostInput = styled.input`
 `;
 
 export const PostButton = styled.button`
-  padding: 10px 20px;
+  padding: 10px;
+  margin-right: 10px;
   background: #2196F3;
   color: #fff;
   border-radius: 5px;

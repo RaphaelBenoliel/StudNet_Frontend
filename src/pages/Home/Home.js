@@ -16,7 +16,7 @@ import {
   UserDetails,
   UserPicture,
 } from './Home.style';
-import { sendGetRequest, sendPostRequest } from '../../API/Home_calls';
+import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
 // import Navbar from '../Navbar/Navbar';
 // import { myUser } from '../Login/Login';
 
@@ -24,8 +24,11 @@ export default function Home() {
   const [auth, setAuth] = useState(null);
   const [postData, setPostData] = useState([]);
   const [newPostContent, setNewPostContent] = useState('');
+  const [editingPostId, setEditingPostId] = useState(null);
+  const [updatedPostContent, setUpdatedPostContent] = useState(''); 
+  const navigate = useNavigate();
   // const [postCon, setPost] = useState(null);
-  const history = useNavigate();
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const authData = localStorage.getItem('user');
@@ -43,9 +46,10 @@ export default function Home() {
           const result = await sendGetRequest();
           if (result && result.data) {
             localStorage.setItem('posts', JSON.stringify(result.data));
-            const updatedPostData = JSON.parse(localStorage.getItem('posts')); // Parse the JSON string
-            setPostData(updatedPostData);
-            console.log('result.data: ', JSON.stringify(postData)); // Use updatedPostData instead of postData
+            // const updatedPostData = JSON.parse(localStorage.getItem('posts')); // Parse the JSON string
+            // setPostData(updatedPostData);
+            setPostData(result.data);
+            // console.log('result.data: ', updatedPostData); // Use updatedPostData instead of postData
           }
         }
       } catch (error) {
@@ -54,10 +58,12 @@ export default function Home() {
     };
     getPosts();
   }, [auth]);
+
   const cleanDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString();
   };
+
   const handlePostSubmission = async () => {
     if (!auth) {
       console.log('Not logged in');
@@ -66,52 +72,119 @@ export default function Home() {
     try {
       console.log(`CONTENT:\t${newPostContent}`);
       const result = await sendPostRequest({ auth, content: newPostContent });
+  
       if (result === null) return;
-      localStorage.setItem('posts', JSON.stringify(result.data));
-      console.log(result.data);
+  
+      const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
+      localStorage.setItem('posts', JSON.stringify(updatedPosts));
+      setPostData(updatedPosts);
+  
       // Reset the new post content
       setNewPostContent('');
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
+  const handleDeletePost = async (postId) => {
+    try {
+      await sendDeleteRequest(postId);
+      const updatedPostData = postData.filter((post) => post._id !== postId);
+      setPostData(updatedPostData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleUpdatePost = async (postId, updatedContent) => {
+    try {
+      const result = await sendPutRequest(postId, { content: updatedContent });
+      if (result === null) return;
+      localStorage.setItem('posts', JSON.stringify(result.data));
+      const updatedPostData = JSON.parse(localStorage.getItem('posts'));
+      window.location.reload();
+      setPostData(updatedPostData);
+      setEditingPostId(null); // Reset the editing post id
+      setUpdatedPostContent({}); // Reset the updated post content
     } catch (error) {
       console.error(error);
     }
   };
   return (
-<HomeWrapper>
-      <TextContainer>
-        {auth ? (
-          <>
-            <Title>
-              Hello {JSON.parse(auth).firstName}!<br />
-              Welcome to StudNet
-            </Title>
-            <Post>
-              <CreatePostContainer>
-                <PostInput
-                  type="text"
-                  value={newPostContent}
-                  onChange={(e) => setNewPostContent(e.target.value)}
-                  placeholder="Write your post..."/><PostButton onClick={handlePostSubmission}>Post</PostButton>
-              </CreatePostContainer>
-            </Post>
-            <PostContainer>
-              {postData.sort((a, b) => new Date(b.date) - new Date(a.date)).map((post) => (
-                <Post key={post._id}>
-                  <UserDetails>
-                    <UserPicture src={post.userID.picture} alt="User Profile" />
-                    <p>{post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}</p>
-                  </UserDetails>
+    <HomeWrapper>
+  <TextContainer>
+    {auth ? (
+      <>
+        <Title>
+          Hello {JSON.parse(auth).firstName}!<br />
+          Welcome to StudNet
+        </Title>
+        <Post>
+          <CreatePostContainer>
+            <PostInput
+              type="text"
+              value={newPostContent}
+              onChange={(e) => setNewPostContent(e.target.value)}
+              placeholder="Write your post..."
+            />
+            <PostButton onClick={handlePostSubmission}>Post</PostButton>
+          </CreatePostContainer>
+        </Post>
+        <PostContainer>
+        {Array.isArray(postData) && 
+          postData.sort((a, b) => new Date(b.date) - new Date(a.date)).map((post) => (
+            <Post key={post._id}>
+              <UserDetails>
+                <UserPicture src={post.userID.picture} alt="User Profile" />
+                <p>
+                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}
+                </p>
+              </UserDetails>
+              {editingPostId === post._id ? (
+                <>
+                  <input
+                    type="text"
+                    value={editingPostId === post._id ? updatedPostContent : post.content}
+                    onChange={(e) => {
+                      if (editingPostId === post._id) {
+                        setUpdatedPostContent(e.target.value);
+                      } else {
+                        setNewPostContent(e.target.value);
+                      }
+                    }}
+                  />
+                  {post.userID._id === JSON.parse(auth)._id && (
+                    <button onClick={() => handleUpdatePost(post._id, updatedPostContent)}>
+                      Update
+                    </button>
+                  )}
+                </>
+              ) : (
+                <>
                   <PostContent>{post.content}</PostContent>
-                </Post>
-              ))}
-            </PostContainer>
-          </>
-        ) : (
-          <Title>
-            Welcome to StudNet
-          </Title>
-        )}
-        {/* <STitle>The ultimate platform for students to share and discover knowledge! Whether you&apos;re struggling with a tough assignment or looking for new study resources, StudNet is the perfect place to find everything you need. Join our community of passionate learners today and start your journey towards academic success. Sign up now and unlock a world of endless possibilities!</STitle> */}
-      </TextContainer>
-    </HomeWrapper>
-  );
+                  {post.userID._id === JSON.parse(auth)._id && (
+                    <>
+                    <div>
+                      <PostButton onClick={() => setEditingPostId(post._id)}>Edit</PostButton>
+                      <PostButton onClick={() => handleDeletePost(post._id)}>Delete</PostButton>
+                    </div>
+                    </>
+                  )}
+                </>
+              )}
+            </Post>
+          ))}
+        </PostContainer>
+      </>
+    ) : (
+      <Title>
+        Welcome to StudNet
+      </Title>
+    )}
+    {/* <STitle>The ultimate platform for students to share and discover knowledge! Whether you&apos;re struggling with a tough assignment or looking for new study resources, StudNet is the perfect place to find everything you need. Join our community of passionate learners today and start your journey towards academic success. Sign up now and unlock a world of endless possibilities!</STitle> */}
+  </TextContainer>
+</HomeWrapper>
+);
 }
