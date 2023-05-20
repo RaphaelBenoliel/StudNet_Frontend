@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
@@ -7,7 +6,7 @@ import axios from 'axios';
 // https://studnet.onrender.com/
 // http://localhost:5002/
 
-const BASE_URL = 'http://localhost:5002/';
+const BASE_URL = 'https://studnet.onrender.com/';
 export const sendLoginRequest = async (params, setMessage) => {
   setMessage('');
   try {

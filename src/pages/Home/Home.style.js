@@ -4,8 +4,9 @@ import Mybackground from '../../icons/background2.png';
 export const HomeWrapper = styled.div`
     /* background-image: url(${Mybackground}); */
     background-repeat: no-repeat;
+    background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 120vh;
+    /* height: 120vh; */
     background-size: cover;
     text-align: center;
     margin-top: 75px;
@@ -15,11 +16,8 @@ export const HomeWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
 `;
-export const STitle = styled.h2`
-    color: white;
-    font-family: monospace;
-    text-align: center;
-    margin: 8px 350px;
+export const STitle = styled.h3`
+    color: #2da042;
 `;
 export const Title = styled.h1`
     font-family: monospace, sans-serif;
@@ -35,4 +33,47 @@ export const TextContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+`;
+
+export const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Post = styled.div`
+  background-color: #fff;
+  
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 400px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const PostContent = styled(STitle)`
+  color: #333;
+  margin-top: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+`;
+export const UserPicture = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+`;
+
+export const UserDetails = styled.div`
+display: flex;
+align-items: center;
+`;
+
+export const DateContainer = styled.div`
+flex-shrink: 0;
+margin-left: 10px;
 `;

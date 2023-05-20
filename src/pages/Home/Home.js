@@ -8,54 +8,96 @@ import {
   STitle,
   Title,
   HomeWrapper,
+  PostContainer,
+  PostContent,
+  Post,
+  UserDetails,
+  UserPicture,
 } from './Home.style';
-import sendPostRequest from '../../API/Home_calls';
+import sendGetRequest from '../../API/Home_calls';
 // import Navbar from '../Navbar/Navbar';
 // import { myUser } from '../Login/Login';
 
 export default function Home() {
   const [auth, setAuth] = useState(null);
-  const [postCon, setPost] = useState(null);
+  const [postData, setPostData] = useState([]);
+  // const [postCon, setPost] = useState(null);
   const history = useNavigate();
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const authData = localStorage.getItem('user');
-      const posts = localStorage.getItem('post');
-      if (authData) {
-        setPost(post);
+      console.log('authData: ', authData);
+      if (JSON.parse(authData)) {
         setAuth(authData);
-        history('/home'); // Redirect to home after setting auth
       }
     }
-  }, [history]);
-  const post = async(content) => {
-    try {
-      const result = await sendPostRequest(content);
-      if (result === null) return;
-      localStorage.setItem('post', JSON.stringify(result));
-    } catch(error) {
-      console.error(error);
-    }
+  }, []);
+ 
+  useEffect(() => {
+    const getPosts = async () => {
+      try {
+        if (auth) {
+          const result = await sendGetRequest();
+          if (result && result.data) {
+            localStorage.setItem('posts', JSON.stringify(result.data));
+            const updatedPostData = JSON.parse(localStorage.getItem('posts')); // Parse the JSON string
+            setPostData(updatedPostData);
+            console.log('result.data: ', JSON.stringify(postData)); // Use updatedPostData instead of postData
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getPosts();
+  }, [auth]);
+  const cleanDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
   };
-  post('Hello this is a post!!!!');
+  // const post = async(content) => {
+  //   console.log(`CONTENT:\t${content}`);
+  //   if (!auth) {
+  //     console.log('Not logged in');
+  //     return;
+  //   }
+  //   try {
+  //     const result = await sendPostRequest({ auth, content });
+  //     if (result === null) return;
+  //     localStorage.setItem('posts', JSON.stringify(result.data));
+  //     console.log(result.data);
+  //   } catch(error) {
+  //     console.error(error);
+  //   }
+  // };
+  // post('Hello this is a post!!!!');
   return (
-    <HomeWrapper>
+<HomeWrapper>
       <TextContainer>
         {auth ? (
-          <Title>
-            {postCon}
-            Hello
-            {' '}
-            {JSON.parse(auth).firstName}
-            !<br />Welcome to StudNet
-          </Title>
+          <>
+            <Title>
+              Hello {JSON.parse(auth).firstName}!<br />
+              Welcome to StudNet
+            </Title>
+            <PostContainer>
+              {postData.map((post) => (
+                <Post key={post._id}>
+                  <UserDetails>
+                    <UserPicture src={post.userID.picture} alt="User Profile" />
+                    <p>{post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}</p>
+                  </UserDetails>
+                  <PostContent>{post.content}</PostContent>
+                </Post>
+              ))}
+            </PostContainer>
+          </>
         ) : (
           <Title>
             Welcome to StudNet
           </Title>
         )}
-        <STitle>The ultimate platform for students to share and discover knowledge! Whether you&apos;re struggling with a tough assignment or looking for new study resources, StudNet is the perfect place to find everything you need. Join our community of passionate learners today and start your journey towards academic success. Sign up now and unlock a world of endless possibilities!</STitle>
+        {/* <STitle>The ultimate platform for students to share and discover knowledge! Whether you&apos;re struggling with a tough assignment or looking for new study resources, StudNet is the perfect place to find everything you need. Join our community of passionate learners today and start your journey towards academic success. Sign up now and unlock a world of endless possibilities!</STitle> */}
       </TextContainer>
     </HomeWrapper>
   );
