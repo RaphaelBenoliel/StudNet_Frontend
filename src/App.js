@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import SignUp from './pages/SignUp/SignUp';
+import Search from './pages/Search/Search';
 import NotFound from './pages/NotFound/NotFound';
 // import { UserContext } from './UserContext';
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/about" element={<About />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" />} />
