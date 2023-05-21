@@ -26,7 +26,7 @@ export default function Home() {
   const [newPostContent, setNewPostContent] = useState('');
   const [editingPostId, setEditingPostId] = useState(null);
   const [updatedPostContent, setUpdatedPostContent] = useState(''); 
-  const navigate = useNavigate();
+  const history = useNavigate();
   // const [postCon, setPost] = useState(null);
   
   useEffect(() => {
@@ -73,28 +73,23 @@ export default function Home() {
       if (result === null) return;
   
       const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
-  
       // Parse the auth object from the string stored in local storage
       const parsedAuth = JSON.parse(auth);
-  
       // Initialize auth.posts as an array if it's not already
       if (!Array.isArray(parsedAuth.posts)) {
         parsedAuth.posts = [];
       }
-  
       // Update the auth.posts array with the new posts
       parsedAuth.posts.push(...updatedPosts);
-  
       // Stringify the updated auth object before storing it back in local storage
       const updatedAuth = JSON.stringify(parsedAuth);
       localStorage.setItem('user', updatedAuth);
   
       setPostData([...postData, ...updatedPosts]);
       localStorage.setItem('posts', JSON.stringify([...postData, ...updatedPosts]));
-
-      // Reset the new post content
+      // Reset the new post contents
       setNewPostContent('');
-      window.location.reload();
+      history('/');
     } catch (error) {
       console.error(error);
     }
@@ -102,7 +97,9 @@ export default function Home() {
 
   const handleDeletePost = async (postId) => {
     try {
-      await sendDeleteRequest( {postId, auth} ); //good
+      console.log('postId: ', postId);
+      console.log('auth: ', auth);
+      await sendDeleteRequest(postId, auth); //good
       const updatedPostData = postData.filter((post) => post._id !== postId);
       setPostData(updatedPostData);
     } catch (error) {
@@ -118,10 +115,10 @@ export default function Home() {
       const updatedPostData = JSON.parse(localStorage.getItem('posts'));
       setPostData(updatedPostData);
       localStorage.setItem('posts', JSON.stringify(result.data));
-      
-      window.location.reload();
       setEditingPostId(null); // Reset the editing post id
       setUpdatedPostContent({}); // Reset the updated post content
+      // window.location.reload();
+      history('/');
     } catch (error) {
       console.error(error);
     }
