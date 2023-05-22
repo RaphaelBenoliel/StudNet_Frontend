@@ -37,7 +37,7 @@ export default function Home() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const authData = localStorage.getItem('user');
-      console.log('authData: ', authData);
+      // console.log('authData: ', authData);
       if (JSON.parse(authData)) {
         setAuth(authData);
       }

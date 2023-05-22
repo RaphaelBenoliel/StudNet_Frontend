@@ -20,20 +20,19 @@ export default function Search() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const authData = localStorage.getItem('user');
-      console.log('authData: ', authData);
       if (JSON.parse(authData)) {
         setAuth(authData);
       }
     }
   }, []);
-
-  const TextBoxWithButton = async () => {
-    try {
-        const [text, setText] = useState('');
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [text, setText] = useState('');
+  // const TextBoxWithButton = async () => {
+  //   try {
+        
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleInputChange = async (e) => {
     try {

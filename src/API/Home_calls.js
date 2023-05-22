@@ -5,7 +5,7 @@ import axios from 'axios';
 const BASE_URL = 'https://studnet.onrender.com/';
 
 export const sendPostRequest = async (params) => {
-  console.log('params: ', params);
+  // console.log('params: ', params);
   try {
     const result = await axios.post(`${BASE_URL}cpost`, params);
     return result.data;
@@ -18,7 +18,7 @@ export const sendPostRequest = async (params) => {
 export const sendGetRequest = async (params) => {
   try {
     const result = await axios.post(`${BASE_URL}posts`, params);
-    console.log('result', result.data);
+    // console.log('result', result.data);
     return result;
   } catch (error) {
     console.error(error);

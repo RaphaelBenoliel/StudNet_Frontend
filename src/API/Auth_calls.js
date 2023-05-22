@@ -11,7 +11,7 @@ export const sendLoginRequest = async (params, setMessage) => {
   setMessage('');
   try {
     const result = await axios.post(`${BASE_URL}log`, params);
-    console.log(result);
+    // console.log(result);
     if (result.data.success) {
       // alert(`Hello ${result.data.data.user.firstName}, You are now logged in!`);
       return result.data.data.user;

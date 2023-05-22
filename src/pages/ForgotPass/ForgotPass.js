@@ -21,15 +21,14 @@ export default function ForgotPass() {
   const [email, setEmail] = useState('');
   const [msg, setMessage] = useState('');
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const authData = localStorage.getItem('user');
-      console.log('authData: ', authData);
-      if (JSON.parse(authData)) {
-        setAuth(authData);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const authData = localStorage.getItem('user');
+  //     if (JSON.parse(authData)) {
+  //       setAuth(authData);
+  //     }
+  //   }
+  // }, []);
 
   // const TextBoxWithButton = async () => {
   //   try {
