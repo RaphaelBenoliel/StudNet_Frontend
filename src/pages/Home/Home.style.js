@@ -39,15 +39,17 @@ export const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #fff;
 `;
 
 export const Post = styled.div`
-  background-color: #fff;
-  
-  border-radius: 10px;
+  background-color: rgba(200, 200, 200, 0.15);
+  border-radius: 15px;
   padding: 15px;
   margin-bottom: 10px;
-  width: 400px;
+  width: 500px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -55,12 +57,15 @@ export const Post = styled.div`
 `;
 
 export const PostContent = styled(STitle)`
-  color: #333;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
   margin-top: 10px;
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
 `;
+
 export const UserPicture = styled.img`
   width: 30px;
   height: 30px;
@@ -87,18 +92,35 @@ export const CreatePostContainer = styled.div`
 export const PostInput = styled.input`
   flex: 1;
   padding: 15px;
-  width: 300px;
-  border-radius: 5px;
+  width: 400px;
+  border-radius: 15px;
   border: 1px solid #ccc;
   margin-right: 10px;
+  background-color: rgba(200, 200, 200, 0.3);
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
 `;
 
 export const PostButton = styled.button`
   padding: 10px;
   margin-right: 10px;
-  background: #2196F3;
+  background: #238636;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 25px;
+  font-family: monospace, sans-serif;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+`;
+
+export const EditDeleteButton = styled.button`
+  padding: 5px;
+  margin-right: 10px;
+  background-color: rgba(200, 200, 200, 0.3);
+  color: #fff;
+  border-radius: 15px;
+  font-family: monospace, sans-serif;
+  font-size: 15px;
   border: none;
   cursor: pointer;
 `;

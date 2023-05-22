@@ -6,7 +6,7 @@ export const PageWrapper = styled.div`
     height: 90vh;
     background-size: cover;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 75px;
     background-color: #0d1116;
     /* display: flex; */
     /* position: fixed; */
@@ -19,18 +19,17 @@ export const Title = styled.h1`
     text-align: center;
     font-size: 50px;
     color: #fff;
-    margin: 10px;
+    margin: 0;
     padding: 0;
+
 `;
 
-export const SearchHolder = styled.div`
-  /* background-color: #fff; */
-  background-color: rgba(200, 200, 200, 0.15);
+export const ForgotPassHolder = styled.div`
+  background-color: rgba(200, 200, 200, 0.3);
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 10px;
-  width: 420px;
-  height: 50px;
+  width: 410px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -44,32 +43,29 @@ export const TextContainer = styled.div`
     align-items: center;
 `;
 
-export const CreateSearchContainer = styled.div`
+export const CreateForgotPassContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 `;
 
-export const SearchInput = styled.input`
+export const ForgotPassInput = styled.input`
   flex: 1;
   padding: 15px;
   width: 300px;
-  border-radius: 15px;
+  border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 10px;
-  background-color: rgba(200, 200, 200, 0.3);
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
 `;
 
-export const SearchButton = styled.button`
+export const ForgotPassButton = styled.button`
   padding: 10px;
   margin-right: 10px;
   background: #238636;
   color: #fff;
-  border-radius: 25px;
+  border-radius: 5px;
   border: none;
   font-family: monospace, sans-serif;
-  font-size: 17px;
+  font-size: 16px;
   cursor: pointer;
 `;

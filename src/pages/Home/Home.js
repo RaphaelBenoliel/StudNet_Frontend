@@ -15,6 +15,7 @@ import {
   Post,
   UserDetails,
   UserPicture,
+  EditDeleteButton,
 } from './Home.style';
 import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
 // import Navbar from '../Navbar/Navbar';
@@ -24,6 +25,9 @@ export default function Home() {
   const [auth, setAuth] = useState(null);
   const [postData, setPostData] = useState([]);
   const [newPostContent, setNewPostContent] = useState('');
+  const [likeContent, setLikeContent] = useState('');
+  const [commentContent, setCommentContent] = useState('');
+  const [shareContent, setShareContent] = useState('');
   const [editingPostId, setEditingPostId] = useState(null);
   const [updatedPostContent, setUpdatedPostContent] = useState(''); 
   const history = useNavigate();
@@ -175,11 +179,18 @@ export default function Home() {
               ) : (
                 <>
                   <PostContent>{post.content}</PostContent>
+                  <>
+                    <div>
+                      <EditDeleteButton onClick={() => setLikeContent(post._id)}>Like</EditDeleteButton>
+                      <EditDeleteButton onClick={() => setCommentContent(post._id)}>Comment</EditDeleteButton>
+                      <EditDeleteButton onClick={() => setShareContent(post._id)}>Share</EditDeleteButton>
+                    </div>
+                    </>
                   {post.userID._id === JSON.parse(auth)._id && (
                     <>
                     <div>
-                      <PostButton onClick={() => setEditingPostId(post._id)}>Edit</PostButton>
-                      <PostButton onClick={() => handleDeletePost(post._id)}>Delete</PostButton>
+                      <EditDeleteButton onClick={() => setEditingPostId(post._id)}>Edit</EditDeleteButton>
+                      <EditDeleteButton onClick={() => handleDeletePost(post._id)}>Delete</EditDeleteButton>
                     </div>
                     </>
                   )}
