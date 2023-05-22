@@ -18,6 +18,7 @@ import {
   EditDeleteButton,
 } from './Home.style';
 import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
+import PopupMessage from './PopMessage';
 // import Navbar from '../Navbar/Navbar';
 // import { myUser } from '../Login/Login';
 
@@ -60,6 +61,15 @@ export default function Home() {
     };
     getPosts();
   }, [auth]);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleShowPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
 
   const cleanDate = (dateString) => {
     const date = new Date(dateString);
@@ -154,7 +164,15 @@ export default function Home() {
               <UserDetails>
                 <UserPicture src={post.userID.picture} alt="User Profile" />
                 <p>
-                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}
+                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;{post.userID._id === JSON.parse(auth)._id && (
+                    <>
+                        <EditDeleteButton onClick={handleShowPopup}>•••</EditDeleteButton>
+                        {showPopup && (
+                          <PopupMessage onDelete={() => handleDeletePost(post._id)} onClose={handleClosePopup} onEdit={() => setEditingPostId(post._id)} />
+                        )}
+                  
+                    </>
+                  )}
                 </p>
               </UserDetails>
               {editingPostId === post._id ? (
@@ -171,9 +189,9 @@ export default function Home() {
                     }}
                   />
                   {post.userID._id === JSON.parse(auth)._id && (
-                    <button onClick={() => handleUpdatePost(post._id, updatedPostContent)}>
-                      Update
-                    </button>
+                    <EditDeleteButton onClick={() => handleUpdatePost(post._id, updatedPostContent)}>
+                      Post
+                    </EditDeleteButton>
                   )}
                 </>
               ) : (
@@ -186,14 +204,6 @@ export default function Home() {
                       <EditDeleteButton onClick={() => setShareContent(post._id)}>Share</EditDeleteButton>
                     </div>
                     </>
-                  {post.userID._id === JSON.parse(auth)._id && (
-                    <>
-                    <div>
-                      <EditDeleteButton onClick={() => setEditingPostId(post._id)}>Edit</EditDeleteButton>
-                      <EditDeleteButton onClick={() => handleDeletePost(post._id)}>Delete</EditDeleteButton>
-                    </div>
-                    </>
-                  )}
                 </>
               )}
             </Post>

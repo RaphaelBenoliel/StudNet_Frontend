@@ -121,3 +121,9 @@ export const EditDeleteButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+export const PopDiv = styled.div`
+  margin-left: 150px;
+  flex-direction: column;
+
+`;
