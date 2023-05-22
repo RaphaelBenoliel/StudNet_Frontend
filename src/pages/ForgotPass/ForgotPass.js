@@ -12,10 +12,14 @@ import {
   ForgotPassInput,
   PageWrapper
 } from './ForgotPass.style';
+import { sendEmailRequest } from '../../API/Auth_calls';
+import { TextMesasge } from '../Login/Login.style';
 
 export default function ForgotPass() {
   const [auth, setAuth] = useState(null); 
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [msg, setMessage] = useState('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -27,17 +31,17 @@ export default function ForgotPass() {
     }
   }, []);
 
-  const TextBoxWithButton = async () => {
-    try {
-        const [text, setText] = useState('');
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const TextBoxWithButton = async () => {
+  //   try {
+  //       const [text, setText] = useState('');
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleInputChange = async (e) => {
     try {
-        setText(e.target.value);
+      setEmail(e.target.value);
     } catch (error) {
       console.error(error);
     }
@@ -45,7 +49,14 @@ export default function ForgotPass() {
 
   const handleButtonClick = async () => {
     try {
-        console.log(text);    }
+        setMessage('');
+        const result = await sendEmailRequest({email});
+        if (result == null){
+          setMessage('Invalid email!');
+          return;
+        }
+        setMessage('A password recovery email has been successfully sent!');
+        }
    catch (error) {
       console.error(error);
     }
@@ -63,11 +74,12 @@ export default function ForgotPass() {
             <ForgotPassInput
               type="text"
               //value={newPostContent}
-              onChange={(e) => handleInputChange(e.target.value)}
+              onChange={(e) => handleInputChange(e)}
               placeholder="Enter your email"
             />
             <ForgotPassButton onClick={handleButtonClick}>Send email</ForgotPassButton>
           </CreateForgotPassContainer>
+          <TextMesasge>{msg}</TextMesasge>
           </ForgotPassHolder>
       </>
     (
