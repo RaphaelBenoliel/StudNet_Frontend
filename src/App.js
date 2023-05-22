@@ -7,6 +7,8 @@ import Navbar from './pages/Navbar/Navbar';
 import Login from './pages/Login';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
+import Terms from './pages/Terms/Terms';
+import Tools from './pages/Tools/Tools';
 import SignUp from './pages/SignUp/SignUp';
 import Search from './pages/Search/Search';
 import NotFound from './pages/NotFound/NotFound';
@@ -24,6 +26,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/about" element={<About />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/tools" element={<Tools />} />
         <Route path="/login/:fpass" element={<ForgotPass />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" />} />
