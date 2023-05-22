@@ -54,7 +54,6 @@ export default function ForgotPass() {
   return (
 <PageWrapper>
   <TextContainer>
-    {auth ? (
       <>
         <Title>
           Forgot Password
@@ -71,10 +70,10 @@ export default function ForgotPass() {
           </CreateForgotPassContainer>
           </ForgotPassHolder>
       </>
-    ) : (
+    (
       <Title>
       </Title>
-    )}
+    )
     {}
   </TextContainer>
 </PageWrapper>
