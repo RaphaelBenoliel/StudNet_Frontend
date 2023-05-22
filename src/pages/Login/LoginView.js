@@ -70,7 +70,7 @@ export default function LoginView(props) {
         <InputLbl>Password<EyeLab onClick={handleShow}> <img src={show ? eyeClosed : eyeOpen} alt={show ? 'Hide' : 'Show'} /></EyeLab></InputLbl>
         <TextInput type={show ? 'text' : 'password'} id="password" ref={password} placeholder="Password"/>
         <TextMesasge>{messagePass}<br/>{messagePass1}<br/>{messagePass2}</TextMesasge>
-        <InputLbl>&emsp;&emsp;Forgot password?&nbsp;&nbsp;<NavLink to="/forgosPass">Click Here</NavLink> </InputLbl>
+        <InputLbl>&emsp;&emsp;Forgot password?&nbsp;&nbsp;<NavLink to="/login/:fpass">Click Here</NavLink> </InputLbl>
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>
         <TextMesasge>{props.message }</TextMesasge>
         <InputLbl>&emsp;&emsp;Don't have an account?&nbsp;&nbsp;<NavLink to="/signUp">Sign up</NavLink> </InputLbl>

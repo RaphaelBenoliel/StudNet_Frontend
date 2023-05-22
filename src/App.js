@@ -10,6 +10,7 @@ import About from './pages/About/About';
 import SignUp from './pages/SignUp/SignUp';
 import Search from './pages/Search/Search';
 import NotFound from './pages/NotFound/NotFound';
+import ForgotPass from './pages/ForgotPass/ForgotPass';
 // import { UserContext } from './UserContext';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/about" element={<About />} />
+        <Route path="/login/:fpass" element={<ForgotPass />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>

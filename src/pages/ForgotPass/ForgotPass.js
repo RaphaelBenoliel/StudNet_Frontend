@@ -13,7 +13,7 @@ import {
   PageWrapper
 } from './ForgotPass.style';
 
-export default function forgotPass() {
+export default function ForgotPass() {
   const [auth, setAuth] = useState(null); 
   const navigate = useNavigate();
 
