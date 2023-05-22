@@ -1,24 +1,16 @@
 import styled from 'styled-components';
-import Mybackground from '../../icons/background2.png';
+
 // eslint-disable-next-line import/prefer-default-export
 export const HomeWrapper = styled.div`
-    /* background-image: url(${Mybackground});
-    background-position: center;
-    background-size: cover;
-    text-align: center;
-    margin-top: 0px;
-    background-attachment: fixed;
-    background-repeat: no-repeat; */
-    background-image: url(${Mybackground});
-    background-position: center;
-    background-size: cover;
-    text-align: center;
-    margin-top: 0px;
-    background-attachment: scroll;
     background-repeat: no-repeat;
-    min-height: 100vh; /* Use min-height instead of a fixed height */
+    background-attachment: fixed;
+    background-size: cover;
     text-align: center;
     margin-top: 75px;
+    background-color: #0d1116;
+    min-height: 120vh;
+    flex-direction: column;
+    justify-content: center;
 `;
 export const STitle = styled.h2`
     color: black;

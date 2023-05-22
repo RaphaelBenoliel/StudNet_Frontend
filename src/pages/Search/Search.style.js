@@ -3,13 +3,11 @@ import styled from 'styled-components';
 export const PageWrapper = styled.div`
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 90vh;
     background-size: cover;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 75px;
     background-color: #0d1116;
-    /* display: flex; */
-    /* position: fixed; */
+    min-height: 120vh;
     flex-direction: column;
     justify-content: center;
 `;

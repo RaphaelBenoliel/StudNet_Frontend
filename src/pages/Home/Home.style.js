@@ -4,15 +4,12 @@ import Mybackground from '../../icons/background2.png';
 export const HomeWrapper = styled.div`
     /* background-image: url(${Mybackground}); */
     background-repeat: no-repeat;
-    background-repeat: no-repeat;
     background-attachment: fixed;
-    /* height: 120vh; */
     background-size: cover;
     text-align: center;
     margin-top: 75px;
     background-color: #0d1116;
-    /* display: flex; */
-    /* position: fixed; */
+    min-height: 120vh;
     flex-direction: column;
     justify-content: center;
 `;
