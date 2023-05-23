@@ -1,6 +1,5 @@
 /* eslint-disable */
 /* eslint max-len: ["error", { "code": 400 }] */
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import {
