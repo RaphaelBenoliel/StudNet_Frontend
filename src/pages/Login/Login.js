@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sendLoginRequest } from '../../API/Auth_calls';
 import LoginView from './LoginView';
-import { use } from 'chai';
 import { useEffect } from 'react';
 
 function Login() {
