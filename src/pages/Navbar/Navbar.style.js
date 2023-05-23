@@ -124,7 +124,7 @@ export const SubmitBtn = styled.button`
 `;
 
 export const TextAuth = styled.h1`
-  font-size: 17px;
+  font-size: 18px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: #2da042;
   text-align: center; /* Align the text to the center */
