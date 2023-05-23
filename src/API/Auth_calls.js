@@ -4,8 +4,8 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
-// const BASE_URL = 'http://localhost:5002/';
-const BASE_URL = 'https://studnet.onrender.com/';
+const BASE_URL = 'http://localhost:5002/';
+// const BASE_URL = 'https://studnet.onrender.com/';
 
 export const sendLoginRequest = async (params, setMessage) => {
   setMessage('');
@@ -47,6 +47,18 @@ export const sendEmailRequest = async (email) => {
     const result = await axios.post(`${BASE_URL}email`, email);
     if (result.data.success) {
       return result.data.success;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
+export const getAllusers = async () => {
+  try {
+    const result = await axios.post(`${BASE_URL}allusers`);
+    if (result.data.success) {
+      return result.data.data;
     }
   } catch (error) {
     console.error(error);
