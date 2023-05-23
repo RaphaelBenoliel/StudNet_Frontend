@@ -17,11 +17,11 @@ export const STitle = styled.h3`
     color: #2da042;
 `;
 export const Title = styled.h1`
-    font-family: monospace, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
     font-size: 50px;
     color: #fff;
-    margin: 0;
+    margin: 10px;
     padding: 0;
 
 `;
@@ -104,7 +104,7 @@ export const PostButton = styled.button`
   background: #238636;
   color: #fff;
   border-radius: 25px;
-  font-family: monospace, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 17px;
   border: none;
   cursor: pointer;
@@ -116,7 +116,7 @@ export const EditDeleteButton = styled.button`
   background-color: rgba(200, 200, 200, 0.3);
   color: #fff;
   border-radius: 15px;
-  font-family: monospace, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 15px;
   border: none;
   cursor: pointer;

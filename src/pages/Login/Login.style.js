@@ -59,7 +59,7 @@ export const VerticalContainer = styled.div`
 export const Title = styled.h1`
     color: #fff;
     line-height: 3;
-    font-family: monospace, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 5px;
     margin-top: -20px;
 `;
@@ -114,7 +114,7 @@ export const TextInput = styled.input`
 
 export const TextMesasge = styled.h3`
   font-size: 13px;
-  font-family: monospace, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: italic;
   color: rgb(200 , 0, 0);
   text-align: left;

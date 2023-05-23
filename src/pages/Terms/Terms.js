@@ -1,21 +1,18 @@
 /* eslint max-len: ["error", { "code": 400 }] */
 /* eslint-disable */
 import React from 'react';
-import {Title} from '../About/About.style'
+import {Title, HomeWrapper, STitle, TextContainer, STitle1} from '../About/About.style';
 
 export default function Terms() {
   return (
-    <div style={{ textAlign: 'left', backgroundColor: 'black' }}>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+    <div>
+      <HomeWrapper>
+        <TextContainer>
       <Title>Terms And Conditions </Title>
       
       <p style={{ color: 'white' }}>
-        User Conduct and Content
+        <STitle1>User Conduct and Content</STitle1>
+        <STitle>
         <br />
         - Users must comply with applicable laws and regulations when using the social network.
         <br />
@@ -27,7 +24,9 @@ export default function Terms() {
         <br />
         <br />
         <br />
-        Moderation and Content Monitoring
+        </STitle>
+        <STitle1>Moderation and Content Monitoring</STitle1>
+        <STitle>
         <br />
         - The social network will implement a moderation system to review and address reported content that violates the terms of service.
         <br />
@@ -39,8 +38,10 @@ export default function Terms() {
         <br />
         <br />
         <br />
-        Protection of Minors
+        </STitle>
+        <STitle1>Protection of Minors</STitle1>
         <br />
+        <STitle>
         - The social network will have measures in place to protect minors from harmful content and interactions.
         <br />
         - Users should not engage in activities that could endanger or exploit minors.
@@ -49,8 +50,10 @@ export default function Terms() {
         <br />
         <br />
         <br />
-        Privacy and Data Protection
+        </STitle>
+        <STitle1>Privacy and Data Protection</STitle1>
         <br />
+        <STitle>
         - The social network will respect user privacy and adhere to applicable data protection laws.
         <br />
         - Users will be informed about the types of personal data collected and how it will be used, stored, and protected.
@@ -61,29 +64,39 @@ export default function Terms() {
         <br />
         <br />
         <br />
-        Intellectual Property Rights
+        </STitle>
+        <STitle1>Intellectual Property Rights</STitle1>
         <br />
+        <STitle>
         - Users should respect intellectual property rights and not infringe upon the copyrights, trademarks, or other proprietary rights of others.
         <br />
         - The social network will respond to valid notices of intellectual property infringement and take appropriate action, which may include removing or disabling access to infringing content.
         <br />
         <br />
         <br />
-        Security
+        </STitle>
+        <STitle1>Security</STitle1>
         <br />
+        <STitle>
         - The social network will employ reasonable measures to protect user data and maintain the security of the platform.
         <br />
         - Users are encouraged to use strong and unique passwords and to report any suspected security breaches or unauthorized access to their accounts.
         <br />
         <br />
         <br />
-        Amendment and Termination
+        </STitle>
+        <STitle1>Amendment and Termination</STitle1>
         <br />
+        <STitle>
         - The social network reserves the right to amend these regulations as necessary, with notice to users.
         <br />
         - The social network may terminate or suspend user accounts for violation of the regulations or breach of terms of service.
         <br />
+        </STitle>
       </p>
+      
+      </TextContainer>
+      </HomeWrapper>
     </div>
   );
 }

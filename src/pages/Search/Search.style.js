@@ -13,7 +13,7 @@ export const PageWrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-    font-family: monospace, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
     font-size: 50px;
     color: #fff;
@@ -22,7 +22,6 @@ export const Title = styled.h1`
 `;
 
 export const SearchHolder = styled.div`
-  /* background-color: #fff; */
   background-color: rgba(200, 200, 200, 0.15);
   border-radius: 10px;
   padding: 15px;
@@ -67,7 +66,7 @@ export const SearchButton = styled.button`
   color: #fff;
   border-radius: 25px;
   border: none;
-  font-family: monospace, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 17px;
   cursor: pointer;
 `;

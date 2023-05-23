@@ -19,7 +19,7 @@ export const Container = styled.div`
 export const Title = styled.h1`
     color: black;
     font-size: 100px;
-    font-family: monospace, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 `;
 
@@ -33,14 +33,14 @@ export const Img = styled.img`
 export const STitle = styled.h3`
     color: black;
     font-size: 25px;
-    font-family: monospace, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 `;
 
 export const NavbarLinkExtended = styled(Link)`
   color: #2da042;
   font-size: x-large;
-  font-family: monospace, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-decoration: none;
   border: 2px solid #2da042;
   border-radius: 8px;

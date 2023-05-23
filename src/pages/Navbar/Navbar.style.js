@@ -51,7 +51,7 @@ export const NavbarLinkContainer = styled.div`
 export const NavbarLinkExtended = styled(Link)`
   color: white;
   font-size: x-large;
-  font-family: monospace, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-decoration: none;
   margin: 10px;
   &:hover{
@@ -63,7 +63,7 @@ export const NavbarLinkExtended = styled(Link)`
 export const NavbarLink = styled(Link)`
   color: white;
   font-size: x-large;
-  font-family: monospace, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-decoration: none;
   margin: 10px;
   &:hover{
@@ -111,8 +111,8 @@ export const SubmitBtn = styled.button`
   height: 40px;
   background-color: #238636;
   color: #fff;
-  font-size: 16px;
-  font-family: monospace, sans-serif;
+  font-size: 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   outline: none;
   padding: 0; /* Remove any padding */
   display: inline-block;
@@ -125,7 +125,7 @@ export const SubmitBtn = styled.button`
 
 export const TextAuth = styled.h1`
   font-size: 17px;
-  font-family: monospace, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: #2da042;
   text-align: center; /* Align the text to the center */
   letter-spacing: 2px; /* Add some letter spacing */

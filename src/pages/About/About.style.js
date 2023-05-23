@@ -5,24 +5,24 @@ export const HomeWrapper = styled.div`
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    text-align: center;
-    margin-top: 75px;
+    /* text-align: center; */
+    margin-top: 80px;
     background-color: #0d1116;
     min-height: 120vh;
     flex-direction: column;
     justify-content: center;
 `;
 export const STitle = styled.h2`
-    color: black;
-    font-family: monospace;
-    text-align: center;
-    margin: 3px 150px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* text-align: center; */
+    margin: 5px 150px;
     color: white;
+    font-size: 15px;
     //font-family: fantasy;
 `;
 export const Title = styled.h1`
-    font-family: monospace, sans-serif;
-    font-size: 70px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 60px;
     color: #fff;
     margin: 0 0 20px;
     padding: 0;
@@ -31,6 +31,23 @@ export const Title = styled.h1`
 export const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+`;
+export const STitle1 = styled.h2`
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* text-align: center; */
+    margin: 5px 150px;
+    color: white;
+    font-size: 22px;
+    //font-family: fantasy;
+`;
+
+export const AboutT = styled.h2`
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* text-align: center; */
+    margin: 5px 150px;
+    color: white;
+    font-size: 20px;
+    //font-family: fantasy;
 `;

@@ -13,21 +13,22 @@ export const PageWrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-    font-family: monospace, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
     font-size: 50px;
     color: #fff;
-    margin: 0;
+    margin: 10px;
     padding: 0;
 
 `;
 
 export const ForgotPassHolder = styled.div`
-  background-color: rgba(200, 200, 200, 0.3);
+  background-color: rgba(200, 200, 200, 0.15);
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 10px;
-  width: 410px;
+  width: 420px;
+  height: 50px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -51,9 +52,12 @@ export const ForgotPassInput = styled.input`
   flex: 1;
   padding: 15px;
   width: 300px;
-  border-radius: 5px;
+  border-radius: 15px;
   border: 1px solid #ccc;
   margin-right: 10px;
+  background-color: rgba(200, 200, 200, 0.3);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 `;
 
 export const ForgotPassButton = styled.button`
@@ -61,9 +65,9 @@ export const ForgotPassButton = styled.button`
   margin-right: 10px;
   background: #238636;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 25px;
   border: none;
-  font-family: monospace, sans-serif;
-  font-size: 16px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 17px;
   cursor: pointer;
 `;
