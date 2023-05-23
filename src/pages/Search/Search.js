@@ -4,18 +4,30 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import {
-  TextContainer,
+  Text,
   SearchButton,
   Title,
   SearchHolder,
   CreateSearchContainer,
   SearchInput,
-  PageWrapper
+  PageWrapper,
+  DropdownContainer,
+  DropdownList,
+  DropdownItem,
+  UserContainer,
+  UserImage,
+  UserName,
+  SearchContainer,
 } from './Search.style';
+import { getAllusers }  from '../../API/Auth_calls';
 
 export default function Search() {
-  const [auth, setAuth] = useState(null); 
+  const [auth, setAuth] = useState(null);
   const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -24,59 +36,90 @@ export default function Search() {
         setAuth(authData);
       }
     }
+    const getUsers = async () => {
+      try {
+        const result = await getAllusers();
+        if (result.users.success) {
+          setUsers(result.users.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUsers();
   }, []);
-  const [text, setText] = useState('');
-  // const TextBoxWithButton = async () => {
-  //   try {
-        
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
-  const handleInputChange = async (e) => {
-    try {
-        setText(e.target.value);
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    if (searchText === '') {
+      setSearchResults([]);
+      setShowDropdown(false);
+      return;
     }
+
+    const filteredResults = users.filter(user => {
+      const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+      const search = searchText.toLowerCase();
+      return fullName.includes(search);
+    });
+
+    setSearchResults(filteredResults);
+    setShowDropdown(true);
+  }, [searchText, users]);
+
+  const handleInputChange = (e) => {
+    setSearchText(e.target.value);
   };
 
-  const handleButtonClick = async () => {
-    try {
-        // Do something with the text, e.g., display it or perform an action
-        console.log(text);    }
-   catch (error) {
-      console.error(error);
-    }
+  const handleItemClick = (user) => {
+    setSearchText(`${user.firstName} ${user.lastName}`);
+    setShowDropdown(false);
   };
 
   return (
-<PageWrapper>
-  <TextContainer>
-    {auth ? (
-      <>
-        <Title>
-          Search
-        </Title>
-        <SearchHolder>
-          <CreateSearchContainer>
-            <SearchInput
-              type="text"
-              //value={newPostContent}
-              onChange={(e) => handleInputChange(e.target.value)}
-              placeholder="Search..."
-            />
-            <SearchButton onClick={handleButtonClick}>Search</SearchButton>
-          </CreateSearchContainer>
+    <PageWrapper>
+    <SearchContainer>
+      {auth ? (
+        <>
+          <Title>Search</Title>
+          <SearchHolder>
+            <CreateSearchContainer>
+              <SearchInput
+                type="text"
+                value={searchText}
+                onChange={handleInputChange}
+                placeholder="Search..."
+              />
+              <SearchButton>Search</SearchButton>
+            </CreateSearchContainer>
+            {showDropdown && (
+              <DropdownContainer>
+                <DropdownList>
+                  {searchResults.length > 0 ? (
+                    <DropdownList>
+                      {searchResults.map(user => (
+                        <DropdownItem key={user._id} onClick={() => handleItemClick(user)}>
+                          <UserContainer>
+                            <UserImage src={user.picture} alt="User" />
+                            <UserName>
+                              {user.firstName} {user.lastName}
+                            </UserName>
+                          </UserContainer>
+                        </DropdownItem>
+                      ))}
+                    </DropdownList>
+                  ) : (
+                    <DropdownList><Text>No results found</Text></DropdownList>
+                  )}
+                </DropdownList>
+              </DropdownContainer>
+            )}
           </SearchHolder>
-      </>
-    ) : (
-      <Title>
-      </Title>
-    )}
-    {/* <STitle>The ultimate platform for students to share and discover knowledge! Whether you&apos;re struggling with a tough assignment or looking for new study resources, StudNet is the perfect place to find everything you need. Join our community of passionate learners today and start your journey towards academic success. Sign up now and unlock a world of endless possibilities!</STitle> */}
-  </TextContainer>
-</PageWrapper>
+        </>
+      ) : (
+        <Title>Please log in to use the search feature.</Title>
+      )}
+    </SearchContainer>
+  </PageWrapper>
 );
-}
+};
+      
