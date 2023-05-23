@@ -4,8 +4,8 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5002/';
-// const BASE_URL = 'https://studnet.onrender.com/';
+// const BASE_URL = 'http://localhost:5002/';
+const BASE_URL = 'https://studnet.onrender.com/';
 
 export const sendLoginRequest = async (params, setMessage) => {
   setMessage('');
@@ -13,7 +13,6 @@ export const sendLoginRequest = async (params, setMessage) => {
     const result = await axios.post(`${BASE_URL}log`, params);
     // console.log(result);
     if (result.data.success) {
-      // alert(`Hello ${result.data.data.user.firstName}, You are now logged in!`);
       return result.data.data.user;
     }
     setMessage(result.data.data.message);
@@ -28,8 +27,6 @@ export const sendSignUpRequest = async (params, setMessage) => {
   setMessage('');
   try {
     const result = await axios.post(`${BASE_URL}auth`, params);
-    console.log(result.data);
-    console.log(result.data.success);
     if (result.data.success) {
       alert(`Hello ${result.data.data.newUser.firstName}, You are now registered!`);
       return result.data.data.user;

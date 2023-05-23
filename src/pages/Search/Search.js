@@ -23,7 +23,6 @@ import { getAllusers }  from '../../API/Auth_calls';
 
 export default function Search() {
   const [auth, setAuth] = useState(null);
-  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -74,7 +73,6 @@ export default function Search() {
     setSearchText(`${user.firstName} ${user.lastName}`);
     setShowDropdown(false);
   };
-
   return (
     <PageWrapper>
     <SearchContainer>
