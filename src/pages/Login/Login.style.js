@@ -29,7 +29,7 @@ export const LoginContainer = styled.div`
   border-radius: 10px;
   background-color: rgba(200, 200, 200, 0.2);
   margin: 0 auto;
-  margin-top: -20px;
+  margin-top: 10px;
   ${InputLbl} {
     display: flex;
     align-items: center;
@@ -44,7 +44,7 @@ export const VerticalContainer = styled.div`
     background-attachment: fixed;
     background-size: cover;
     text-align: center;
-    margin-top: 75px;
+    margin-top: -20px;
     background-color: #0d1116;
     min-height: 100vh;
     flex-direction: column;
@@ -60,8 +60,8 @@ export const Title = styled.h1`
     color: #fff;
     line-height: 3;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin-bottom: 5px;
-    margin-top: -20px;
+    /* margin-bottom: 5px; */
+    margin-top: 100px;
 `;
 
 export const SubmitBtn = styled.button`

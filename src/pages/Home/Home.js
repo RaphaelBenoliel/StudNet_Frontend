@@ -143,7 +143,7 @@ export default function Home() {
     {auth ? (
       <>
         <Title>
-          Hello {JSON.parse(auth).firstName}!<br />
+          Hello {JSON.parse(auth).firstName}!&#128075;<br />
           Welcome to StudNet
         </Title>
         <Post>

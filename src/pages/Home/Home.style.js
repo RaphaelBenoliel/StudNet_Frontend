@@ -7,7 +7,6 @@ export const HomeWrapper = styled.div`
     background-attachment: fixed;
     background-size: cover;
     text-align: center;
-    margin-top: 75px;
     background-color: #0d1116;
     min-height: 120vh;
     flex-direction: column;
@@ -19,9 +18,9 @@ export const STitle = styled.h3`
 export const Title = styled.h1`
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
-    font-size: 50px;
+    font-size: 30px;
     color: #fff;
-    margin: 10px;
+    margin-top: 100px;
     padding: 0;
 
 `;
