@@ -13,6 +13,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Search from './pages/Search/Search';
 import NotFound from './pages/NotFound/NotFound';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
+import PersonalArea from './pages/PersonalArea/PersonalArea';
 // import { UserContext } from './UserContext';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/profile" element={<PersonalArea />} />
         <Route path="/about" element={<About />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/tools" element={<Tools />} />
