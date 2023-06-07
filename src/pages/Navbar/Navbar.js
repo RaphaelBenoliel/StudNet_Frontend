@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import {
   NavbarContainer, LeftContainer, RightContainer, NavbarInnerContainer,
   NavbarExtendedContainer, NavbarLinkContainer, NavbarLink, SubmitBtn,
-  OpenLinksButton, NavbarLinkExtended, TextAuth,
+  OpenLinksButton, NavbarLinkExtended,
 } from './Navbar.style';
+import AccountMenu from './AccountMenu';
 
 function Navbar() {
   const [extendNavbar, setExtendNavbar] = useState(false);
@@ -59,16 +60,7 @@ function Navbar() {
         </LeftContainer>
         <RightContainer>
           {auth ? (
-            <>
-              <TextAuth>
-                {JSON.parse(auth).firstName}
-                &nbsp;
-                {JSON.parse(auth).lastName}
-              </TextAuth>
-              <NavbarLinkExtended onClick={signOut} to="/">
-                <SubmitBtn>Sign out</SubmitBtn>
-              </NavbarLinkExtended>
-            </>
+            <AccountMenu auth={auth} signOut={signOut} />
           ) : (
             <>
               <NavbarLinkExtended to="/"><SubmitBtn> Sign in</SubmitBtn></NavbarLinkExtended>
