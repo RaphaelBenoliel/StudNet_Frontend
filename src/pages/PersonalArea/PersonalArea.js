@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import './PersonalArea.css';
+import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 export default function PersonalArea() {
     
@@ -11,6 +13,11 @@ export default function PersonalArea() {
     const [savedPosts, setSavedPosts] = useState([]);
     const [statistics, setStatistics] = useState({});
     const [user, setUser] = useState(null);
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = (event) => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+       }
     const [isEditing, setIsEditing] = useState({
       userName: false,
       firstName: false,
@@ -192,7 +199,7 @@ export default function PersonalArea() {
       </div>
                         </div>
                     </TabPanel><TabPanel>
-                        <div className="panel-content">
+                        <div className="panel-content_password">
                             <h2>Edit password</h2>
                             <form onSubmit={saveProfile}>
       <p>Current Password: &nbsp;
@@ -215,12 +222,32 @@ export default function PersonalArea() {
 
       <p>
       New password again: &nbsp;
-          <input
+      <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
+          {/* <input
             type="password"
             name="confirmPassword"
             value={updatedProfile.confirmPassword}
             onChange={handleChange}
-          />
+          /> */}
       </p>
       <p>Forgot password? &nbsp;
       <Link to="/login/:fpass" className="forgot-link">Click Here</Link> </p>

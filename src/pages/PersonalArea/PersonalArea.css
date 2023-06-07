@@ -121,6 +121,10 @@ font-size: 17px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.panel-content_password {
+    font-size: 17px;
+}
+
 
 
 .title img {
