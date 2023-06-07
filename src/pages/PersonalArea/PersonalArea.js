@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import './PersonalArea.css';
+import { Link } from 'react-router-dom';
 export default function PersonalArea() {
     
     const [followers, setFollowers] = useState([]);
@@ -14,11 +15,13 @@ export default function PersonalArea() {
       userName: false,
       firstName: false,
       lastName: false,
+      password: false,
     });
     const [updatedProfile, setUpdatedProfile] = useState({
       userName: '',
       firstName: '',
       lastName: '',
+      password: '',
     });
   
     useEffect(() => {
@@ -116,16 +119,16 @@ export default function PersonalArea() {
                             <p>Account</p>
                         </Tab>
                         <Tab>
+                            <p>Password</p>
+                        </Tab>
+                        <Tab>
+                            <p>Personal</p>
+                        </Tab>
+                        <Tab>
                             <p>Followers</p>
                         </Tab>
                         <Tab>
                             <p>Following</p>
-                        </Tab>
-                        <Tab>
-                            <p>Title 4</p>
-                        </Tab>
-                        <Tab>
-                            <p>Title 5</p>
                         </Tab>
                     </TabList>
                     <TabPanel>
@@ -135,7 +138,7 @@ export default function PersonalArea() {
 
                             <form onSubmit={saveProfile}>
       <p>
-        Username:{' '}
+        Username: &nbsp;
         {isEditing.userName ? (
           <input
             type="text"
@@ -152,7 +155,7 @@ export default function PersonalArea() {
       </p>
 
       <p>
-        First Name:{' '}
+        First Name: &nbsp;
         {isEditing.firstName ? (
           <input
             type="text"
@@ -169,7 +172,7 @@ export default function PersonalArea() {
       </p>
 
       <p>
-        Last Name:{' '}
+        Last Name: &nbsp;
         {isEditing.lastName ? (
           <input
             type="text"
@@ -190,7 +193,41 @@ export default function PersonalArea() {
                         </div>
                     </TabPanel><TabPanel>
                         <div className="panel-content">
-                            <h2>Any content 2</h2>
+                            <h2>Edit password</h2>
+                            <form onSubmit={saveProfile}>
+      <p>Current Password: &nbsp;
+      <input
+            type="password"
+            name="currentPassword"
+            value={updatedProfile.currentPassword}
+            onChange={handleChange}
+          />
+          </p>
+      <p>
+        New password: &nbsp;
+          <input
+            type="password"
+            name="newPassword"
+            value={updatedProfile.newPassword}
+            onChange={handleChange}
+          />
+      </p>
+
+      <p>
+      New password again: &nbsp;
+          <input
+            type="password"
+            name="confirmPassword"
+            value={updatedProfile.confirmPassword}
+            onChange={handleChange}
+          />
+      </p>
+      <p>Forgot password? &nbsp;
+      <Link to="/login/:fpass" className="forgot-link">Click Here</Link> </p>
+      <button onClick={() => setIsEditing({ ...isEditing, password: !isEditing.password })}>
+        Save
+        </button>
+    </form>
                         </div>
                     </TabPanel><TabPanel>
                         <div className="panel-content">

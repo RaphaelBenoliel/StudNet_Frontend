@@ -5,7 +5,7 @@ export const PageWrapper = styled.div`
     background-attachment: fixed;
     background-size: cover;
     text-align: center;
-    margin-top: 75px;
+    /* margin-top: 0px; */
     background-color: #0d1116;
     min-height: 120vh;
     flex-direction: column;
@@ -19,6 +19,7 @@ export const Title = styled.h1`
     color: #fff;
     margin: 10px;
     padding: 0;
+    margin-top: 100px;
 
 `;
 

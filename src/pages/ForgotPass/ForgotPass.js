@@ -81,10 +81,9 @@ export default function ForgotPass() {
           <TextMesasge>{msg}</TextMesasge>
           </ForgotPassHolder>
       </>
-    (
       <Title>
       </Title>
-    )
+
     {}
   </TextContainer>
 </PageWrapper>
