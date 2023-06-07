@@ -10,11 +10,15 @@ export default function PersonalArea() {
     const [savedPosts, setSavedPosts] = useState([]);
     const [statistics, setStatistics] = useState({});
     const [user, setUser] = useState(null);
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState({
+      userName: false,
+      firstName: false,
+      lastName: false,
+    });
     const [updatedProfile, setUpdatedProfile] = useState({
-      username: '',
-      email: '',
-      fullName: ''
+      userName: '',
+      firstName: '',
+      lastName: '',
     });
   
     useEffect(() => {
@@ -53,40 +57,42 @@ export default function PersonalArea() {
       event.preventDefault();
       setIsEditing(true);
       setUpdatedProfile({
-        username: user.username,
+        username: user.userName,
         email: user.email,
         fullName: user.fullName
       });
     };
   
-    const saveProfile = (event) => {
-      event.preventDefault();
-      // Call the backend API to save the updated profile
-      // Replace the placeholder API endpoint with the actual backend API endpoint
-      fetch(`/api/users/${user.id}/profile`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedProfile),
-      })
-        .then((response) => response.json())
-        .then((updatedProfileData) => {
-          setUser(updatedProfileData);
-          setIsEditing(false);
-        })
-        .catch((error) => {
-          console.error('Error updating profile:', error);
-        });
-    };
+    // const saveProfile = (event) => {
+    //   event.preventDefault();
+    //   // Call the backend API to save the updated profile
+    //   // Replace the placeholder API endpoint with the actual backend API endpoint
+    //   fetch(`/api/users/${user.id}/profile`, {
+    //     method: 'PUT',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(updatedProfile),
+    //   })
+    //     .then((response) => response.json())
+    //     .then((updatedProfileData) => {
+    //       setUser(updatedProfileData);
+    //       setIsEditing(false);
+    //     })
+    //     .catch((error) => {
+    //       console.error('Error updating profile:', error);
+    //     });
+    // };
     
+    const saveProfile = (e, field) => {
+      e.preventDefault();
+      setUser({ ...user, [field]: updatedProfile[field] });
+      setIsEditing({ ...isEditing, [field]: false });
+    };
   
-    const handleChange = (event) => {
-      const { name, value } = event.target;
-      setUpdatedProfile((prevProfile) => ({
-        ...prevProfile,
-        [name]: value
-      }));
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setUpdatedProfile({ ...updatedProfile, [name]: value });
     };
     const deleteAccount = () => {
         // Implement the logic to delete the user account
@@ -124,7 +130,63 @@ export default function PersonalArea() {
                     </TabList>
                     <TabPanel>
                         <div className="panel-content">
-                            <h2>Any content 1</h2>
+                            <h2>Edit account</h2>
+                            <div>
+
+                            <form onSubmit={saveProfile}>
+      <p>
+        Username:{' '}
+        {isEditing.userName ? (
+          <input
+            type="text"
+            name="userName"
+            value={updatedProfile.userName}
+            onChange={handleChange}
+          />
+        ) : (
+          user.userName
+        )}
+        <button onClick={() => setIsEditing({ ...isEditing, userName: !isEditing.userName })}>
+          {isEditing.userName ? 'Save' : 'Edit'}
+        </button>
+      </p>
+
+      <p>
+        First Name:{' '}
+        {isEditing.firstName ? (
+          <input
+            type="text"
+            name="firstName"
+            value={updatedProfile.firstName}
+            onChange={handleChange}
+          />
+        ) : (
+          user.firstName
+        )}
+        <button onClick={() => setIsEditing({ ...isEditing, firstName: !isEditing.firstName })}>
+          {isEditing.firstName ? 'Save' : 'Edit'}
+        </button>
+      </p>
+
+      <p>
+        Last Name:{' '}
+        {isEditing.lastName ? (
+          <input
+            type="text"
+            name="lastName"
+            value={updatedProfile.lastName}
+            onChange={handleChange}
+          />
+        ) : (
+          user.lastName
+        )}
+        <button onClick={() => setIsEditing({ ...isEditing, lastName: !isEditing.lastName })}>
+          {isEditing.lastName ? 'Save' : 'Edit'}
+        </button>
+      </p>
+    </form>
+                            
+      </div>
                         </div>
                     </TabPanel><TabPanel>
                         <div className="panel-content">

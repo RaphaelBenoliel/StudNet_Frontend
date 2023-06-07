@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 export const NavbarContainer = styled.nav`
   width: 100%;
   height: ${(props) => (props.extendNavbar ? '100vh' : '80px')};
-  background-color: rgba(0, 0, 0 , .9);
+  background-color: rgba(0, 0, 0 , .8);
   flex-wrap: wrap;
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 0;
   z-index: 999;
-  @media (min-width: 700px) {
+  @media (min-width: 850px) {
     height: 80px;
   }
 `;
@@ -71,7 +71,7 @@ export const NavbarLink = styled(Link)`
         cursor: pointer;
         color: #2da042;
     }
-  @media (max-width: 700px) {
+  @media (max-width: 850px) {
     display: none;
   }
 `;
@@ -90,7 +90,7 @@ export const OpenLinksButton = styled.button`
   color: white;
   font-size: 45px;
   cursor: pointer;
-  @media (min-width: 700px) {
+  @media (min-width: 850px) {
     display: none;
   }
 `;
@@ -99,7 +99,8 @@ export const NavbarExtendedContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (min-width: 700px) {
+  /* width: 300px; */
+  @media (min-width: 850px) {
     display: none;
   }
 `;

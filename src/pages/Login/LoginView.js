@@ -61,6 +61,7 @@ export default function LoginView(props) {
   const [show, setShow] = useState(false);
   const handleShow = () => { setShow(!show); };
   return (
+    
        <VerticalContainer>
         <Title>Log in to StudNet</Title>
       <LoginContainer>

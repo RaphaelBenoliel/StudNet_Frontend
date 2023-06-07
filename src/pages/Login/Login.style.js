@@ -11,13 +11,13 @@ export const InputLbl = styled.label`
   display: block;
   margin-bottom: 5px;
 `;
-export const EyeLab = styled.span`
-    margin-left: 60%;
-    
-    display: block;
-    cursor: pointer;
 
+export const EyeLab = styled.span`
+  margin-left: 60%;
+  display: block;
+  cursor: pointer;
 `;
+
 export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@ export const LoginContainer = styled.div`
   border-radius: 10px;
   background-color: rgba(200, 200, 200, 0.2);
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: -60px;
   ${InputLbl} {
     display: flex;
     align-items: center;
@@ -44,7 +44,7 @@ export const VerticalContainer = styled.div`
     background-attachment: fixed;
     background-size: cover;
     text-align: center;
-    margin-top: -20px;
+    margin-top: -100px;
     background-color: #0d1116;
     min-height: 100vh;
     flex-direction: column;
@@ -58,7 +58,7 @@ export const VerticalContainer = styled.div`
 
 export const Title = styled.h1`
     color: #fff;
-    line-height: 3;
+    line-height: 7;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     /* margin-bottom: 5px; */
     margin-top: 100px;
@@ -75,7 +75,6 @@ export const SubmitBtn = styled.button`
     color:#fff;
     outline: none;
     font-size: 15px;
-
     &:hover{
         cursor: pointer;
         background-color: #2da042;

@@ -6,7 +6,6 @@ export const HomeWrapper = styled.div`
     background-attachment: fixed;
     background-size: cover;
     /* text-align: center; */
-    
     background-color: #0d1116;
     min-height: 120vh;
     flex-direction: column;
