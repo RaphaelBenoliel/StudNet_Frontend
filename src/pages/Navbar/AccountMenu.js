@@ -2,18 +2,10 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import { Box, Avatar, Menu, MenuItem, ListItemIcon, Divider, IconButton, Tooltip  } from '@mui/material';
+import {PersonAdd, Settings, Logout} from '@mui/icons-material';
 import { UserPicture } from '../Home/Home.style';
+
 export default function AccountMenu({ auth, signOut }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -30,24 +22,8 @@ export default function AccountMenu({ auth, signOut }) {
       navigate('/my-area');
     }
 }
-   
   };
-//   useEffect(() => {
-//     if (typeof window !== 'undefined') {
-//       const authData = localStorage.getItem('user');
-//       if (authData) {
-//         setAuth(authData);
-//         // navigate('/home'); // Redirect to home after setting auth
-//       }
-//     }
-//   }, [navigate]);
-//   const signOut = () => {
-//     if (typeof window !== 'undefined') {
-//       localStorage.clear();
-//       setAuth(null); // Update auth state to null
-//       navigate('/');
-//     }
-//   };
+
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -76,7 +52,13 @@ export default function AccountMenu({ auth, signOut }) {
           sx: {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            background: 'rgb(36 40 45)',
+            color: 'white',
+            borderRadius: '10px',
             mt: 1.5,
+            '& .MuiMenuItem-root:hover': {
+              background: 'rgba(0, 250, 48, 0.20)'
+            },
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -91,7 +73,7 @@ export default function AccountMenu({ auth, signOut }) {
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
+              bgcolor: 'rgb(36 40 45)',
               transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
             },
