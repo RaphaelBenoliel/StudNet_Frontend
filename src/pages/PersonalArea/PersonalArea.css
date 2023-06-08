@@ -10,7 +10,7 @@ height: 100vh;
 
 .title{
     margin-top: 100px;
-    margin-left: 70px; 
+    margin-left: 150px; 
     font-size: 20px;
 }
 
@@ -18,21 +18,23 @@ height: 100vh;
 display: flex;
 margin-left: 50px;
 margin-top: 10px;
-width: 80%;
+/* width: 90%; */
 height: 500px;
 /* border: 1px solid #3c3e43; */
 color: white;
 background: #1c1d1f;
+margin-left: 150px;
 }
 
 .react-tabs__tab-list {
 display: flex;
 flex-direction: column;
-width: 170px;
+width: 200px;
 margin-top: 0;
 padding: 0;
 color: white;
-background: #3c3e43;
+/* background: #3c3e43; */
+font-size: 18px;
 }
 
 .react-tabs__tab {
@@ -40,27 +42,28 @@ height: 50px;
 list-style: none;
 padding: 12px 6px;
 cursor: pointer;
-color: #bbb;
+color: #fff;
+border-radius: 10px;
 &:hover{
     cursor: pointer;
-    background-color: #232326;
+    background-color: #4e4e54;
 }
 }
 
 .react-tabs__tab--selected {
-background: #1c1d1f;
+background: #3c3e43;
 /* border-color: #1c1d1f; */
 border-left: 7px solid #238636;
 color: white;
 &:hover{
     cursor: pointer;
-    background-color: #232326;
+    background-color: #4e4e54;
 }
 }
 
 .react-tabs__tab-panel {
 display: none;
-width: 400px;
+width: 80%;
 margin-left: 50px;
 }
 
@@ -80,17 +83,25 @@ padding-left: 21px;
 .panel-content {
 /* text-align: center; */
 font-size: 17px;
+margin-left: 50px;
+}
+
+
+.panel-content_password h4 {
+    font-size: 17px;
+    font-family: 
 }
 
 .panel-content input {
-    font-size: 14px;
+    font-size: 15px;
     color:#fff;
-    align-items: center;
     background-color: rgba(200, 200, 200, 0.2);
     border-radius: 5px;
-    border: 1px solid #238636;
-    padding: 5px 10px;
-    line-height: 1.5;
+    width: 35ch;
+    height: 40px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-left: 10px;
 }
 
 .forgot-link {
@@ -103,14 +114,14 @@ font-size: 17px;
 }
 
 .panel-content button {
-    font-size: 14px;
+    font-size: 15px;
     background-color: #238636;
     border: 1px solid #2da042;
     border-radius: 8px;
     color:#fff;
-    width: fit-content;
+    width: 60px;
     height: 30px;
-    padding: 10px;
+    /* padding: 10px; */
     margin-top: 10px;
     outline: none;
     &:hover{
@@ -122,10 +133,27 @@ font-size: 17px;
 }
 
 .panel-content_password {
+    /* margin-left: 250px; */
     font-size: 17px;
+
 }
-
-
+.saveButton {
+    font-size: 17px;
+    background-color: #238636;
+    border: 1px solid #2da042;
+    border-radius: 8px;
+    color:#fff;
+    width: 40ch;
+    height: 35px;
+    padding: 1px;
+    margin-top: 10px;
+    outline: none;
+    &:hover{
+        cursor: pointer;
+        background-color: #2da042;
+    }
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
 .title img {
     width: 100px;
