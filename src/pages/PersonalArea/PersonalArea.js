@@ -6,7 +6,7 @@ import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } fr
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/system';
-import { requestUpdateProfile } from '../../API/Auth_calls';
+import { getUsersByiD, requestUpdateProfile } from '../../API/Auth_calls';
 
 export default function PersonalArea() {
     
@@ -61,6 +61,7 @@ export default function PersonalArea() {
         const parsedData = JSON.parse(userData);
         setUser(parsedData);
         setEditedUser(parsedData);
+        setFollowers(parsedData.followers);
         // fetchUserData(parsedData.id);
       }
     }, []);
@@ -145,6 +146,7 @@ const handleChange = (e) => {
 const saveProfile = async () => {
   setIsEditing(false);
   setUser(editedUser);
+
   localStorage.setItem('user', JSON.stringify(editedUser));
   try {
     const result = await requestUpdateProfile(editedUser);
@@ -159,7 +161,16 @@ const toggleEdit= () => {
     saveProfile();
   }
 };
-
+const getFollwers = async () => {
+  try {
+    console.log(followers);
+    const result = await getUsersByiD({followers});
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+getFollwers();
     const deleteAccount = () => {
         // Implement the logic to delete the user account
         // This can include API calls, removing data, etc.
