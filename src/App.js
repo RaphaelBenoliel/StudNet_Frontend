@@ -11,6 +11,7 @@ import Terms from './pages/Terms/Terms';
 import Tools from './pages/Tools/Tools';
 import SignUp from './pages/SignUp/SignUp';
 import Search from './pages/Search/Search';
+import Profile from './pages/Profile/Profile';
 import NotFound from './pages/NotFound/NotFound';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import PersonalArea from './pages/PersonalArea/PersonalArea';
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/my-area" element={<PersonalArea />} />
         <Route path="/about" element={<About />} />
         <Route path="/terms" element={<Terms />} />
