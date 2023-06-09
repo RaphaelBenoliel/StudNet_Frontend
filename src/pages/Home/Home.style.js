@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import Mybackground from '../../icons/background2.png';
 // eslint-disable-next-line import/prefer-default-export
 export const HomeWrapper = styled.div`
-    /* background-image: url(${Mybackground}); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

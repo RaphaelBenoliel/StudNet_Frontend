@@ -71,14 +71,12 @@ color: white;
 display: none;
 width: 80%;
 margin-left: 20px;
-border-radius: 0px 10px 10px 0px;
-border: 1px solid #3c3e43;
+
 }
 
 .react-tabs__tab-panel--selected {
 display: flex;
-margin-left: 10px;
-
+margin-left: 20px;
 }
 
 .react-tabs__tab {
