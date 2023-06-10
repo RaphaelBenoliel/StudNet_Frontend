@@ -2,12 +2,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import './PersonalArea.css';
-import { InputLabel,  } from '@mui/material';
+import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { TextInput } from '../Login/Login.style';
-import eyeClosed from '../../icons/eye-off.png';
-import eyeOpen from '../../icons/eye-on.png';
+import { styled } from '@mui/system';
+import { getUsersByiD, requestUpdateProfile } from '../../API/Auth_calls';
 
 export default function PersonalArea() {
     
@@ -22,41 +21,50 @@ export default function PersonalArea() {
     const [messagePass2, setMessagePass2] = useState([]);
     const [noEqualMessage, setNoEqualMessage] = useState(false);
     const [currentPasswordMessage, setCurrentPasswordMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const currentPassword = useRef(null);
-    const newPassword = useRef(null);
-    const newPasswordAgain = useRef(null);
-  
-    const [isEditing, setIsEditing] = useState({
-      userName: false,
-      firstName: false,
-      lastName: false,
-      password: false,
-    });
-    const [updatedProfile, setUpdatedProfile] = useState({
+    const [newPassword, setNewPassword] = useState('');
+    const [newPasswordAgain, setNewPasswordAgain] = useState('');
+    const handleClickShowPassword = (event) => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+       }
+    const [showCurrentPassword, setShowCurrentPassword] = useState('');
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showNewPasswordAgain, setShowNewPasswordAgain] = useState(false);
+    const [editedUser, setEditedUser] = useState({
       userName: '',
       firstName: '',
       lastName: '',
-      password: '',
     });
-    const [showPassword, setShow] = useState(false);
-    const handleShow = () => {
-      setShow(!showPassword);
+    const toggleCurrentPasswordVisibility = () => {
+      setShowCurrentPassword(!showCurrentPassword);
     };
+    
+    const toggleNewPasswordVisibility = () => {
+      setShowNewPassword(!showNewPassword);
+    };
+  
+    const toggleNewPasswordAgainVisibility = () => {
+      setShowNewPasswordAgain(!showNewPasswordAgain);
+    };
+
+    const handleCurrentPasswordChange = (event) => {
+      const passwordValue = event.target.value;
+      setCurrentPassword(passwordValue);
+    };
+   
 
     useEffect(() => {
       const userData = localStorage.getItem('user');
       if (userData) {
         const parsedData = JSON.parse(userData);
         setUser(parsedData);
-        fetchUserData(parsedData.id);
+        setEditedUser(parsedData);
+        setFollowers(parsedData.followers);
+        // fetchUserData(parsedData.id);
       }
     }, []);
-
-  const EyeLab = styled.span`
-  margin-left: 60%;
-  display: block;
-  cursor: pointer;
-`;
   
     const changePassword = async () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -68,13 +76,13 @@ export default function PersonalArea() {
         console.log('hhhh', user.password);
 
         setCurrentPasswordMessage('');
-        if (newPassword.current.value === newPasswordAgain.current.value) {
-          if (newPassword.current.value === '') {
+        if (newPassword === newPasswordAgain) {
+          if (newPassword === '') {
             setMessagePass("Password cannot be empty.");
             props.setMessage('');
             isRegex = true;
             // Check if the password is in the correct format
-          }else if (!newPassword.current.value.match(passRegex)) {
+          }else if (!newPassword.match(passRegex)) {
             setMessagePass("Password must be at least 8 characters.");
             setMessagePass1("At least one uppercase,");
             setMessagePass2("lowercase and number.");
@@ -87,7 +95,7 @@ export default function PersonalArea() {
           }
           if (!isRegex){
             try {
-              const result = await changePassword({user, newPassword});
+              const result = await requestChangePassword({user, showNewPassword});
             } catch (error) {
               console.error(error);
             }
@@ -123,47 +131,49 @@ export default function PersonalArea() {
     //     });
     };
   
-    const editProfile = (event) => {
-      event.preventDefault();
-      setIsEditing(true);
-      setUpdatedProfile({
-        username: user.userName,
-        email: user.email,
-        fullName: user.fullName
-      });
-    };
-  
-    // const saveProfile = (event) => {
-    //   event.preventDefault();
-    //   // Call the backend API to save the updated profile
-    //   // Replace the placeholder API endpoint with the actual backend API endpoint
-    //   fetch(`/api/users/${user.id}/profile`, {
-    //     method: 'PUT',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(updatedProfile),
-    //   })
-    //     .then((response) => response.json())
-    //     .then((updatedProfileData) => {
-    //       setUser(updatedProfileData);
-    //       setIsEditing(false);
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error updating profile:', error);
-    //     });
-    // };
-    
-    const saveProfile = (e, field) => {
-      e.preventDefault();
-      setUser({ ...user, [field]: updatedProfile[field] });
-      setIsEditing({ ...isEditing, [field]: false });
-    };
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setUpdatedProfile({ ...updatedProfile, [name]: value });
-    };
+const [isEditing, setIsEditing] = useState(false);
+const [isEditingFirstName, setIsEditingFirstName] = useState(false);
+const [isEditingLastName, setIsEditingLastName] = useState(false);
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setEditedUser((prevUser) => ({
+    ...prevUser,
+    [name]: value,
+  }));
+};
+
+const saveProfile = async () => {
+  setIsEditing(false);
+  setUser(editedUser);
+
+  localStorage.setItem('user', JSON.stringify(editedUser));
+  try {
+    const result = await requestUpdateProfile(editedUser);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+const toggleEdit= () => {
+  setIsEditing(!isEditing);
+  if (isEditing) {
+    saveProfile();
+  }
+};
+const getFollwers = async () => {
+  if (followers.length === 0) {
+    return;
+  }
+  try {
+    console.log(followers);
+    const result = await getUsersByiD({followers});
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+getFollwers();
     const deleteAccount = () => {
         // Implement the logic to delete the user account
         // This can include API calls, removing data, etc.
@@ -171,6 +181,44 @@ export default function PersonalArea() {
         console.log('Deleting user account...');
       };
 
+      const StyledInputLabel = styled(InputLabel)(
+        ({ theme }) => ({
+          color: 'white',
+        })
+      );
+
+// StyledFormControl component with customized styles
+const StyledFormControl = styled(FormControl)(
+  ({ theme }) => ({
+    margin: theme.spacing(1),
+    width: '40ch',
+    // border: '0.5px solid white',
+    borderRadius: '5px',
+    backgroundColor: 'rgba(200, 200, 200, 0.2)',
+    height: '50px',
+    marginBottom: '0px',
+  })
+);
+
+const StyledOutlinedInput = styled(OutlinedInput)(
+  ({ theme }) => ({
+    color: 'white',
+  })
+);
+
+// StyledInputAdornment component with customized styles
+const StyledInputAdornment = styled(InputAdornment)(
+  ({ theme }) => ({
+    color: 'white',
+  })
+);
+
+// StyledIconButton component with customized styles
+const StyledIconButton = styled(IconButton)(
+  ({ theme }) => ({
+    color: 'white',
+  })
+);
     return (
         <div className="App">
             {user && (
@@ -199,65 +247,60 @@ export default function PersonalArea() {
                         </Tab>
                     </TabList>
                     <TabPanel>
-                        <div className="panel-content">
-                            <h2>Edit account</h2>
-                            <div>
-
-                            <form onSubmit={saveProfile}>
-      <p>
-        Username: &nbsp;
-        {isEditing.userName ? (
-          <input
-            type="text"
-            name="userName"
-            defaultValue={ user.userName }
-            onChange={handleChange}
-          />
-        ) : (
-          user.userName
-        )}
-        <button onClick={() => setIsEditing({ ...isEditing, userName: !isEditing.userName })}>
-          {isEditing.userName ? 'Save' : 'Edit'}
-        </button>
-      </p>
-
-      <p>
-        First Name: &nbsp;
-        {isEditing.firstName ? (
-          <input
-            type="text"
-            name="firstName"
-            defaultValue={ user.firstName }
-            onChange={handleChange}
-          />
-        ) : (
-          user.firstName
-        )}
-        <button onClick={() => setIsEditing({ ...isEditing, firstName: !isEditing.firstName })}>
-          {isEditing.firstName ? 'Save' : 'Edit'}
-        </button>
-      </p>
-
-      <p>
-        Last Name: &nbsp;
-        {isEditing.lastName ? (
-          <input
-            type="text"
-            name="lastName"
-            defaultValue={ user.lastName }
-            onChange={handleChange}
-          />
-        ) : (
-          user.lastName
-        )}
-        <button onClick={() => setIsEditing({ ...isEditing, lastName: !isEditing.lastName })}>
-          {isEditing.lastName ? 'Save' : 'Edit'}
-        </button>
-      </p>
-    </form>
-                            
-      </div>
-                        </div>
+                      <div className="panel-content">
+                          <h2>Edit account</h2>
+                          <div>
+                          <form >
+                          <p>
+                      User Name: {' '}
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="userName"
+                          value={editedUser.userName}
+                          onChange={handleChange}
+                          autoComplete="userName"
+                        />
+                      ) : (
+                        editedUser.userName
+                      )}
+                    </p>
+                    <p>
+                      First Name: {' '}
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="firstName"
+                          value={editedUser.firstName}
+                          onChange={handleChange}
+                          autoComplete="firstName"
+                        />
+                      ) : (
+                        editedUser.firstName
+                      )}
+                    </p>
+                    <p>
+                      Last Name: {' '}
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="lastName"
+                          value={editedUser.lastName}
+                          onChange={handleChange}
+                          autoComplete="lastName"
+                        />
+                      ) : (
+                        editedUser.lastName
+                      )}
+                    </p>
+                    <p>
+                      <button type="button" onClick={toggleEdit}>
+                        {isEditing ? 'Save' : 'Edit'}
+                      </button>
+                    </p>
+                  </form>
+                          </div>
+                      </div>
                     </TabPanel>
                     <TabPanel>
   <div className="panel-content_password">
@@ -266,43 +309,75 @@ export default function PersonalArea() {
     <h9>At least one uppercase, lowercase, and number.</h9>
     <form onSubmit={saveProfile}>
       <p>
-      <InputLabel>
-          <EyeLab
-            onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
-      <TextInput 
-      type={showPassword ? 'text' : 'password'} 
-      id="password" 
-      ref={currentPassword} 
-      placeholder="Current Password"
-      />
+        <StyledFormControl variant="outlined">
+          <StyledInputLabel htmlFor="current-password-input">Current Password</StyledInputLabel>
+          <StyledOutlinedInput
+            id="current-password-input"
+            type={showCurrentPassword ? 'text' : 'password'}
+            ref={currentPassword}
+            endAdornment={
+              <StyledInputAdornment position="end">
+                <StyledIconButton
+                  aria-label="toggle current password visibility"
+                  onClick={toggleCurrentPasswordVisibility}
+                  edge="end"
+                >
+                  {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                </StyledIconButton>
+                
+              </StyledInputAdornment>
+                    
+            }
+            label="Password"
+          />
+        </StyledFormControl>
         <p>{currentPasswordMessage}</p>
       </p>
       <p>
-      <InputLabel>
-          <EyeLab
-            onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
-      <TextInput 
-      type={showPassword ? 'text' : 'password'} 
-      id="password" 
-      ref={newPassword} 
-      placeholder="New Password"
-      />        <p>{messagePass}</p>
+        <StyledFormControl variant="outlined">
+          <StyledInputLabel htmlFor="new-password-input">New Password</StyledInputLabel>
+          <StyledOutlinedInput
+            id="new-password-input"
+            type={showNewPassword ? 'text' : 'password'}
+            endAdornment={
+              <StyledInputAdornment position="end">
+                <StyledIconButton
+                  aria-label="toggle new password visibility"
+                  onClick={toggleNewPasswordVisibility}
+                  edge="end"
+                >
+                  {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                </StyledIconButton>
+              </StyledInputAdornment>
+            }
+            label="Password"
+          />
+        </StyledFormControl>
+
+        <p>{messagePass}</p>
         <p>{messagePass1}</p>
         <p>{messagePass2}</p>
       </p>
       <p>
-      <InputLabel>
-          <EyeLab
-            onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
-      <TextInput 
-      type={showPassword ? 'text' : 'password'} 
-      id="password" 
-      ref={newPasswordAgain} 
-      placeholder="New Password Again"
-      />
+        <StyledFormControl variant="outlined">
+          <StyledInputLabel htmlFor="new-password-again-input">New Password Again</StyledInputLabel>
+          <StyledOutlinedInput
+            id="new-password-again-input"
+            type={showNewPasswordAgain ? 'text' : 'password'}
+            endAdornment={
+              <StyledInputAdornment position="end">
+                <StyledIconButton
+                  aria-label="toggle new password again visibility"
+                  onClick={toggleNewPasswordAgainVisibility}
+                  edge="end"
+                >
+                  {showNewPasswordAgain ? <VisibilityOff /> : <Visibility />}
+                </StyledIconButton>
+              </StyledInputAdornment>
+            }
+            label="Password"
+          />
+        </StyledFormControl>
         <p>{noEqualMessage}</p>
       </p>
       <p>Forgot password?&nbsp;
@@ -334,128 +409,3 @@ export default function PersonalArea() {
         </div>
     );
 }
-
-
-{/* <Container>
-<Heading>Personal Area</Heading>
-
-{user && (
-  <div>
-    <SubHeading>User Profile</SubHeading>
-    <UserInfo>
-      <Label>Username:</Label>
-      <span>{user.username}</span>
-    </UserInfo>
-    <UserInfo>
-      <Label>Email:</Label>
-      <span>{user.email}</span>
-    </UserInfo>
-    <UserInfo>
-      <Label>Full Name:</Label>
-      <span>{user.fullName}</span>
-    </UserInfo>
-
-    {!isEditing && (
-      <Button onClick={editProfile}>Edit Profile</Button>
-    )}
-
-    {isEditing && (
-      <FormContainer>
-        <form onSubmit={saveProfile}>
-          <FormLabel>Username:</FormLabel>
-          <FormInput
-            type="text"
-            name="username"
-            value={updatedProfile.username}
-            onChange={handleChange}
-          />
-
-          <FormLabel>Email:</FormLabel>
-          <FormInput
-            type="email"
-            name="email"
-            value={updatedProfile.email}
-            onChange={handleChange}
-          />
-
-          <FormLabel>Full Name:</FormLabel>
-          <FormInput
-            type="text"
-            name="fullName"
-            value={updatedProfile.fullName}
-            onChange={handleChange}
-          />
-
-          <Button type="submit">Save</Button>
-          <Button onClick={() => setIsEditing(false)}>Cancel</Button>
-        </form>
-      </FormContainer>
-    )}
-
-    <Button onClick={deleteAccount}>Delete Account</Button>
-    <Button onClick={() => changePassword('newpassword')}>Change Password</Button>
-  </div>
-)}
-
-{followers.length > 0 && (
-  <div>
-    <SubHeading>Followers ({followers.length})</SubHeading>
-    <List>
-      {followers.map((follower, index) => (
-        <ListItem key={index}>{follower}</ListItem>
-      ))}
-    </List>
-  </div>
-)}
-
-{following.length > 0 && (
-  <div>
-    <SubHeading>Following ({following.length})</SubHeading>
-    <List>
-      {following.map((followedAccount, index) => (
-        <ListItem key={index}>{followedAccount}</ListItem>
-      ))}
-    </List>
-  </div>
-)}
-
-{likedPosts.length > 0 && (
-  <div>
-    <SubHeading>Liked Posts ({likedPosts.length})</SubHeading>
-    <List>
-      {likedPosts.map((likedPost, index) => (
-        <ListItem key={index}>{likedPost}</ListItem>
-      ))}
-    </List>
-  </div>
-)}
-
-{savedPosts.length > 0 && (
-  <div>
-    <SubHeading>Saved Posts ({savedPosts.length})</SubHeading>
-    <List>
-      {savedPosts.map((savedPost, index) => (
-        <ListItem key={index}>{savedPost}</ListItem>
-      ))}
-    </List>
-  </div>
-)}
-
-{Object.keys(statistics).length > 0 && (
-  <div>
-    <SubHeading>Statistics</SubHeading>
-    <UserInfo>
-      <Label>Posts:</Label>
-      <span>{statistics.posts}</span>
-    </UserInfo>
-    <UserInfo>
-      <Label>Followers:</Label>
-      <span>{statistics.followers}</span>
-    </UserInfo>
-    <UserInfo>
-      <Label>Following:</Label>
-      <span>{statistics.following}</span>
-    </UserInfo>
-  </div>
-)}
-</Container> */}
