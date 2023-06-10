@@ -1,6 +1,7 @@
 /* eslint max-len: ["error", { "code": 400 }] */
 /* eslint-disable */
 import React from 'react';
+import 'Tools.css';
 import ChatGpt from '../../icons/chatgpt.webp';
 import Gool from '../../icons/gool.png';
 import Zoom from '../../icons/zoom.webp';
@@ -47,7 +48,7 @@ export default function Tools() {
       <br />
       <br />
       <br />
-      <h1 style={{ color: 'white' }}>Math</h1>
+      <h2 style={{ color: 'white' }}>Math</h2>
       <br />
       <a href="https://he.symbolab.com/">
       <img src={Symbolab} alt="Symbolab" style={{ width: 100, height: 100, margin: 20 }} />
