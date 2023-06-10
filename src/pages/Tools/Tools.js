@@ -77,10 +77,6 @@ export default function Tools() {
     <a href="https://github.com/">
       <img src={GitHub} alt="GitHub" style={{ width: 100, height: 100, margin: 30 }} />
     </a>
-    <br />
-    <br />
-    <br />
-    <br />
     <a href="https://circleci.com/">
       <img src={CircleCi} alt="Circlrci" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
