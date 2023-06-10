@@ -20,12 +20,6 @@ import Rapid from '../../icons/rapid.png';
 import Compilers from '../../icons/compilers.png';
 import Scholar from '../../icons/scholar.png';
 
-
-
-
-
-
-
 export default function Tools() {
   return (
     <div style={{ textAlign: 'center', backgroundColor: '#0d1116' }}>
@@ -36,7 +30,7 @@ export default function Tools() {
       <h1 style={{ color: 'white' }}>General</h1>
       <br />
       <a href="https://openai.com/blog/chatgpt">
-      <img src={ChatGpt} alt="ChatGpt" style={{ width: 100, height: 100, margin: 30 }} />
+      <img src={ChatGpt} alt="ChatGpt" style={{ width: 100, height: 100, margin: 30 }} title="Click to move to the site" />
       </a>
       <a href="https://www.gool.co.il/">
       <img src={Gool} alt="Gool" style={{ width: 100, height: 100, margin: 30 }} />
