@@ -11,45 +11,60 @@ import { Link } from 'react-router-dom';
 import { getUsersByiD, requestUpdateProfile } from '../../API/Auth_calls';
 
 export default function PersonalArea() {
-    
-    const [followers, setFollowers] = useState([]);
-    const [following, setFollowing] = useState([]);
-    const [likedPosts, setLikedPosts] = useState([]);
-    const [savedPosts, setSavedPosts] = useState([]);
-    const [statistics, setStatistics] = useState({});
-    const [user, setUser] = useState(null);
-    const [messagePass, setMessagePass] = useState([]);
-    const [messagePass1, setMessagePass1] = useState([]);
-    const [messagePass2, setMessagePass2] = useState([]);
-    const [noEqualMessage, setNoEqualMessage] = useState(false);
-    const [currentPasswordMessage, setCurrentPasswordMessage] = useState('');
-    const currentPassword = useRef(null);
-    const newPassword = useRef(null);
-    const newPasswordAgain = useRef(null);
-    const [editedUser, setEditedUser] = useState({
-      userName: '',
-      firstName: '',
-      lastName: '',
-    });
+  const [followers, setFollowers] = useState([]);
+  const [followersUsers, setFollowersUsers] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
+  const [savedPosts, setSavedPosts] = useState([]);
+  const [statistics, setStatistics] = useState({});
+  const [user, setUser] = useState(null);
+  const [messagePass, setMessagePass] = useState([]);
+  const [messagePass1, setMessagePass1] = useState([]);
+  const [messagePass2, setMessagePass2] = useState([]);
+  const [noEqualMessage, setNoEqualMessage] = useState(false);
+  const [currentPasswordMessage, setCurrentPasswordMessage] = useState('');
+  const currentPassword = useRef(null);
+  const newPassword = useRef(null);
+  const newPasswordAgain = useRef(null);
+  const [editedUser, setEditedUser] = useState({
+    userName: '',
+    firstName: '',
+    lastName: '',
+  });
 
-    const [showPassword, setShow] = useState(false);
-    const handleShow = () => {
-      setShow(!showPassword);
-    };
+  const [showPassword, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(!showPassword);
+  };
    
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      setUser(parsedData);
+      setEditedUser(parsedData);
+      setFollowers(parsedData.followers);
+    }
 
-    useEffect(() => {
-      const userData = localStorage.getItem('user');
-      if (userData) {
-        const parsedData = JSON.parse(userData);
-        setUser(parsedData);
-        setEditedUser(parsedData);
-        setFollowers(parsedData.followers);
-        // fetchUserData(parsedData.id);
-      }
-    }, []);
+  }, []);
+  const getFollowers = async () => {
+    if (followers.length === 0) {
+      return;
+    }
+    try {
+      console.log(followers);
+      const result = await getUsersByiD({ followers });
+      console.log(result);
+      setFollowersUsers(result.users);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+      getFollowers();
+  }, [followers]);
 
-    const EyeLab = styled.span`
+const EyeLab = styled.span`
   margin-left: 60%;
   display: block;
   cursor: pointer;
@@ -96,33 +111,8 @@ export default function PersonalArea() {
         setCurrentPasswordMessage('Current password not match');
       }
   }
-
-    const fetchUserData = (userId) => {
-      // Fetch user-related data from the backend server
-      // Replace the placeholder API endpoints with the actual backend API endpoints
-    //   Promise.all([
-    //     fetch(`/api/users/${userId}/followers`),
-    //     fetch(`/api/users/${userId}/following`),
-    //     fetch(`/api/users/${userId}/liked-posts`),
-    //     fetch(`/api/users/${userId}/saved-posts`),
-    //     fetch(`/api/users/${userId}/statistics`),
-    //   ])
-    //     .then((responses) => Promise.all(responses.map((res) => res.json())))
-    //     .then(([followersData, followingData, likedPostsData, savedPostsData, statisticsData]) => {
-    //       setFollowers(followersData);
-    //       setFollowing(followingData);
-    //       setLikedPosts(likedPostsData);
-    //       setSavedPosts(savedPostsData);
-    //       setStatistics(statisticsData);
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error fetching user data:', error);
-    //     });
-    };
   
 const [isEditing, setIsEditing] = useState(false);
-const [isEditingFirstName, setIsEditingFirstName] = useState(false);
-const [isEditingLastName, setIsEditingLastName] = useState(false);
 
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -151,19 +141,7 @@ const toggleEdit= () => {
   }
 };
 
-const getFollwers = async () => {
-  if (followers.length === 0) {
-    return;
-  }
-  try {
-    console.log(followers);
-    const result = await getUsersByiD({followers});
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-};
-getFollwers();
+
     const deleteAccount = () => {
         // Implement the logic to delete the user account
         // This can include API calls, removing data, etc.
@@ -174,10 +152,9 @@ getFollwers();
     return (
         <div className="App">
             {user && (
-            <><div className='title'>
-                <p>
+            <><div className="title">
+                <p >
                 <img src={user.picture} alt="User Profile" />
-                
                   {user.firstName} {user.lastName}
                 </p>
                 </div><Tabs>
@@ -305,18 +282,28 @@ getFollwers();
                   <button className='saveButton' onClick={() => changePassword()}>
                     Save
                   </button>
-
                 </form>
               </div>
-            </TabPanel><TabPanel>
+            </TabPanel>
+            <TabPanel>
               <div className="panel-content">
                 <h2>Any content 3</h2>
               </div>
-            </TabPanel><TabPanel>
-              <div className="panel-content">
-                <h2>Any content 4</h2>
-              </div>
-            </TabPanel><TabPanel>
+              </TabPanel>
+              <TabPanel>
+                <div className="panel-content-followers">
+                  <h2>My Followers</h2>
+                  <div className="followers-list">
+                    {followersUsers.map((user) => (
+                      <div key={user.email}>
+                        <img src={user.picture} alt={user.firstName} />
+                        <p>{`${user.firstName} ${user.lastName}`}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </TabPanel>
+              <TabPanel>
               <div className="panel-content">
                 <h2>Any content 5</h2>
               </div>
