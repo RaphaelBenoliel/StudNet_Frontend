@@ -8,11 +8,22 @@ import Jira from '../../icons/jira.png';
 import GitHub from '../../icons/github.png';
 import Qase from '../../icons/qase.png';
 import StackOverFlow from '../../icons/stackoverflow.png';
-import Translate from '../../icons/translate.png';
+import Translate from '../../icons/trans.png';
 import Discord from '../../icons/Discord.png';
 import Symbolab from '../../icons/favicon.png';
 import Desmos from '../../icons/desmos_icon_square.png';
 import Wikipedia from '../../icons/Wikipedia.png';
+import Rapid from '../../icons/rapid.jpeg';
+import CircleCi from '../../icons/circleci.png';
+import Render from '../../icons/render.png';
+import Rapid from '../../icons/rapid.png';
+import Compilers from '../../icons/compilers.png';
+import Scholar from '../../icons/scholar.png';
+
+
+
+
+
 
 
 export default function Tools() {
@@ -25,19 +36,19 @@ export default function Tools() {
       <h1 style={{ color: 'white' }}>General</h1>
       <br />
       <a href="https://openai.com/blog/chatgpt">
-      <img src={ChatGpt} alt="ChatGpt" style={{ width: 150, height: 150, margin: 30 }} />
+      <img src={ChatGpt} alt="ChatGpt" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
       <a href="https://www.gool.co.il/">
-      <img src={Gool} alt="Gool" style={{ width: 150, height: 150, margin: 30 }} />
+      <img src={Gool} alt="Gool" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
       <a href="https://translate.google.com/?hl=iw">
-      <img src={Translate} alt="Translate" style={{ width: 150, height: 150, margin: 20 }} />
+      <img src={Translate} alt="Translate" style={{ width: 100, height: 100, margin: 20 }} />
       </a>
       <a href="https://www.wikipedia.org/">
-      <img src={Wikipedia} alt="Wikipedia" style={{ width: 150, height: 150, margin: 30 }} />
+      <img src={Wikipedia} alt="Wikipedia" style={{ width: 100, height: 100, margin: 30 }} />
       </a>  
-      <a href="https://zoom.us/">
-      <img src={Zoom} alt="Zoom" style={{ width: 150, height: 150, margin: 30 }} />
+      <a href="https://scholar.google.com/">
+      <img src={Scholar} alt="Scholar" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
       <br />
       <br />
@@ -45,15 +56,15 @@ export default function Tools() {
       <br />
       <h2 style={{ color: 'white' }}>Math</h2>
       <br />
-      <a href="https://www.atlassian.com/software/jira">
-      <img src={Jira} alt="Jira" style={{ width: 150, height: 150, margin: 30 }} />
-      </a>
-    <a href="https://github.com/">
-      <img src={GitHub} alt="GitHub" style={{ width: 150, height: 150, margin: 30 }} />
+      <a href="https://he.symbolab.com/">
+      <img src={Symbolab} alt="Symbolab" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
-    <a href="https://qase.io/">
-      <img src={Qase} alt="Qase" style={{ width: 150, height: 150, margin: 30 }} />
+    <a href="https://www.desmos.com/">
+      <img src={Desmos} alt="Desmos" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
+    <a href="https://www.rapidtables.com/calc/math/binary-calculator.html">
+      <img src={Rapid} alt="Rapid" style={{ width: 100, height: 100, margin: 30 }} />
+    </a>   
     <br />
     <br />
     <br />
@@ -61,29 +72,29 @@ export default function Tools() {
     <h3 style={{ color: 'white' }}>Software</h3>
     <br />
     <a href="https://stackoverflow.com/">
-      <img src={StackOverFlow} alt="StackOverFlow" style={{ width: 150, height: 150, margin: 20 }} />
+      <img src={StackOverFlow} alt="StackOverFlow" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
-    <a href="https://translate.google.com/?hl=iw">
-      <img src={Translate} alt="Translate" style={{ width: 150, height: 150, margin: 20 }} />
+    <a href="https://www.atlassian.com/software/jira">
+      <img src={Jira} alt="Jira" style={{ width: 100, height: 100, margin: 30 }} />
     </a>
-    <a href="https://discord.com/">
-      <img src={Discord} alt="Discord" style={{ width: 150, height: 150, margin: 30 }} />
+    <a href="https://qase.io/">
+      <img src={Qase} alt="Qase" style={{ width: 100, height: 100, margin: 30 }} />
     </a>
-    <a href="https://he.symbolab.com/">
-      <img src={Symbolab} alt="Symbolab" style={{ width: 150, height: 150, margin: 20 }} />
+    <a href="https://github.com/">
+      <img src={GitHub} alt="GitHub" style={{ width: 100, height: 100, margin: 30 }} />
     </a>
     <br />
     <br />
     <br />
     <br />
-    <a href="https://he.symbolab.com/">
-      <img src={Symbolab} alt="Symbolab" style={{ width: 150, height: 150, margin: 20 }} />
+    <a href="https://circleci.com/">
+      <img src={CircleCi} alt="Circlrci" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
-    <a href="https://www.desmos.com/">
-      <img src={Desmos} alt="Desmos" style={{ width: 150, height: 150, margin: 20 }} />
+    <a href="https://render.com/">
+      <img src={Render} alt="Render" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
-    <a href="https://www.wikipedia.org/">
-      <img src={Wikipedia} alt="Wikipedia" style={{ width: 150, height: 150, margin: 30 }} />
+    <a href="https://www.codingninjas.com/codestudio/online-compiler">
+      <img src={Compilers} alt="Compilers" style={{ width: 100, height: 100, margin: 30 }} />
     </a>    
     <br />
     <br />
@@ -91,12 +102,12 @@ export default function Tools() {
     <br />
     <h4 style={{ color: 'white' }}>Tools for online learning in groups</h4>
     <br />
-    <a href="https://openai.com/blog/chatgpt">
-      <img src={ChatGpt} alt="ChatGpt" style={{ width: 150, height: 150, margin: 30 }} />
+    <a href="https://zoom.us/">
+      <img src={Zoom} alt="Zoom" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
-      <a href="https://www.gool.co.il/">
-      <img src={Gool} alt="Gool" style={{ width: 150, height: 150, margin: 30 }} />
-      </a>
+    <a href="https://discord.com/">
+      <img src={Discord} alt="Discord" style={{ width: 100, height: 100, margin: 30 }} />
+    </a>
     </div>
  );
 }
