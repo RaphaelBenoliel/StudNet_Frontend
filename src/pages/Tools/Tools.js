@@ -1,7 +1,7 @@
 /* eslint max-len: ["error", { "code": 400 }] */
 /* eslint-disable */
 import React from 'react';
-import ChatGpt from '../../icons/chatgpt.webp';
+import ChatGpt from '../../icons/gptnew.png';
 import Gool from '../../icons/gool.png';
 import Zoom from '../../icons/zoom.webp';
 import Jira from '../../icons/jira.png';
