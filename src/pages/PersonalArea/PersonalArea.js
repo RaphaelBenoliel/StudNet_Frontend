@@ -2,10 +2,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import './PersonalArea.css';
-import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { InputLabel,  } from '@mui/material';
+import styled from 'styled-components';
+import { TextInput } from '../Login/Login.style';
+import eyeClosed from '../../icons/eye-off.png';
+import eyeOpen from '../../icons/eye-on.png';
 import { Link } from 'react-router-dom';
-import { styled } from '@mui/system';
 import { getUsersByiD, requestUpdateProfile } from '../../API/Auth_calls';
 
 export default function PersonalArea() {
@@ -21,37 +23,18 @@ export default function PersonalArea() {
     const [messagePass2, setMessagePass2] = useState([]);
     const [noEqualMessage, setNoEqualMessage] = useState(false);
     const [currentPasswordMessage, setCurrentPasswordMessage] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
     const currentPassword = useRef(null);
-    const [newPassword, setNewPassword] = useState('');
-    const [newPasswordAgain, setNewPasswordAgain] = useState('');
-    const handleClickShowPassword = (event) => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event) => {
-      event.preventDefault();
-       }
-    const [showCurrentPassword, setShowCurrentPassword] = useState('');
-    const [showNewPassword, setShowNewPassword] = useState(false);
-    const [showNewPasswordAgain, setShowNewPasswordAgain] = useState(false);
+    const newPassword = useRef(null);
+    const newPasswordAgain = useRef(null);
     const [editedUser, setEditedUser] = useState({
       userName: '',
       firstName: '',
       lastName: '',
     });
-    const toggleCurrentPasswordVisibility = () => {
-      setShowCurrentPassword(!showCurrentPassword);
-    };
-    
-    const toggleNewPasswordVisibility = () => {
-      setShowNewPassword(!showNewPassword);
-    };
-  
-    const toggleNewPasswordAgainVisibility = () => {
-      setShowNewPasswordAgain(!showNewPasswordAgain);
-    };
 
-    const handleCurrentPasswordChange = (event) => {
-      const passwordValue = event.target.value;
-      setCurrentPassword(passwordValue);
+    const [showPassword, setShow] = useState(false);
+    const handleShow = () => {
+      setShow(!showPassword);
     };
    
 
@@ -65,6 +48,12 @@ export default function PersonalArea() {
         // fetchUserData(parsedData.id);
       }
     }, []);
+
+    const EyeLab = styled.span`
+  margin-left: 60%;
+  display: block;
+  cursor: pointer;
+`;
   
     const changePassword = async () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -76,13 +65,13 @@ export default function PersonalArea() {
         console.log('hhhh', user.password);
 
         setCurrentPasswordMessage('');
-        if (newPassword === newPasswordAgain) {
-          if (newPassword === '') {
+        if (newPassword.current.value === newPasswordAgain.current.value) {
+          if (newPassword.current.value === '') {
             setMessagePass("Password cannot be empty.");
             props.setMessage('');
             isRegex = true;
             // Check if the password is in the correct format
-          }else if (!newPassword.match(passRegex)) {
+          }else if (!newPassword.current.value.match(passRegex)) {
             setMessagePass("Password must be at least 8 characters.");
             setMessagePass1("At least one uppercase,");
             setMessagePass2("lowercase and number.");
@@ -95,7 +84,7 @@ export default function PersonalArea() {
           }
           if (!isRegex){
             try {
-              const result = await requestChangePassword({user, showNewPassword});
+              const result = await changePassword({user, newPassword});
             } catch (error) {
               console.error(error);
             }
@@ -182,44 +171,6 @@ getFollwers();
         console.log('Deleting user account...');
       };
 
-      const StyledInputLabel = styled(InputLabel)(
-        ({ theme }) => ({
-          color: 'white',
-        })
-      );
-
-// StyledFormControl component with customized styles
-const StyledFormControl = styled(FormControl)(
-  ({ theme }) => ({
-    margin: theme.spacing(1),
-    width: '40ch',
-    // border: '0.5px solid white',
-    borderRadius: '5px',
-    backgroundColor: 'rgba(200, 200, 200, 0.2)',
-    height: '50px',
-    marginBottom: '0px',
-  })
-);
-
-const StyledOutlinedInput = styled(OutlinedInput)(
-  ({ theme }) => ({
-    color: 'white',
-  })
-);
-
-// StyledInputAdornment component with customized styles
-const StyledInputAdornment = styled(InputAdornment)(
-  ({ theme }) => ({
-    color: 'white',
-  })
-);
-
-// StyledIconButton component with customized styles
-const StyledIconButton = styled(IconButton)(
-  ({ theme }) => ({
-    color: 'white',
-  })
-);
     return (
         <div className="App">
             {user && (
@@ -306,65 +257,45 @@ const StyledIconButton = styled(IconButton)(
                 <h9>At least one uppercase, lowercase, and number.</h9>
                 <form onSubmit={saveProfile}>
                   <p>
-                    <StyledFormControl variant="outlined">
-                      <StyledInputLabel htmlFor="current-password-input">Current Password</StyledInputLabel>
-                      <StyledOutlinedInput
-                        id="current-password-input"
-                        type={showCurrentPassword ? 'text' : 'password'}
-                        ref={currentPassword}
-                        endAdornment={<StyledInputAdornment position="end">
-                          <StyledIconButton
-                            aria-label="toggle current password visibility"
-                            onClick={toggleCurrentPasswordVisibility}
-                            edge="end"
-                          >
-                            {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
-                          </StyledIconButton>
-
-                        </StyledInputAdornment>}
-                        label="Password" />
-                    </StyledFormControl>
+                  <InputLabel>
+          <EyeLab
+            onClick={handleShow} >
+          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
+      <TextInput 
+      type={showPassword ? 'text' : 'password'} 
+      id="password" 
+      ref={currentPassword} 
+      placeholder="Current Password"
+      />
                     <p>{currentPasswordMessage}</p>
                   </p>
                   <p>
-                    <StyledFormControl variant="outlined">
-                      <StyledInputLabel htmlFor="new-password-input">New Password</StyledInputLabel>
-                      <StyledOutlinedInput
-                        id="new-password-input"
-                        type={showNewPassword ? 'text' : 'password'}
-                        endAdornment={<StyledInputAdornment position="end">
-                          <StyledIconButton
-                            aria-label="toggle new password visibility"
-                            onClick={toggleNewPasswordVisibility}
-                            edge="end"
-                          >
-                            {showNewPassword ? <VisibilityOff /> : <Visibility />}
-                          </StyledIconButton>
-                        </StyledInputAdornment>}
-                        label="Password" />
-                    </StyledFormControl>
+                  <InputLabel>
+          <EyeLab
+            onClick={handleShow} >
+          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
+      <TextInput 
+      type={showPassword ? 'text' : 'password'} 
+      id="password" 
+      ref={newPassword} 
+      placeholder="New Password"
+      /> 
 
                     <p>{messagePass}</p>
                     <p>{messagePass1}</p>
                     <p>{messagePass2}</p>
                   </p>
                   <p>
-                    <StyledFormControl variant="outlined">
-                      <StyledInputLabel htmlFor="new-password-again-input">New Password Again</StyledInputLabel>
-                      <StyledOutlinedInput
-                        id="new-password-again-input"
-                        type={showNewPasswordAgain ? 'text' : 'password'}
-                        endAdornment={<StyledInputAdornment position="end">
-                          <StyledIconButton
-                            aria-label="toggle new password again visibility"
-                            onClick={toggleNewPasswordAgainVisibility}
-                            edge="end"
-                          >
-                            {showNewPasswordAgain ? <VisibilityOff /> : <Visibility />}
-                          </StyledIconButton>
-                        </StyledInputAdornment>}
-                        label="Password" />
-                    </StyledFormControl>
+                  <InputLabel>
+          <EyeLab
+            onClick={handleShow} >
+          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
+      <TextInput 
+      type={showPassword ? 'text' : 'password'} 
+      id="password" 
+      ref={newPasswordAgain} 
+      placeholder="New Password Again"
+      />
                     <p>{noEqualMessage}</p>
                   </p>
                   <p>Forgot password?&nbsp;
