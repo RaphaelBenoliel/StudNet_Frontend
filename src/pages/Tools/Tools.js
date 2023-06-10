@@ -29,7 +29,7 @@ export default function Tools() {
       <h1 style={{ color: 'white' }}>General</h1>
       <br />
       <a href="https://openai.com/blog/chatgpt">
-      <img src={ChatGpt} alt="ChatGpt" title="blablabla" style={{ width: 100, height: 100, margin: 30 }} />
+      <img src={ChatGpt} alt="ChatGpt" title="Chatbot GPT (Generative Pre-trained Transformer) is a language model developed by OpenAI. It is designed to generate human-like responses in conversational contexts. GPT-based models, such as ChatGPT, utilize deep learning techniques to understand and generate human-like text based on the input received." style={{ width: 100, height: 100, margin: 30 }} />
       </a>
       <a href="https://www.gool.co.il/">
       <img src={Gool} alt="Gool" style={{ width: 100, height: 100, margin: 30 }} />
@@ -65,10 +65,10 @@ export default function Tools() {
     <h1 style={{ color: 'white' }}>Software</h1>
     <br />
     <a href="https://stackoverflow.com/">
-      <img src={StackOverFlow} alt="StackOverFlow" style={{ width: 200, height: 200, margin: 20 }} />
+      <img src={StackOverFlow} alt="StackOverFlow" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
     <a href="https://www.atlassian.com/software/jira">
-      <img src={Jira} alt="Jira" style={{ width: 150, height: 150, margin: 30 }} />
+      <img src={Jira} alt="Jira" style={{ width: 100, height: 100, margin: 30 }} />
     </a>
     <a href="https://qase.io/">
       <img src={Qase} alt="Qase" style={{ width: 100, height: 100, margin: 30 }} />
@@ -95,7 +95,7 @@ export default function Tools() {
       <img src={Zoom} alt="Zoom" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
     <a href="https://discord.com/">
-      <img src={Discord} alt="Discord" style={{ width: 200, height: 200, margin: 30 }} />
+      <img src={Discord} alt="Discord" style={{ width: 100, height: 100, margin: 30 }} />
     </a>
     </div>
  );
