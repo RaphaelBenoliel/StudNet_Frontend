@@ -29,11 +29,10 @@ export default function Tools() {
       <h1 style={{ color: 'white' }}>General</h1>
       <br />
       <a href="https://openai.com/blog/chatgpt">
-      <img src={ChatGpt} alt="ChatGpt" style={{ width: 100, height: 100, margin: 30 }}
-       title="Chatbot GPT (Generative Pre-trained Transformer) is a language model developed by OpenAI. It is designed to generate human-like responses in conversational contexts. GPT-based models, such as ChatGPT, utilize deep learning techniques to understand and generate human-like text based on the input received." />
+      <img src={ChatGpt} alt="ChatGpt" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
       <a href="https://www.gool.co.il/">
-      <img src={Gool} alt="Gool" style={{ width: 100, height: 100, margin: 30 }} title="Click to move to the site" />
+      <img src={Gool} alt="Gool" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
       <a href="https://translate.google.com/?hl=iw">
       <img src={Translate} alt="Translate" style={{ width: 100, height: 100, margin: 20 }} />
