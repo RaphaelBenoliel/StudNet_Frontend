@@ -18,9 +18,11 @@ import Wikipedia from '../../icons/Wikipedia.png';
 export default function Tools() {
   return (
     <div style={{ textAlign: 'center', backgroundColor: '#0d1116' }}>
-      <h1 style={{ color: 'white' }}>Educational Tools</h1>
       <br />
       <br />
+      <br />
+      <br />
+      <h1 style={{ color: 'white' }}>General</h1>
       <br />
       <a href="https://openai.com/blog/chatgpt">
       <img src={ChatGpt} alt="ChatGpt" style={{ width: 200, height: 200, margin: 30 }} />
@@ -28,6 +30,12 @@ export default function Tools() {
       <a href="https://www.gool.co.il/">
       <img src={Gool} alt="Gool" style={{ width: 200, height: 200, margin: 30 }} />
       </a>
+      <a href="https://translate.google.com/?hl=iw">
+      <img src={Translate} alt="Translate" style={{ width: 200, height: 200, margin: 20 }} />
+      </a>
+      <a href="https://www.wikipedia.org/">
+      <img src={Wikipedia} alt="Wikipedia" style={{ width: 200, height: 200, margin: 30 }} />
+      </a>  
       <a href="https://zoom.us/">
       <img src={Zoom} alt="Zoom" style={{ width: 200, height: 200, margin: 30 }} />
       </a>
