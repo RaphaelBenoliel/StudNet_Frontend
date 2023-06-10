@@ -1,7 +1,6 @@
 /* eslint max-len: ["error", { "code": 400 }] */
 /* eslint-disable */
 import React from 'react';
-import 'Tools.css';
 import ChatGpt from '../../icons/chatgpt.webp';
 import Gool from '../../icons/gool.png';
 import Zoom from '../../icons/zoom.webp';
@@ -48,7 +47,7 @@ export default function Tools() {
       <br />
       <br />
       <br />
-      <h2 style={{ color: 'white' }}>Math</h2>
+      <h1 style={{ color: 'white' }}>Math</h1>
       <br />
       <a href="https://he.symbolab.com/">
       <img src={Symbolab} alt="Symbolab" style={{ width: 100, height: 100, margin: 20 }} />
@@ -63,7 +62,7 @@ export default function Tools() {
     <br />
     <br />
     <br />
-    <h3 style={{ color: 'white' }}>Software</h3>
+    <h1 style={{ color: 'white' }}>Software</h1>
     <br />
     <a href="https://stackoverflow.com/">
       <img src={StackOverFlow} alt="StackOverFlow" style={{ width: 100, height: 100, margin: 20 }} />
@@ -90,7 +89,7 @@ export default function Tools() {
     <br />
     <br />
     <br />
-    <h4 style={{ color: 'white' }}>Tools for online learning in groups</h4>
+    <h1 style={{ color: 'white' }}>Tools for online learning in groups</h1>
     <br />
     <a href="https://zoom.us/">
       <img src={Zoom} alt="Zoom" style={{ width: 100, height: 100, margin: 30 }} />
