@@ -305,7 +305,7 @@ const toggleEdit= () => {
               </TabPanel>
               <TabPanel>
               <div className="panel-content">
-                <h2>Any content 5</h2>
+                <h2> My Following</h2>
               </div>
               </TabPanel>
                 </Tabs></>
