@@ -154,12 +154,14 @@ const saveProfile = async () => {
     console.error(error);
   }
 };
+
 const toggleEdit= () => {
   setIsEditing(!isEditing);
   if (isEditing) {
     saveProfile();
   }
 };
+
 const getFollwers = async () => {
   if (followers.length === 0) {
     return;
