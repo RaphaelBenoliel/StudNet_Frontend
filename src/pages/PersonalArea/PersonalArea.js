@@ -47,6 +47,7 @@ export default function PersonalArea() {
     }
 
   }, []);
+  //followers
   const getFollowers = async () => {
     if (followers.length === 0) {
       return;
@@ -63,6 +64,11 @@ export default function PersonalArea() {
   useEffect(() => {
       getFollowers();
   }, [followers]);
+  const handleFollowButtonClick = (user) => {
+    // Implement the desired functionality here
+    // For example, you can show a message or perform an action
+    console.log(`Follow button clicked for user: ${user.firstName} ${user.lastName}`);
+  };
 
 const EyeLab = styled.span`
   margin-left: 60%;
@@ -298,6 +304,7 @@ const toggleEdit= () => {
                       <div key={user.email}>
                         <img src={user.picture} alt={user.firstName} />
                         <p>{`${user.firstName} ${user.lastName}`}</p>
+                        <button onClick={() => handleFollowButtonClick(user)}>Follow</button>
                       </div>
                     ))}
                   </div>

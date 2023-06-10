@@ -185,6 +185,7 @@ margin-left: 50px;
     align-items: flex-start;
     font-size: 17px;
     margin-left: 50px;
+    overflow: auto;
   }
   
   .panel-content-followers h2 {
@@ -196,6 +197,7 @@ margin-left: 50px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjust the column width as needed */
     grid-gap: 20px;
+    gap: 20px;
   }
   
   .followers-list div {
@@ -216,5 +218,21 @@ margin-left: 50px;
   .followers-list p {
     font-size: 16px;
     margin-left: 10px;
+
   }
-  
+  .followers-list button {
+    font-size: 15px;
+    margin-left: 100px;
+    background-color: #238636;
+    border: 1px solid #2da042;
+    border-radius: 8px;
+    color:#fff;
+    width: 60px;
+    height: 30px;
+
+    &:hover{
+        cursor: pointer;
+        background-color: #2da042;
+    }
+
+}
