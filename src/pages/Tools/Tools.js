@@ -48,7 +48,7 @@ export default function Tools() {
       <br />
       <br />
       <br />
-      <h1 style={{ color: 'white' }}>Math</h1>
+      <Title>Math</Title>
       <br />
       <a href="https://he.symbolab.com/">
       <img src={Symbolab} alt="Symbolab" title="Symbolab is an advanced math education tool. It allows users to learn, practice and discover math topics using mathematical symbols and scientific notations as well as text. Symbolab provides automated step by step solutions to algebraic, trigonometric and calculus topics covering from middle school through college. Symbolab offers a wealth of smart calculators including: equations, simultaneous equations, inequalities, integrals, derivatives, limits , tangent line, trigonometric equations, functions and more. The stated goal of the site is to make scientific content universally accessible by expanding the searchable data space onto scientific notations, expressions, equations and formulas. This is done by applying proprietary machine learning algorithms in order to understand the meaning and context of the queries. Symbolab, making math simpler." style={{ width: 100, height: 100, margin: 20 }} />
@@ -63,8 +63,7 @@ export default function Tools() {
     <br />
     <br />
     <br />
-    <h1 style={{ color: 'white' }}>Software</h1>
-    <br />
+    <Title>Software</Title>    <br />
     <a href="https://stackoverflow.com/">
       <img src={StackOverFlow} alt="StackOverFlow" title="Stack Overflow is a popular question and answer website that focuses on programming and software development topics. It serves as a community-driven platform where developers can ask questions, provide answers, and engage in discussions related to programming, coding, and technology." style={{ width: 100, height: 100, margin: 20 }} />
     </a>
@@ -90,8 +89,7 @@ export default function Tools() {
     <br />
     <br />
     <br />
-    <h1 style={{ color: 'white' }}>Tools for online learning in groups</h1>
-    <br />
+    <Title>Online learning in groups</Title>    <br />
     <a href="https://zoom.us/">
       <img src={Zoom} alt="Zoom" title="Zoom is a popular video conferencing and collaboration platform that allows users to conduct online meetings, webinars, and virtual events. It provides a range of features and tools for remote communication and collaboration." style={{ width: 100, height: 100, margin: 30 }} />
       </a>
