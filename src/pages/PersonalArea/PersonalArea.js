@@ -146,7 +146,6 @@ const handleChange = (e) => {
 const saveProfile = async () => {
   setIsEditing(false);
   setUser(editedUser);
-
   localStorage.setItem('user', JSON.stringify(editedUser));
   try {
     const result = await requestUpdateProfile(editedUser);
@@ -247,163 +246,148 @@ const StyledIconButton = styled(IconButton)(
                         </Tab>
                     </TabList>
                     <TabPanel>
-                      <div className="panel-content">
-                          <h2>Edit account</h2>
-                          <div>
-                          <form >
-                          <p>
-                      User Name: {' '}
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          name="userName"
-                          value={editedUser.userName}
-                          onChange={handleChange}
-                          autoComplete="userName"
-                        />
-                      ) : (
-                        editedUser.userName
-                      )}
-                    </p>
-                    <p>
-                      First Name: {' '}
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          name="firstName"
-                          value={editedUser.firstName}
-                          onChange={handleChange}
-                          autoComplete="firstName"
-                        />
-                      ) : (
-                        editedUser.firstName
-                      )}
-                    </p>
-                    <p>
-                      Last Name: {' '}
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          name="lastName"
-                          value={editedUser.lastName}
-                          onChange={handleChange}
-                          autoComplete="lastName"
-                        />
-                      ) : (
-                        editedUser.lastName
-                      )}
-                    </p>
-                    <p>
-                      <button type="button" onClick={toggleEdit}>
-                        {isEditing ? 'Save' : 'Edit'}
-                      </button>
-                    </p>
-                  </form>
-                          </div>
-                      </div>
-                    </TabPanel>
-                    <TabPanel>
-  <div className="panel-content_password">
-    <h2>Edit password</h2>
-    <p>Password must be at least 8 characters,</p>
-    <h9>At least one uppercase, lowercase, and number.</h9>
-    <form onSubmit={saveProfile}>
-      <p>
-        <StyledFormControl variant="outlined">
-          <StyledInputLabel htmlFor="current-password-input">Current Password</StyledInputLabel>
-          <StyledOutlinedInput
-            id="current-password-input"
-            type={showCurrentPassword ? 'text' : 'password'}
-            ref={currentPassword}
-            endAdornment={
-              <StyledInputAdornment position="end">
-                <StyledIconButton
-                  aria-label="toggle current password visibility"
-                  onClick={toggleCurrentPasswordVisibility}
-                  edge="end"
-                >
-                  {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
-                </StyledIconButton>
-                
-              </StyledInputAdornment>
-                    
-            }
-            label="Password"
-          />
-        </StyledFormControl>
-        <p>{currentPasswordMessage}</p>
-      </p>
-      <p>
-        <StyledFormControl variant="outlined">
-          <StyledInputLabel htmlFor="new-password-input">New Password</StyledInputLabel>
-          <StyledOutlinedInput
-            id="new-password-input"
-            type={showNewPassword ? 'text' : 'password'}
-            endAdornment={
-              <StyledInputAdornment position="end">
-                <StyledIconButton
-                  aria-label="toggle new password visibility"
-                  onClick={toggleNewPasswordVisibility}
-                  edge="end"
-                >
-                  {showNewPassword ? <VisibilityOff /> : <Visibility />}
-                </StyledIconButton>
-              </StyledInputAdornment>
-            }
-            label="Password"
-          />
-        </StyledFormControl>
+            <div className="panel-content">
+              <h2>Edit account</h2>
+              <div>
+                <form>
+                  <p>
+                    User Name: {' '}
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="userName"
+                        value={editedUser.userName}
+                        onChange={handleChange}
+                        autoComplete="userName" />
+                    ) : (
+                      editedUser.userName
+                    )}
+                  </p>
+                  <p>
+                    First Name: {' '}
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={editedUser.firstName}
+                        onChange={handleChange}
+                        autoComplete="firstName" />
+                    ) : (
+                      editedUser.firstName
+                    )}
+                  </p>
+                  <p>
+                    Last Name: {' '}
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={editedUser.lastName}
+                        onChange={handleChange}
+                        autoComplete="lastName" />
+                    ) : (
+                      editedUser.lastName
+                    )}
+                  </p>
+                  <p>
+                    <button type="button" onClick={toggleEdit}>
+                      {isEditing ? 'Save' : 'Edit'}
+                    </button>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </TabPanel><TabPanel>
+              <div className="panel-content_password">
+                <h2>Edit password</h2>
+                <p>Password must be at least 8 characters,</p>
+                <h9>At least one uppercase, lowercase, and number.</h9>
+                <form onSubmit={saveProfile}>
+                  <p>
+                    <StyledFormControl variant="outlined">
+                      <StyledInputLabel htmlFor="current-password-input">Current Password</StyledInputLabel>
+                      <StyledOutlinedInput
+                        id="current-password-input"
+                        type={showCurrentPassword ? 'text' : 'password'}
+                        ref={currentPassword}
+                        endAdornment={<StyledInputAdornment position="end">
+                          <StyledIconButton
+                            aria-label="toggle current password visibility"
+                            onClick={toggleCurrentPasswordVisibility}
+                            edge="end"
+                          >
+                            {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                          </StyledIconButton>
 
-        <p>{messagePass}</p>
-        <p>{messagePass1}</p>
-        <p>{messagePass2}</p>
-      </p>
-      <p>
-        <StyledFormControl variant="outlined">
-          <StyledInputLabel htmlFor="new-password-again-input">New Password Again</StyledInputLabel>
-          <StyledOutlinedInput
-            id="new-password-again-input"
-            type={showNewPasswordAgain ? 'text' : 'password'}
-            endAdornment={
-              <StyledInputAdornment position="end">
-                <StyledIconButton
-                  aria-label="toggle new password again visibility"
-                  onClick={toggleNewPasswordAgainVisibility}
-                  edge="end"
-                >
-                  {showNewPasswordAgain ? <VisibilityOff /> : <Visibility />}
-                </StyledIconButton>
-              </StyledInputAdornment>
-            }
-            label="Password"
-          />
-        </StyledFormControl>
-        <p>{noEqualMessage}</p>
-      </p>
-      <p>Forgot password?&nbsp;
-        <Link to="/login/:fpass" className="forgot-link">Click Here</Link>
-      </p>
+                        </StyledInputAdornment>}
+                        label="Password" />
+                    </StyledFormControl>
+                    <p>{currentPasswordMessage}</p>
+                  </p>
+                  <p>
+                    <StyledFormControl variant="outlined">
+                      <StyledInputLabel htmlFor="new-password-input">New Password</StyledInputLabel>
+                      <StyledOutlinedInput
+                        id="new-password-input"
+                        type={showNewPassword ? 'text' : 'password'}
+                        endAdornment={<StyledInputAdornment position="end">
+                          <StyledIconButton
+                            aria-label="toggle new password visibility"
+                            onClick={toggleNewPasswordVisibility}
+                            edge="end"
+                          >
+                            {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                          </StyledIconButton>
+                        </StyledInputAdornment>}
+                        label="Password" />
+                    </StyledFormControl>
 
-      <button className='saveButton' onClick={() => changePassword()}>
-        Save
-      </button>
-      
-    </form>
-  </div>
-</TabPanel>
-                    <TabPanel>
-                        <div className="panel-content">
-                            <h2>Any content 3</h2>
-                        </div>
-                    </TabPanel><TabPanel>
-                        <div className="panel-content">
-                            <h2>Any content 4</h2>
-                        </div>
-                    </TabPanel><TabPanel>
-                        <div className="panel-content">
-                            <h2>Any content 5</h2>
-                        </div>
-                    </TabPanel>
+                    <p>{messagePass}</p>
+                    <p>{messagePass1}</p>
+                    <p>{messagePass2}</p>
+                  </p>
+                  <p>
+                    <StyledFormControl variant="outlined">
+                      <StyledInputLabel htmlFor="new-password-again-input">New Password Again</StyledInputLabel>
+                      <StyledOutlinedInput
+                        id="new-password-again-input"
+                        type={showNewPasswordAgain ? 'text' : 'password'}
+                        endAdornment={<StyledInputAdornment position="end">
+                          <StyledIconButton
+                            aria-label="toggle new password again visibility"
+                            onClick={toggleNewPasswordAgainVisibility}
+                            edge="end"
+                          >
+                            {showNewPasswordAgain ? <VisibilityOff /> : <Visibility />}
+                          </StyledIconButton>
+                        </StyledInputAdornment>}
+                        label="Password" />
+                    </StyledFormControl>
+                    <p>{noEqualMessage}</p>
+                  </p>
+                  <p>Forgot password?&nbsp;
+                    <Link to="/login/:fpass" className="forgot-link">Click Here</Link>
+                  </p>
+
+                  <button className='saveButton' onClick={() => changePassword()}>
+                    Save
+                  </button>
+
+                </form>
+              </div>
+            </TabPanel><TabPanel>
+              <div className="panel-content">
+                <h2>Any content 3</h2>
+              </div>
+            </TabPanel><TabPanel>
+              <div className="panel-content">
+                <h2>Any content 4</h2>
+              </div>
+            </TabPanel><TabPanel>
+              <div className="panel-content">
+                <h2>Any content 5</h2>
+              </div>
+              </TabPanel>
                 </Tabs></>
             )}
         </div>
