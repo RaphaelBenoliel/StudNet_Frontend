@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import Mybackground from '../../icons/background2.png';
 // eslint-disable-next-line import/prefer-default-export
-export const HomeWrapper = styled.div`
+export const Wrapper = styled.div`
+    /* background-image: url(${Mybackground}); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -107,7 +109,7 @@ export const PostButton = styled.button`
   cursor: pointer;
 `;
 
-export const EditDeleteButton = styled.button`
+export const Button = styled.button`
   padding: 5px;
   margin-right: 10px;
   background-color: rgba(200, 200, 200, 0.3);

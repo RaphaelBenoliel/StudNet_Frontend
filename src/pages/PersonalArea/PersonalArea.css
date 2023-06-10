@@ -1,6 +1,6 @@
 .App {
 font-family: sans-serif;
-background: #1c1d1f;
+background-color: #0d1116;
 color: white;
 margin-top: -100px;
 height: 100vh;
@@ -17,14 +17,17 @@ height: 100vh;
 
 .react-tabs {
 display: flex;
-margin-left: 50px;
+
 margin-top: 10px;
 /* width: 90%; */
 height: 500px;
-/* border: 1px solid #3c3e43; */
+border: 1px solid #3c3e43;
+border-radius: 10px;
 color: white;
 background: #1c1d1f;
 margin-left: 150px;
+margin-right: 150px;
+
 }
 
 .react-tabs__tab-list {
@@ -36,6 +39,7 @@ padding: 0;
 color: white;
 /* background: #3c3e43; */
 font-size: 18px;
+/* border:100px #0d1116; */
 }
 
 .react-tabs__tab {
@@ -45,6 +49,7 @@ padding: 12px 6px;
 cursor: pointer;
 color: #fff;
 border-radius: 10px;
+
 &:hover{
     cursor: pointer;
     background-color: #4e4e54;
@@ -65,11 +70,13 @@ color: white;
 .react-tabs__tab-panel {
 display: none;
 width: 80%;
-margin-left: 50px;
+margin-left: 20px;
+
 }
 
 .react-tabs__tab-panel--selected {
 display: flex;
+margin-left: 20px;
 }
 
 .react-tabs__tab {
@@ -90,7 +97,6 @@ margin-left: 50px;
 
 .panel-content_password h4 {
     font-size: 17px;
-    font-family: 
 }
 
 
@@ -138,6 +144,7 @@ margin-left: 50px;
 .panel-content_password {
     /* margin-left: 250px; */
     font-size: 17px;
+    margin-left: 50px;
 
 }
 .saveButton {
