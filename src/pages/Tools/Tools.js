@@ -47,7 +47,7 @@ export default function Tools() {
       <br />
       <br />
       <br />
-      <h2 style={{ color: 'white' }}>Math</h2>
+      <h1 style={{ color: 'white' }}>Math</h1>
       <br />
       <a href="https://he.symbolab.com/">
       <img src={Symbolab} alt="Symbolab" style={{ width: 100, height: 100, margin: 20 }} />
