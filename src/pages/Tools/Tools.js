@@ -16,7 +16,6 @@ import Wikipedia from '../../icons/Wikipedia.png';
 import Rapid from '../../icons/rapid.jpeg';
 import CircleCi from '../../icons/circleci.png';
 import Render from '../../icons/render.png';
-import Rapid from '../../icons/rapid.png';
 import Compilers from '../../icons/compilers.png';
 import Scholar from '../../icons/scholar.png';
 
