@@ -29,7 +29,7 @@ export default function Tools() {
       <h1 style={{ color: 'white' }}>General</h1>
       <br />
       <a href="https://openai.com/blog/chatgpt">
-      <img src={ChatGpt} alt="ChatGpt" style={{ width: 100, height: 100, margin: 30 }} />
+      <img src={ChatGpt} alt="ChatGpt" title="blablabla" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
       <a href="https://www.gool.co.il/">
       <img src={Gool} alt="Gool" style={{ width: 100, height: 100, margin: 30 }} />
