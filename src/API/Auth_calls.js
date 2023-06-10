@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
 /* eslint-disable import/prefer-default-export */
+
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5002/';
 // const BASE_URL = 'https://studnet.onrender.com/';
-
 export const sendLoginRequest = async (params, setMessage) => {
   setMessage('');
   try {
@@ -22,7 +22,6 @@ export const sendLoginRequest = async (params, setMessage) => {
   }
   return null;
 };
-
 export const sendSignUpRequest = async (params, setMessage) => {
   setMessage('');
   try {
@@ -38,7 +37,6 @@ export const sendSignUpRequest = async (params, setMessage) => {
   }
   return null;
 };
-
 export const sendEmailRequest = async (email) => {
   try {
     const result = await axios.post(`${BASE_URL}email`, email);
@@ -50,36 +48,9 @@ export const sendEmailRequest = async (email) => {
   }
   return null;
 };
-
 export const getAllusers = async () => {
   try {
     const result = await axios.post(`${BASE_URL}allusers`);
-    if (result.data.success) {
-      return result.data.data;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
-};
-
-export const getUsersByiD = async (params) => {
-  try {
-    const result = await axios.post(`${BASE_URL}userbyid`, params);
-    if (result.data.success) {
-      return result.data.data;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
-};
-
-export const requestUpdateProfile = async (params) => {
-  try {
-    console.log('before req :', params);
-    const result = await axios.put(`${BASE_URL}update`, params);
-    console.log('afer req :', result);
     if (result.data.success) {
       return result.data.data;
     }
