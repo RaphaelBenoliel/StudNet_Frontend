@@ -162,6 +162,9 @@ const toggleEdit= () => {
   }
 };
 const getFollwers = async () => {
+  if (followers.length === 0) {
+    return;
+  }
   try {
     console.log(followers);
     const result = await getUsersByiD({followers});
