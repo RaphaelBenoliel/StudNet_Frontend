@@ -41,7 +41,7 @@ export default function Tools() {
       <img src={Wikipedia} alt="Wikipedia" style={{ width: 100, height: 100, margin: 30 }} />
       </a>  
       <a href="https://scholar.google.com/">
-      <img src={Scholar} alt="Scholar" style={{ width: 100, height: 100, margin: 30 }} />
+      <img src={Scholar} alt="Scholar" style={{ width: 150, height: 100, margin: 30 }} />
       </a>
       <br />
       <br />
@@ -56,7 +56,7 @@ export default function Tools() {
       <img src={Desmos} alt="Desmos" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
     <a href="https://www.rapidtables.com/calc/math/binary-calculator.html">
-      <img src={Rapid} alt="Rapid" style={{ width: 100, height: 100, margin: 30 }} />
+      <img src={Rapid} alt="Rapid" style={{ width: 150, height: 100, margin: 30 }} />
     </a>   
     <br />
     <br />
@@ -65,10 +65,10 @@ export default function Tools() {
     <h1 style={{ color: 'white' }}>Software</h1>
     <br />
     <a href="https://stackoverflow.com/">
-      <img src={StackOverFlow} alt="StackOverFlow" style={{ width: 100, height: 100, margin: 20 }} />
+      <img src={StackOverFlow} alt="StackOverFlow" style={{ width: 200, height: 200, margin: 20 }} />
     </a>
     <a href="https://www.atlassian.com/software/jira">
-      <img src={Jira} alt="Jira" style={{ width: 100, height: 100, margin: 30 }} />
+      <img src={Jira} alt="Jira" style={{ width: 150, height: 150, margin: 30 }} />
     </a>
     <a href="https://qase.io/">
       <img src={Qase} alt="Qase" style={{ width: 100, height: 100, margin: 30 }} />
@@ -80,10 +80,10 @@ export default function Tools() {
       <img src={CircleCi} alt="Circlrci" style={{ width: 100, height: 100, margin: 20 }} />
     </a>
     <a href="https://render.com/">
-      <img src={Render} alt="Render" style={{ width: 100, height: 100, margin: 20 }} />
+      <img src={Render} alt="Render" style={{ width: 120, height: 100, margin: 20 }} />
     </a>
     <a href="https://www.codingninjas.com/codestudio/online-compiler">
-      <img src={Compilers} alt="Compilers" style={{ width: 100, height: 100, margin: 30 }} />
+      <img src={Compilers} alt="Compilers" style={{ width: 170, height: 100, margin: 30 }} />
     </a>    
     <br />
     <br />
@@ -95,7 +95,7 @@ export default function Tools() {
       <img src={Zoom} alt="Zoom" style={{ width: 100, height: 100, margin: 30 }} />
       </a>
     <a href="https://discord.com/">
-      <img src={Discord} alt="Discord" style={{ width: 100, height: 100, margin: 30 }} />
+      <img src={Discord} alt="Discord" style={{ width: 200, height: 200, margin: 30 }} />
     </a>
     </div>
  );
