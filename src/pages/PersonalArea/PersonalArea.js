@@ -8,8 +8,7 @@ import styled from 'styled-components';
 import { TextInput } from '../Login/Login.style';
 import eyeClosed from '../../icons/eye-off.png';
 import eyeOpen from '../../icons/eye-on.png';
-import { requestUpdateProfile } from '../../API/Auth_calls';
-
+import { getUsersByiD, requestUpdateProfile } from '../../API/Auth_calls';
 export default function PersonalArea() {
     
     const [followers, setFollowers] = useState([]);
@@ -50,6 +49,7 @@ export default function PersonalArea() {
         const parsedData = JSON.parse(userData);
         setUser(parsedData);
         setEditedUser(parsedData);
+        setFollowers(parsedData.followers);
 
       }
     }, []);
@@ -154,6 +154,22 @@ const toggleEdit= () => {
     saveProfile();
   }
 };
+
+const getFollwers = async () => {
+  if (followers.length === 0) {
+    return;
+  }
+  try {
+    console.log(followers);
+    const result = await getUsersByiD({followers});
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+getFollwers();
+
     
     const deleteAccount = () => {
         // Implement the logic to delete the user account
