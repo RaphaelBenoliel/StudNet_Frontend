@@ -43,6 +43,8 @@ export default function Tools() {
       <br />
       <br />
       <br />
+      <h2 style={{ color: 'white' }}>Math</h2>
+      <br />
       <a href="https://www.atlassian.com/software/jira">
       <img src={Jira} alt="Jira" style={{ width: 200, height: 200, margin: 30 }} />
       </a>
@@ -56,6 +58,8 @@ export default function Tools() {
     <br />
     <br />
     <br />
+    <h3 style={{ color: 'white' }}>Software</h3>
+    <br />
     <a href="https://stackoverflow.com/">
       <img src={StackOverFlow} alt="StackOverFlow" style={{ width: 200, height: 200, margin: 20 }} />
     </a>
@@ -64,6 +68,9 @@ export default function Tools() {
     </a>
     <a href="https://discord.com/">
       <img src={Discord} alt="Discord" style={{ width: 200, height: 200, margin: 30 }} />
+    </a>
+    <a href="https://he.symbolab.com/">
+      <img src={Symbolab} alt="Symbolab" style={{ width: 200, height: 200, margin: 20 }} />
     </a>
     <br />
     <br />
@@ -78,6 +85,18 @@ export default function Tools() {
     <a href="https://www.wikipedia.org/">
       <img src={Wikipedia} alt="Wikipedia" style={{ width: 200, height: 200, margin: 30 }} />
     </a>    
+    <br />
+    <br />
+    <br />
+    <br />
+    <h4 style={{ color: 'white' }}>Tools for online learning in groups</h4>
+    <br />
+    <a href="https://openai.com/blog/chatgpt">
+      <img src={ChatGpt} alt="ChatGpt" style={{ width: 200, height: 200, margin: 30 }} />
+      </a>
+      <a href="https://www.gool.co.il/">
+      <img src={Gool} alt="Gool" style={{ width: 200, height: 200, margin: 30 }} />
+      </a>
     </div>
  );
 }
