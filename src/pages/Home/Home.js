@@ -172,14 +172,11 @@ export default function Home() {
             <Post key={post._id}>
               <UserDetails>
                 <UserPicture src={post.userID.picture} alt="User Profile" />
-                <p>
+                <div>
                   {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;&emsp;&emsp;{post.userID._id === JSON.parse(auth)._id && (
-                    <>
-                          <PopupMessage onDelete={() => handleDeletePost(post._id)} onClose={handleClosePopup} onEdit={() => setEditingPostId(post._id)} />
-                  
-                    </>
+                    <PopupMessage onDelete={() => handleDeletePost(post._id)} onClose={handleClosePopup} onEdit={() => setEditingPostId(post._id)} />
                   )}
-                </p>
+                </div>
               </UserDetails>
               {editingPostId === post._id ? (
                 <>
