@@ -2,9 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import './PersonalArea.css';
-import { InputLabel,  } from '@mui/material';
-// import styled from 'styled-components';
-import { TextInput, EyeLab } from '../Login/Login.style';
+import { TextInputContainer, TextInput, EyeLab } from '../Login/Login.style';
 import eyeClosed from '../../icons/eye-off.png';
 import eyeOpen from '../../icons/eye-on.png';
 import { Link } from 'react-router-dom';
@@ -290,48 +288,39 @@ const toggleEdit= () => {
                 <h2>Edit password</h2>
                 <p>Password must be at least 8 characters, At least one uppercase, lowercase, and number.</p>
                 <form onSubmit={saveProfile}>
-                <p>
-                <InputLabel>
-                <TextInput 
-                  type={showPassword ? 'text' : 'password'} 
-                  id="password" 
-                  ref={currentPassword} 
-                  placeholder="Current Password"/> 
-                <EyeLab onClick={handleShow} >
-                  <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} />
-                </EyeLab>
-                </InputLabel>
+                <TextInputContainer>
+                  <TextInput 
+                    type={showPassword ? 'text' : 'password'} 
+                    ref={currentPassword} 
+                    placeholder="Current Password"/> 
+                  <EyeLab onClick={handleShow} >
+                    <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} />
+                  </EyeLab>
+                </TextInputContainer>
                   <p>{currentPasswordMessage}</p>
-                  </p>
-                  <p>
-                  <InputLabel>
-               <TextInput 
-      type={showPassword ? 'text' : 'password'} 
-      id="password" 
-      ref={newPassword} 
-      placeholder="New Password"
-      /> 
-       <EyeLab
-            onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab>
-          </InputLabel>
+                <TextInputContainer>
+                    <TextInput 
+                      type={showPassword ? 'text' : 'password'} 
+                      ref={newPassword} 
+                      placeholder="New Password" /> 
+                      <EyeLab onClick={handleShow} >
+                        <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} />
+                      </EyeLab>
+                </TextInputContainer>
                     <p>{messagePass}</p>
                     <p>{messagePass1}</p>
                     <p>{messagePass2}</p>
-                  </p>
-                  <p>
-              <InputLabel>
-              <TextInput 
-              type={showPassword ? 'text' : 'password'} 
-              id="password" 
-              ref={newPasswordAgain} 
-              placeholder="New Password Again"/>
-              <EyeLab onClick={handleShow} >
-                <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
-
-                    <p>{noEqualMessage}</p>
-                  </p>
-                  <p>Forgot password?&nbsp;
+                  <TextInputContainer>
+                    <TextInput 
+                      type={showPassword ? 'text' : 'password'} 
+                      ref={newPasswordAgain} 
+                      placeholder="New Password Again"/>
+                      <EyeLab onClick={handleShow} >
+                        <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} />
+                      </EyeLab>
+                  </TextInputContainer>
+                  <p>{noEqualMessage}</p>
+                  <p> Forgot password?&nbsp;
                     <Link to="/login/:fpass" className="forgot-link">Click Here</Link>
                   </p>
                   <button className='saveButton' onClick={() => changePassword()}>

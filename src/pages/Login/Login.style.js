@@ -103,7 +103,6 @@ export const SubmitBtn = styled.button`
 export const TextInputContainer = styled.div`
   position: relative;
   width: 100%;
-  /* border-color: rgba(255, 255, 255, 0.1); */
 `;
 
 export const TextInput = styled.input`
