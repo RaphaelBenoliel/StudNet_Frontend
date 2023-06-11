@@ -36,7 +36,8 @@ export const sendDeleteRequest = async (postId, auth) => {
 
 export const sendPutRequest = async (postId, updatedData) => {
   try {
-    const result = await axios.put(`${BASE_URL}posts/update`, updatedData);
+    console.log(postId, updatedData);
+    const result = await axios.put(`${BASE_URL}posts/update`, { _id: postId, updatedData });
     return result;
   } catch (error) {
     console.error(error);

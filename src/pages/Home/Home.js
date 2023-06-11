@@ -131,7 +131,9 @@ export default function Home() {
 
   const handleUpdatePost = async (postId, updatedContent) => {
     try {
-      const result = await sendPutRequest(postId, { content: updatedContent });
+      console.log('postId: ', postId);
+      console.log('updatedContent: ', updatedContent);
+      const result = await sendPutRequest(postId,  updatedContent );
       if (result === null) return;
       
       const updatedPostData = JSON.parse(localStorage.getItem('posts'));
