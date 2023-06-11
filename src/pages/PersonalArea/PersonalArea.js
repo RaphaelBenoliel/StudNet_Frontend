@@ -83,13 +83,15 @@ export default function PersonalArea() {
     // For example, you can show a message or perform an action
     console.log(`Follow button clicked for user: ${user.firstName} ${user.lastName}`);
   };
-
+  const handleUnfollowButtonClick = (user) => {
+    // Logic for unfollowing the user goes here
+    console.log(`Unfollow ${user.firstName} ${user.lastName}`);
+  };
 const EyeLab = styled.span`
   margin-left: 60%;
   display: block;
   cursor: pointer;
 `;
-  
     const changePassword = async () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     var isRegex = false;
