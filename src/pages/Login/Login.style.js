@@ -111,7 +111,7 @@ export const TextInput = styled.input`
   height: 25px;
   border-radius: 5px;
   margin-bottom: 3px;
-  background-color: #0d1116;
+  background-color: rgba(1, 1, 1, 0.80);
   color: white;
   padding: 5px 10px;
   font-size: 14px;
@@ -121,7 +121,11 @@ export const TextInput = styled.input`
     color: #8c8c8c;
   }
   &:focus {
-    border-color: #2ea043;
+    border: 3px solid #2ea043;
+  }
+  :-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #0d1116 inset;
+    -webkit-text-fill-color: white;
   }
 `;
 
