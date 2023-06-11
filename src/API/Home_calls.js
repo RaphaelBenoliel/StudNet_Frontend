@@ -44,3 +44,13 @@ export const sendPutRequest = async (postId, updatedData) => {
   }
   return null;
 };
+
+export const sendLikeRequest = async (params) => {
+  try {
+    const result = await axios.get(`${BASE_URL}liked`, paramas);
+    return result;
+
+  }catch (error){
+    console.error(error);
+  }
+}

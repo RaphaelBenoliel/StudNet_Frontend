@@ -120,6 +120,14 @@ export default function Home() {
       console.error(error);
     }
   };
+  const handleLikePost = async (post_id) => {
+    try {
+      const result = await sendLikeRequest({ postId: post_id, userId: auth._id });
+      setAuth(result.data); 
+    }catch(error) {
+      console.error(error);
+    }
+  }
 
   const handleUpdatePost = async (postId, updatedContent) => {
     try {
@@ -199,7 +207,7 @@ export default function Home() {
                   <PostContent>{post.content}</PostContent>
                   <>
                     <div>
-                      <EditDeleteButton onClick={() => setLikeContent(post._id)}>Like</EditDeleteButton>
+                      <EditDeleteButton onClick={() => handleLikePost(post._id)}>Like</EditDeleteButton>
                       <EditDeleteButton onClick={() => setCommentContent(post._id)}>Comment</EditDeleteButton>
                       <EditDeleteButton onClick={() => setShareContent(post._id)}>Share</EditDeleteButton>
                     </div>
