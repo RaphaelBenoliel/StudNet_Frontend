@@ -88,9 +88,11 @@ export default function PersonalArea() {
     console.log(`Unfollow ${user.firstName} ${user.lastName}`);
   };
 const EyeLab = styled.span`
-  margin-left: 60%;
+  margin-left: 85%;
   display: block;
   cursor: pointer;
+  margin-top: -45px ;
+
 `;
     const changePassword = async () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -291,33 +293,35 @@ const toggleEdit= () => {
           </TabPanel><TabPanel>
               <div className="panel-content_password">
                 <h2>Edit password</h2>
-                <p>Password must be at least 8 characters,</p>
-                <h9>At least one uppercase, lowercase, and number.</h9>
+                <p>Password must be at least 8 characters, At least one uppercase, lowercase, and number.</p>
                 <form onSubmit={saveProfile}>
                   <p>
                   <InputLabel>
-          <EyeLab
-            onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
-      <TextInput 
+            <TextInput 
       type={showPassword ? 'text' : 'password'} 
       id="password" 
       ref={currentPassword} 
       placeholder="Current Password"
-      />
+      /> 
+      <EyeLab
+        onClick={handleShow} >
+      <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab>
+
+      </InputLabel>
                     <p>{currentPasswordMessage}</p>
                   </p>
                   <p>
                   <InputLabel>
-          <EyeLab
-            onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
-      <TextInput 
+               <TextInput 
       type={showPassword ? 'text' : 'password'} 
       id="password" 
       ref={newPassword} 
       placeholder="New Password"
       /> 
+       <EyeLab
+            onClick={handleShow} >
+          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
+
 
                     <p>{messagePass}</p>
                     <p>{messagePass1}</p>
@@ -325,15 +329,16 @@ const toggleEdit= () => {
                   </p>
                   <p>
                   <InputLabel>
-          <EyeLab
-            onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
-      <TextInput 
+                <TextInput 
       type={showPassword ? 'text' : 'password'} 
       id="password" 
       ref={newPasswordAgain} 
       placeholder="New Password Again"
       />
+      <EyeLab
+            onClick={handleShow} >
+          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
+
                     <p>{noEqualMessage}</p>
                   </p>
                   <p>Forgot password?&nbsp;
@@ -366,7 +371,7 @@ const toggleEdit= () => {
                 </div>
               </TabPanel>
               <TabPanel>
-                    <div className="panel-content">
+                    <div className="panel-content-followers">
                       <h2>My Following</h2>
                       <div className="followers-list">
                         {followingUsers.map((user) => (

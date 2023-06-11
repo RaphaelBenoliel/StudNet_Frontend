@@ -6,7 +6,6 @@ margin-top: -100px;
 min-height: 100vh;
 height: fit-content;
 padding-bottom: 100px;
-
 /* box-sizing: border-box; */
 }
 
@@ -25,8 +24,8 @@ padding-bottom: 100px;
     border-radius: 10px;
     color: white;
     background: #1c1d1f;
-    margin-left: 150px;
-    margin-right: 150px;
+    margin-left: 90px;
+    margin-right: 90px;
     overflow: auto;
   }
 /* .react-tabs {
@@ -159,10 +158,17 @@ margin-left: 50px;
 }
 
 .panel-content_password {
-    /* margin-left: 250px; */
     font-size: 17px;
     margin-left: 50px;
+    width: 260px;
+}
 
+.panel-content_password p {
+    font-size: 14px;
+}
+.panel-content_password input {
+    width: 230px;
+    margin-bottom: 22px;
 }
 .saveButton {
     font-size: 17px;
@@ -170,10 +176,12 @@ margin-left: 50px;
     border: 1px solid #2da042;
     border-radius: 8px;
     color:#fff;
-    width: 40ch;
+    width: 28ch;
     height: 35px;
     padding: 1px;
     margin-top: 10px;
+    margin-bottom: 15px;
+    
     outline: none;
     &:hover{
         cursor: pointer;
@@ -190,10 +198,6 @@ margin-left: 50px;
     margin-top: 100px;
 }
 
-
-
-
-
 .panel-content-followers {
     display: flex;
     flex-direction: column;
@@ -201,16 +205,19 @@ margin-left: 50px;
     font-size: 17px;
     margin-left: 50px;
     overflow: auto;
+    width: 260px;
+
   }
   
   .panel-content-followers h2 {
     font-size: 25px;
     margin-bottom: 20px;
+    
   }
   
   .followers-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjust the column width as needed */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Adjust the column width as needed */
     grid-gap: 20px;
     gap: 20px;
   }
