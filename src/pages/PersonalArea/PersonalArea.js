@@ -54,7 +54,7 @@ export default function PersonalArea() {
     if (followers.length !== 0) {
       try {
         // console.log(followers);
-        const result = await getUsersByiD({ followers: followers });
+        const result = await getUsersByiD({ users: followers });
         // console.log(result);
         setFollowersUsers(result.users);
        
@@ -66,7 +66,7 @@ export default function PersonalArea() {
       try {
         console.log(following);
         //using the same function to get the following users
-        const result1 = await getUsersByiD({ followers: following });
+        const result1 = await getUsersByiD({ users: following });
         console.log(result1);
         setFollowingUsers(result1.users);
       } catch (error) {
