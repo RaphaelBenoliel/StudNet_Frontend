@@ -247,6 +247,7 @@ export default function Home() {
       setEditingPostId(null); // Reset the editing post id
       setUpdatedPostContent({}); // Reset the updated post content
       // window.location.reload();
+      // ddd
       history('/');
     } catch (error) {
       console.error(error);
