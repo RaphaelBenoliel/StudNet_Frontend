@@ -242,6 +242,45 @@ const toggleEdit= () => {
                     )}
                   </p>
                   <p>
+                    User Name: {' '}
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="userName"
+                        value={editedUser.userName}
+                        onChange={handleChange}
+                        autoComplete="userName" />
+                    ) : (
+                      editedUser.userName
+                    )}
+                  </p>
+                  <p>
+                    First Name: {' '}
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={editedUser.firstName}
+                        onChange={handleChange}
+                        autoComplete="firstName" />
+                    ) : (
+                      editedUser.firstName
+                    )}
+                  </p>
+                  <p>
+                    Last Name: {' '}
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={editedUser.lastName}
+                        onChange={handleChange}
+                        autoComplete="lastName" />
+                    ) : (
+                      editedUser.lastName
+                    )}
+                  </p>
+                  <p>
                     <button type="button" onClick={toggleEdit}>
                       {isEditing ? 'Save' : 'Edit'}
                     </button>
