@@ -17,7 +17,6 @@ export const sendPostRequest = async (params) => {
 export const sendGetRequest = async (params) => {
   try {
     const result = await axios.post(`${BASE_URL}posts`, params);
-
     return result;
   } catch (error) {
     console.error(error);
@@ -47,10 +46,10 @@ export const sendPutRequest = async (postId, updatedData) => {
 
 export const sendLikeRequest = async (params) => {
   try {
-    const result = await axios.get(`${BASE_URL}liked`, paramas);
+    const result = await axios.get(`${BASE_URL}liked`, params);
     return result;
-
-  }catch (error){
+  } catch (error) {
     console.error(error);
   }
-}
+  return null;
+};

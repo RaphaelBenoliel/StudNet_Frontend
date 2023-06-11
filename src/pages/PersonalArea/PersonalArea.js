@@ -207,7 +207,7 @@ const toggleEdit= () => {
                   <p>
                     User Name: {' '}
                     {isEditing ? (
-                      <input
+                      <TextInput
                         type="text"
                         name="userName"
                         value={editedUser.userName}
@@ -220,7 +220,7 @@ const toggleEdit= () => {
                   <p>
                     First Name: {' '}
                     {isEditing ? (
-                      <input
+                      <TextInput
                         type="text"
                         name="firstName"
                         value={editedUser.firstName}
@@ -233,7 +233,7 @@ const toggleEdit= () => {
                   <p>
                     Last Name: {' '}
                     {isEditing ? (
-                      <input
+                      <TextInput
                         type="text"
                         name="lastName"
                         value={editedUser.lastName}
@@ -246,7 +246,7 @@ const toggleEdit= () => {
                   <p>
                     User Name: {' '}
                     {isEditing ? (
-                      <input
+                      <TextInput
                         type="text"
                         name="userName"
                         value={editedUser.userName}
@@ -259,7 +259,7 @@ const toggleEdit= () => {
                   <p>
                     First Name: {' '}
                     {isEditing ? (
-                      <input
+                      <TextInput
                         type="text"
                         name="firstName"
                         value={editedUser.firstName}
@@ -272,7 +272,7 @@ const toggleEdit= () => {
                   <p>
                     Last Name: {' '}
                     {isEditing ? (
-                      <input
+                      <TextInput
                         type="text"
                         name="lastName"
                         value={editedUser.lastName}
