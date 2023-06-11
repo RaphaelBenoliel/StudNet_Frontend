@@ -7,6 +7,7 @@ import {
   LoginContainer,
   SubmitBtn,
   TextInput,
+  TextInputContainer,
   Title,
   VerticalContainer,
   EyeLab,
@@ -66,10 +67,17 @@ export default function LoginView(props) {
         <Title>Log in to StudNet</Title>
       <LoginContainer>
         <InputLbl>Email address</InputLbl>
-        <TextInput type="email" ref={email} placeholder="Email"></TextInput>
+        <TextInputContainer>
+        <TextInput type="email" ref={email} placeholder="example@email.com"></TextInput>
+      </TextInputContainer>
         <TextMesasge>{message}</TextMesasge>
-        <InputLbl>Password<EyeLab onClick={handleShow}> <img src={show ? eyeClosed : eyeOpen} alt={show ? 'Hide' : 'Show'} /></EyeLab></InputLbl>
-        <TextInput type={show ? 'text' : 'password'} id="password" ref={password} placeholder="Password"/>
+        <InputLbl>Password</InputLbl>
+        <TextInputContainer>
+          <TextInput type={show ? 'text' : 'password'} ref={password} placeholder="Password" />
+          <EyeLab onClick={handleShow}>
+            <img src={show ? eyeClosed : eyeOpen} alt={show ? 'Hide' : 'Show'} />
+          </EyeLab>
+        </TextInputContainer>
         <TextMesasge>{messagePass}<br/>{messagePass1}<br/>{messagePass2}</TextMesasge>
         <InputLbl>&emsp;&emsp;Forgot password?&nbsp;&nbsp;<NavLink to="/login/:fpass">Click Here</NavLink> </InputLbl>
         <SubmitBtn onClick={() => submitHandler()}>Log in</SubmitBtn>

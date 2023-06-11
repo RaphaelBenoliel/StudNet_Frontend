@@ -12,12 +12,6 @@ export const InputLbl = styled.label`
   margin-bottom: 5px;
 `;
 
-export const EyeLab = styled.span`
-  margin-left: 60%;
-  display: block;
-  cursor: pointer;
-`;
-
 export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -81,16 +75,39 @@ export const SubmitBtn = styled.button`
     }
 `;
 
+// export const TextInput = styled.input`
+//   border: 2px solid #21262d;
+//   width: 90%;
+//   height: 25px;
+//   border-radius: 5px;
+//   margin-bottom: 3px;
+//   background-color: #0d1116;
+//   color: white;
+//   padding: 5px 10px;
+//   font-size: 14px;
+//   line-height: 1.5;
+//   outline: none;
+//   ::placeholder {
+//     color: #8c8c8c;
+//   }
+//   &:focus {
+//     border-color: #2ea043;
+//   }
+
+// `;
+// export const EyeLab = styled.span`
+//   margin-left: 5px;
+//   /* display: block; */
+//   cursor: pointer;
+// `;
+export const TextInputContainer = styled.div`
+  position: relative;
+  width: 100%;
+  /* border-color: rgba(255, 255, 255, 0.1); */
+`;
+
 export const TextInput = styled.input`
-    /* border: 2px solid #21262d;
-    width: 100%;
-    height: 25px;
-    border-radius: 5px;
-    align-items: left;
-    margin-bottom: 3px;
-    background-color: #0d1116;
-    color: white; */
-    border: 2px solid #21262d;
+  border: 1px solid rgba(255, 25, 255, 0.15);
   width: 90%;
   height: 25px;
   border-radius: 5px;
@@ -101,14 +118,27 @@ export const TextInput = styled.input`
   font-size: 14px;
   line-height: 1.5;
   outline: none;
-  
   ::placeholder {
     color: #8c8c8c;
   }
-  
   &:focus {
     border-color: #2ea043;
   }
+`;
+
+export const EyeLab = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+`;
+
+export const EyeLab1 = styled.span`
+  margin-left: 85%;
+  display: block;
+  cursor: pointer;
+  margin-top: -45px ;
 `;
 
 export const TextMesasge = styled.h3`

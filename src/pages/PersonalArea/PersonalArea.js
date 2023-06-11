@@ -3,8 +3,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import './PersonalArea.css';
 import { InputLabel,  } from '@mui/material';
-import styled from 'styled-components';
-import { TextInput } from '../Login/Login.style';
+// import styled from 'styled-components';
+import { TextInput, EyeLab } from '../Login/Login.style';
 import eyeClosed from '../../icons/eye-off.png';
 import eyeOpen from '../../icons/eye-on.png';
 import { Link } from 'react-router-dom';
@@ -87,13 +87,7 @@ export default function PersonalArea() {
     // Logic for unfollowing the user goes here
     console.log(`Unfollow ${user.firstName} ${user.lastName}`);
   };
-const EyeLab = styled.span`
-  margin-left: 85%;
-  display: block;
-  cursor: pointer;
-  margin-top: -45px ;
 
-`;
     const changePassword = async () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     var isRegex = false;
@@ -290,25 +284,24 @@ const toggleEdit= () => {
                 </form>
               </div>
             </div>
-          </TabPanel><TabPanel>
+          </TabPanel>
+          <TabPanel>
               <div className="panel-content_password">
                 <h2>Edit password</h2>
                 <p>Password must be at least 8 characters, At least one uppercase, lowercase, and number.</p>
                 <form onSubmit={saveProfile}>
-                  <p>
-                  <InputLabel>
-            <TextInput 
-      type={showPassword ? 'text' : 'password'} 
-      id="password" 
-      ref={currentPassword} 
-      placeholder="Current Password"
-      /> 
-      <EyeLab
-        onClick={handleShow} >
-      <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab>
-
-      </InputLabel>
-                    <p>{currentPasswordMessage}</p>
+                <p>
+                <InputLabel>
+                <TextInput 
+                  type={showPassword ? 'text' : 'password'} 
+                  id="password" 
+                  ref={currentPassword} 
+                  placeholder="Current Password"/> 
+                <EyeLab onClick={handleShow} >
+                  <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} />
+                </EyeLab>
+                </InputLabel>
+                  <p>{currentPasswordMessage}</p>
                   </p>
                   <p>
                   <InputLabel>
@@ -320,31 +313,27 @@ const toggleEdit= () => {
       /> 
        <EyeLab
             onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
-
-
+          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab>
+          </InputLabel>
                     <p>{messagePass}</p>
                     <p>{messagePass1}</p>
                     <p>{messagePass2}</p>
                   </p>
                   <p>
-                  <InputLabel>
-                <TextInput 
-      type={showPassword ? 'text' : 'password'} 
-      id="password" 
-      ref={newPasswordAgain} 
-      placeholder="New Password Again"
-      />
-      <EyeLab
-            onClick={handleShow} >
-          <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
+              <InputLabel>
+              <TextInput 
+              type={showPassword ? 'text' : 'password'} 
+              id="password" 
+              ref={newPasswordAgain} 
+              placeholder="New Password Again"/>
+              <EyeLab onClick={handleShow} >
+                <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} /></EyeLab></InputLabel>
 
                     <p>{noEqualMessage}</p>
                   </p>
                   <p>Forgot password?&nbsp;
                     <Link to="/login/:fpass" className="forgot-link">Click Here</Link>
                   </p>
-
                   <button className='saveButton' onClick={() => changePassword()}>
                     Save
                   </button>
