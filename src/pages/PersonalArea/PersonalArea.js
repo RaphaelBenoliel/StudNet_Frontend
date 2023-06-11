@@ -14,6 +14,7 @@ export default function PersonalArea() {
   const [followers, setFollowers] = useState([]);
   const [followersUsers, setFollowersUsers] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [followingUsers, setFollowingUsers] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
   const [statistics, setStatistics] = useState({});
@@ -44,26 +45,39 @@ export default function PersonalArea() {
       setUser(parsedData);
       setEditedUser(parsedData);
       setFollowers(parsedData.followers);
+      setFollowing(parsedData.following);
     }
 
   }, []);
   //followers
   const getFollowers = async () => {
-    if (followers.length === 0) {
-      return;
+    if (followers.length !== 0) {
+      try {
+        // console.log(followers);
+        const result = await getUsersByiD({ followers: followers });
+        // console.log(result);
+        setFollowersUsers(result.users);
+       
+      } catch (error) {
+        console.error(error);
+      }
     }
-    try {
-      console.log(followers);
-      const result = await getUsersByiD({ followers });
-      console.log(result);
-      setFollowersUsers(result.users);
-    } catch (error) {
-      console.error(error);
+    if (following.length !== 0) {
+      try {
+        console.log(following);
+        //using the same function to get the following users
+        const result1 = await getUsersByiD({ followers: following });
+        console.log(result1);
+        setFollowingUsers(result1.users);
+      } catch (error) {
+        console.error(error);
+      }
     }
+   
   };
   useEffect(() => {
       getFollowers();
-  }, [followers]);
+  }, [followers, following]);
   const handleFollowButtonClick = (user) => {
     // Implement the desired functionality here
     // For example, you can show a message or perform an action
@@ -311,10 +325,19 @@ const toggleEdit= () => {
                 </div>
               </TabPanel>
               <TabPanel>
-              <div className="panel-content">
-                <h2> My Following</h2>
-              </div>
-              </TabPanel>
+                    <div className="panel-content">
+                      <h2>My Following</h2>
+                      <div className="followers-list">
+                        {followingUsers.map((user) => (
+                          <div key={user.email}>
+                            <img src={user.picture} alt={user.firstName} />
+                            <p>{`${user.firstName} ${user.lastName}`}</p>
+                            <button onClick={() => handleUnfollowButtonClick(user)}>Unfollow</button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </TabPanel>
                 </Tabs></>
             )}
         </div>
