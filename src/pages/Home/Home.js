@@ -112,14 +112,15 @@ export default function Home() {
   const handleDeletePost = async (postId) => {
     try {
       console.log('postId: ', postId);
-      console.log('auth: ', auth);
-      await sendDeleteRequest(postId, auth); //good
+      console.log('auth: ', JSON.parse(auth)._id);
+      await sendDeleteRequest(postId, JSON.parse(auth)._id ); //good
       const updatedPostData = postData.filter((post) => post._id !== postId);
       setPostData(updatedPostData);
     } catch (error) {
       console.error(error);
     }
   };
+
   const handleLikePost = async (post_id) => {
     try {
       const result = await sendLikeRequest({ postId: post_id, userId: auth._id });
@@ -131,8 +132,6 @@ export default function Home() {
 
   const handleUpdatePost = async (postId, updatedContent) => {
     try {
-      console.log('postId: ', postId);
-      console.log('updatedContent: ', updatedContent);
       const result = await sendPutRequest(postId,  updatedContent );
       if (result === null) return;
       
@@ -141,8 +140,6 @@ export default function Home() {
       localStorage.setItem('posts', JSON.stringify(result.data));
       setEditingPostId(null); // Reset the editing post id
       setUpdatedPostContent({}); // Reset the updated post content
-      // window.location.reload();
-      // ddd
       history('/');
     } catch (error) {
       console.error(error);

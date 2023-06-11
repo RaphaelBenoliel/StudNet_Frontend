@@ -24,9 +24,11 @@ export const sendGetRequest = async (params) => {
   return null;
 };
 
-export const sendDeleteRequest = async (postId, auth) => {
+export const sendDeleteRequest = async (postId, userID) => {
   try {
-    const result = await axios.delete(`${BASE_URL}posts/delete`, { postId, data: { auth } });
+    console.log('postId: ', postId);
+    console.log('userID: ', userID);
+    const result = await axios.put(`${BASE_URL}posts/delete`, { _id: postId, userID });
     return result.data;
   } catch (error) {
     console.error(error);
@@ -34,16 +36,15 @@ export const sendDeleteRequest = async (postId, auth) => {
   return null;
 };
 
-export const sendPutRequest = async (postId, updatedData) => {
+export async function sendPutRequest(postId, updatedData) {
   try {
-    console.log(postId, updatedData);
     const result = await axios.put(`${BASE_URL}posts/update`, { _id: postId, updatedData });
     return result;
   } catch (error) {
     console.error(error);
   }
   return null;
-};
+}
 
 export const sendLikeRequest = async (params) => {
   try {
