@@ -16,16 +16,9 @@ import {
   UserDetails,
   UserPicture,
   EditDeleteButton,
-  PopDiv
 } from './Home.style';
 import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
-import { styled, alpha } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import EditIcon from '@mui/icons-material/Edit';
-import Divider from '@mui/material/Divider';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import PopupMessage from './PopMessage';
 // import Navbar from '../Navbar/Navbar';
 // import { myUser } from '../Login/Login';
 
@@ -50,106 +43,6 @@ export default function Home() {
       }
     }
   }, []);
-
-
-  const StyledMenu = styled((props) => (
-    <Menu
-      elevation={0}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      {...props}
-    />
-  ))(({ theme }) => ({
-    '& .MuiPaper-root': {
-      borderRadius: 6,
-      marginTop: theme.spacing(1),
-      minWidth: 180,
-      color:
-        theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
-      boxShadow:
-        'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
-      '& .MuiMenu-list': {
-        padding: '4px 0',
-      },
-      '& .MuiMenuItem-root': {
-        '& .MuiSvgIcon-root': {
-          fontSize: 18,
-          color: theme.palette.text.secondary,
-          marginRight: theme.spacing(1.5),
-        },
-        '&:active': {
-          backgroundColor: alpha(
-            theme.palette.primary.main,
-            theme.palette.action.selectedOpacity,
-          ),
-        },
-      },
-    },
-  }));
-  
-  function PopupMessage({ onClose, onDelete, onEdit }) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-  
-    const handleDelete = () => {
-          if (typeof onDelete === 'function') {
-            onDelete(); // Call the delete function
-          }
-          onClose(); // Close the popup
-        };
-        const handleEdit = () => {
-          if (typeof onEdit === 'function') {
-            onEdit(); // Call the delete function
-          }
-          onClose(); // Close the popup
-        };
-    return (
-      <div>
-        <Button
-          id="demo-customized-button"
-          aria-controls={open ? 'demo-customized-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          variant="contained"
-          disableElevation
-          onClick={handleClick}
-          endIcon={<KeyboardArrowDownIcon />}
-        >
-        </Button>
-        <StyledMenu
-          id="demo-customized-menu"
-          MenuListProps={{
-            'aria-labelledby': 'demo-customized-button',
-          }}
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-        >
-          <EditDeleteButton onClick={handleEdit} disableRipple>
-            <EditIcon />
-            Edit
-          </EditDeleteButton>
-          <EditDeleteButton onClick={handleDelete} disableRipple>
-            <FileCopyIcon />
-            Delete
-          </EditDeleteButton>
-          <Divider sx={{ my: 0.5 }} />
-        </StyledMenu>
-      </div>
-    );
-  }
  
   useEffect(() => {
     const getPosts = async () => {
@@ -253,6 +146,7 @@ export default function Home() {
       console.error(error);
     }
   };
+
   return (
     <HomeWrapper>
   <TextContainer>
@@ -280,7 +174,7 @@ export default function Home() {
               <UserDetails>
                 <UserPicture src={post.userID.picture} alt="User Profile" />
                 <p>
-                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;{post.userID._id === JSON.parse(auth)._id && (
+                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;&emsp;&emsp;{post.userID._id === JSON.parse(auth)._id && (
                     <>
                           <PopupMessage onDelete={() => handleDeletePost(post._id)} onClose={handleClosePopup} onEdit={() => setEditingPostId(post._id)} />
                   
@@ -302,9 +196,9 @@ export default function Home() {
                     }}
                   />
                   {post.userID._id === JSON.parse(auth)._id && (
-                    <EditDeleteButton onClick={() => handleUpdatePost(post._id, updatedPostContent)}>
+                    <><EditDeleteButton onClick={() => handleUpdatePost(post._id, updatedPostContent)}>
                       Post
-                    </EditDeleteButton>
+                    </EditDeleteButton><EditDeleteButton onClick={() => handleClosePopup}>Cancel</EditDeleteButton></>
                   )}
                 </>
               ) : (

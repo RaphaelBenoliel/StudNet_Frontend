@@ -70,6 +70,7 @@ export const UserPicture = styled.img`
 export const UserDetails = styled.div`
 display: flex;
 align-items: center;
+margin-left: -5px;
 `;
 
 export const DateContainer = styled.div`
@@ -109,7 +110,7 @@ export const PostButton = styled.button`
 
 export const EditDeleteButton = styled.button`
   padding: 5px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   background-color: rgba(200, 200, 200, 0.3);
   color: #fff;
   border-radius: 15px;
@@ -120,7 +121,7 @@ export const EditDeleteButton = styled.button`
 `;
 
 export const PopDiv = styled.div`
-  margin-left: 150px;
+  margin-left: 420px;
   flex-direction: column;
-
+  margin-top: -20px;
 `;
