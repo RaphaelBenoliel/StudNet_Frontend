@@ -83,3 +83,16 @@ export const requestUpdateProfile = async (params) => {
   }
   return null;
 };
+
+export const requestDeleteProfile = async (params) => {
+  try {
+    console.log('params: ', params);
+    const result = await axios.put(`${BASE_URL}delete`, params);
+    if (result.data.success) {
+      return result.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};

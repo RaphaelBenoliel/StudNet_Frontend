@@ -14,17 +14,6 @@ function Navbar() {
   // const [open, setOpen] = useState(false);
   const [auth, setAuth] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const authData = localStorage.getItem('user');
-      if (authData) {
-        setAuth(authData);
-        // navigate('/home'); // Redirect to home after setting auth
-      }
-    }
-  }, [navigate]);
-
   const signOut = () => {
     if (typeof window !== 'undefined') {
       localStorage.clear();
@@ -32,6 +21,18 @@ function Navbar() {
       navigate('/');
     }
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const authData = localStorage.getItem('user');
+      if (authData) {
+        setAuth(authData);
+        // navigate('/home'); // Redirect to home after setting auth
+      } else {
+        setAuth(null);
+      }
+    }
+  }, [navigate]);
   return (
     <NavbarContainer extendNavbar={extendNavbar}>
       <NavbarInnerContainer>

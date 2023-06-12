@@ -5,11 +5,23 @@ import './PersonalArea.css';
 import { TextInputContainer, TextInput, EyeLab } from '../Login/Login.style';
 import eyeClosed from '../../icons/eye-off.png';
 import eyeOpen from '../../icons/eye-on.png';
-import { Link } from 'react-router-dom';
-import { getUsersByiD, requestUpdateProfile } from '../../API/Auth_calls';
-import { FormControl, InputLabel, MenuItem, Select, TextField, Snackbar, MuiAlert} from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { getUsersByiD, requestUpdateProfile, requestDeleteProfile } from '../../API/Auth_calls';
+import { FormControl, InputLabel, MenuItem, Select, TextField} from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function PersonalArea() {
+  const navigate = useNavigate();
   const [followers, setFollowers] = useState([]);
   const [followersUsers, setFollowersUsers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -37,6 +49,15 @@ export default function PersonalArea() {
     aboutMySelf: '',
     phoneNumber: '',
   });
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const [showPassword, setShow] = useState(false);
   const handleShow = () => {
@@ -59,6 +80,7 @@ export default function PersonalArea() {
       try {
         // console.log(followers);
         const result = await getUsersByiD({ users: followers });
+        // getUsersByiD( {_id: userID} )
         // console.log(result);
         setFollowersUsers(result.users);
       } catch (error) {
@@ -177,14 +199,19 @@ const toggleEdit= () => {
   }
 };
 
-const deleteAccount = () => {
-    // Implement the logic to delete the user account
-    // This can include API calls, removing data, etc.
-    // You can replace the placeholder implementation with your actual logic.
+const deleteAccount = async () => {
+    setOpen(false);
+    console.log(user._id);
+    try {
+      await requestDeleteProfile({_id: user._id});
+      setUser(null);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+    localStorage.removeItem('user');
     console.log('Deleting user account...');
   };
-      
-
         
     return (
         <div className="App">
@@ -261,6 +288,30 @@ const deleteAccount = () => {
                       {isEditing ? 'Save' : 'Edit'}
                     </button>
                   </p>
+                
+                      <Button variant="outlined" onClick={handleClickOpen}>
+                        Delete My Account
+                      </Button>
+                      <Dialog
+                        open={open}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={handleClose}
+                        aria-describedby="alert-dialog-slide-description"
+                      >
+                        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+                        <DialogContent>
+                          <DialogContentText id="alert-dialog-slide-description">
+                            Let Google help apps determine location. This means sending anonymous
+                            location data to Google, even when no apps are running.
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose}>Cancel</Button>
+                          <Button onClick={deleteAccount}>Delete Account</Button>
+                        </DialogActions>
+                      </Dialog>
+                   
                 </form>
               </div>
             </div>
