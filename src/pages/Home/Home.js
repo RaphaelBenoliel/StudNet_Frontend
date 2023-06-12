@@ -87,7 +87,6 @@ export default function Home() {
       console.log(`CONTENT:\t${newPostContent}`);
       const result = await sendPostRequest({ auth, content: newPostContent });
       if (result === null) return;
-  
       const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
       // Parse the auth object from the string stored in local storage
       const parsedAuth = JSON.parse(auth);
@@ -100,7 +99,6 @@ export default function Home() {
       // Stringify the updated auth object before storing it back in local storage
       const updatedAuth = JSON.stringify(parsedAuth);
       localStorage.setItem('user', updatedAuth);
-  
       setPostData([...postData, ...updatedPosts]);
       localStorage.setItem('posts', JSON.stringify([...postData, ...updatedPosts]));
       // Reset the new post contents
@@ -113,9 +111,7 @@ export default function Home() {
 
   const handleDeletePost = async (postId) => {
     try {
-      console.log('postId: ', postId);
-      console.log('auth: ', JSON.parse(auth)._id);
-      await sendDeleteRequest(postId, JSON.parse(auth)._id ); //good
+      await sendDeleteRequest(postId, JSON.parse(auth)._id );
       const updatedPostData = postData.filter((post) => post._id !== postId);
       setPostData(updatedPostData);
     } catch (error) {
@@ -125,11 +121,9 @@ export default function Home() {
 
   const handleLikePost = async (postId) => {
     try {
-      console.log('post_id: ', postId);
-      console.log('auth: ', JSON.parse(auth)._id);
       const result = await sendLikeRequest( postId, JSON.parse(auth)._id );
       if (result) {
-        // Update the user and post data in your frontend state or variables
+        // Update the user and post data in local storage and state
         const authData = localStorage.setItem('user', JSON.stringify(result.data.user));
         setAuth(JSON.stringify(result.data.user));
         const postsData = JSON.parse(localStorage.getItem('posts', JSON.stringify(result.data.posts)));
@@ -145,7 +139,6 @@ export default function Home() {
     try {
       const result = await sendPutRequest(postId,  updatedContent );
       if (result === null) return;
-      
       const updatedPostData = JSON.parse(localStorage.getItem('posts'));
       setPostData(updatedPostData);
       localStorage.setItem('posts', JSON.stringify(result.data));
