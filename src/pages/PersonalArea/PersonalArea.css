@@ -116,9 +116,6 @@ margin-left: 55px;
     font-size: 17px;
 }
 
-
-
-
 .panel-content input {
     border-radius: 8px;
     width: 230px;
@@ -156,6 +153,8 @@ margin-left: 55px;
     }
 } */
 
+
+
 .panel-content_password {
     font-size: 17px;
     margin-left: 50px;
@@ -183,13 +182,12 @@ margin-left: 55px;
     padding: 1px;
     margin-top: 10px;
     margin-bottom: 15px;
-    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     outline: none;
     &:hover{
         cursor: pointer;
         background-color: #2da042;
     }
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .title img {
@@ -238,7 +236,26 @@ margin-left: 55px;
     object-fit: cover;
     margin-right: 10px;
   }
-  
+
+  .accountButton {
+        font-size: 17px;
+        background-color: #238636;
+        border: 1px solid #2da042;
+        border-radius: 8px;
+        color:#fff;
+        width: 10ch;
+        height: 35px;
+        padding: 1px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        outline: none;
+        &:hover{
+            cursor: pointer;
+            background-color: #2da042;
+        }
+    }
+
   .followers-list p {
     font-size: 16px;
     margin-left: 10px;

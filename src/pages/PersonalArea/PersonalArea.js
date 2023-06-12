@@ -241,7 +241,7 @@ const deleteAccount = async () => {
                     </TabList>
                     <TabPanel>
             <div className="panel-content">
-              <h2>Edit account</h2>
+              <h2>Edit Account</h2>
               <div>
                 <form>
                   <p>
@@ -284,12 +284,12 @@ const deleteAccount = async () => {
                     )}
                   </p>
                   <p>
-                    <button type="button" onClick={toggleEdit}>
+                    <button type="button" className='accountButton' onClick={toggleEdit}>
                       {isEditing ? 'Save' : 'Edit'}
                     </button>
                   </p>
                 
-                      <Button variant="outlined" onClick={handleClickOpen}>
+                      <Button variant="outlined" onClick={handleClickOpen} style={{ color: 'green', border: '1px solid #2da042'}}>
                         Delete My Account
                       </Button>
                       <Dialog
@@ -299,16 +299,15 @@ const deleteAccount = async () => {
                         onClose={handleClose}
                         aria-describedby="alert-dialog-slide-description"
                       >
-                        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+                        <DialogTitle>{"Delete My Account"}</DialogTitle>
                         <DialogContent>
-                          <DialogContentText id="alert-dialog-slide-description">
-                            Let Google help apps determine location. This means sending anonymous
-                            location data to Google, even when no apps are running.
+                          <DialogContentText id="alert-dialog-slide-description"> 
+                            Are you sure?
                           </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                          <Button onClick={handleClose}>Cancel</Button>
-                          <Button onClick={deleteAccount}>Delete Account</Button>
+                          <Button onClick={handleClose} style={{ color: 'green' }}>Cancel</Button>
+                          <Button onClick={deleteAccount} style={{ color: 'green' }}>Delete Account</Button>
                         </DialogActions>
                       </Dialog>
                    
@@ -318,7 +317,7 @@ const deleteAccount = async () => {
           </TabPanel>
           <TabPanel>
               <div className="panel-content_password">
-                <h2>Edit password</h2>
+                <h2>Edit Password</h2>
                 <p>Password must be at least 8 characters, At least one uppercase, lowercase, and number.</p>
                 <form >
                 <TextInputContainer>
@@ -456,7 +455,7 @@ const deleteAccount = async () => {
                     )}
                   </p>
                   <p>
-                    <button type="button" onClick={toggleEdit}>
+                    <button type="button" className='accountButton' onClick={toggleEdit}>
                       {isEditing ? 'Save' : 'Edit'}
                     </button>
                   </p>
