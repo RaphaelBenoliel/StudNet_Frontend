@@ -6,23 +6,36 @@ export const Wrapper = styled.div`
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    text-align: center;
+    text-align: left;
     background-color: #0d1116;
     min-height: 120vh;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
 `;
 export const STitle = styled.h3`
     color: #2da042;
 `;
 export const Title = styled.h1`
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: center;
+    text-align: left;
     font-size: 30px;
     color: #fff;
     margin-top: 100px;
     padding: 0;
-
+`;
+export const Label = styled.h3`
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: left;
+    padding: 0;
+`;
+export const Label2 = styled.h3`
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: left;
+    padding: 0;
 `;
 export const TextContainer = styled.div`
     display: flex;
@@ -69,6 +82,12 @@ export const UserPicture = styled.img`
   margin-right: 10px;
 `;
 
+export const UserPictureBig = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+`;
 export const UserDetails = styled.div`
 display: flex;
 align-items: center;

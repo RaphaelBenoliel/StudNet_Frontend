@@ -14,22 +14,63 @@ import {
   Post,
   UserDetails,
   UserPicture,
+  UserPictureBig,
   Button,
+  Label,
+  Label2
 } from './Profile.style';
 import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
+import { getUsersByiD, requestFollow, requestFollowingList, requestUnfollow }  from '../../API/Auth_calls';
+import { isVisible } from '@testing-library/user-event/dist/utils';
 
 export default function Profile() {
   const [auth, setAuth] = useState(null);
+  const [authID, setAuthID] = useState(null);
+  const [isFollowing, setFollowingState] = useState(null);
+  const [isFollowBtnVisible, setFollowBtnVisibility] = useState(null);
+  const [followBtnContent, setFollowBtnContent] = useState(null);
   const [postData, setPostData] = useState([]);
+  const [isNewPostVisible, setNewPostVisibility] = useState(null);
   const [newPostContent, setNewPostContent] = useState('');
   const [editingPostId, setEditingPostId] = useState(null);
   const [updatedPostContent, setUpdatedPostContent] = useState(''); 
-  
+  var urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get('id');
+  // console.log(userId);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const authData = localStorage.getItem('user');
-      if (JSON.parse(authData)) {
-        setAuth(authData);
+      if(userId === null)
+      {
+        const authData = localStorage.getItem('user');
+        //console.log('&&&&&&&&&&&&', authData);
+        if (JSON.parse(authData)) {
+          setAuth(authData);
+        }
+        setAuthID(JSON.parse(authData)._id);
+      }
+      else
+      {
+        const getUserByID = async () => {
+          try {
+            const result = await getUsersByiD({users: userId});
+            //console.log('1111111111', result.users[0]);
+            const tmp = result.users[0];
+            try {
+              var jsonData = JSON.stringify(eval(tmp));
+              if (JSON.parse(jsonData)) {
+                setAuth(jsonData);
+              } 
+              setAuthID(userId);             
+              //console.log('!@#$%^&*&^%$#@!@#$%^&*&^%$#@!', jsonData);
+            } catch (error) {
+              console.error(error);
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        getUserByID(userId);
       }
     }
   }, []);
@@ -41,7 +82,8 @@ export default function Profile() {
           const result = await sendGetRequest();
           if (result && result.data) {
             // const updatedPosts = result.data.posts ? result.data.posts : [];
-            setPostData(result.data.filter((post) => post.userID._id === JSON.parse(auth)._id));
+            //setPostData(result.data.filter((post) => post.userID._id === JSON.parse(auth)._id));
+            setPostData(result.data.filter((post) => post.userID._id === authID));
             localStorage.setItem('posts', JSON.stringify(result.data));
           }
         }
@@ -51,6 +93,40 @@ export default function Profile() {
     };
     getPosts();
   }, [auth]);
+
+  useEffect(() => {
+    const getFollowingState = async () => {
+      try {
+        const loggedUserID = JSON.parse(localStorage.getItem('user'))._id;
+        if(authID === null) return;
+        else if (authID === loggedUserID) {
+          setFollowBtnVisibility(false);
+          setNewPostVisibility(true);
+        }
+        else {
+          setFollowBtnVisibility(true);
+          setNewPostVisibility(false);
+          //לבדוק אם אני עוקבת אחרי המשתמש
+          const user_ID = loggedUserID;
+          const result = await requestFollowingList({ user_ID });
+          console.log('^^^^^^^^^^', result.find((value) => value === authID));
+          if (!result) return;
+
+          if (result.find((value) => value === authID)){
+            setFollowingState(true);
+            setFollowBtnContent('unfollow');
+          }
+          else{
+            setFollowingState(false);
+            setFollowBtnContent('follow');
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getFollowingState();
+  }, [authID]);
 
   const cleanDate = (dateString) => {
     const date = new Date(dateString);
@@ -93,8 +169,8 @@ export default function Profile() {
   const handleDeletePost = async (postId) => {
     try {
       console.log('postId: ', postId);
-      console.log('auth: ', auth);
-      await sendDeleteRequest(postId, auth); //good
+      console.log('auth: ', JSON.parse(auth)._id);
+      await sendDeleteRequest(postId, JSON.parse(auth)._id ); //good
       const updatedPostData = postData.filter((post) => post._id !== postId);
       setPostData(updatedPostData);
     } catch (error) {
@@ -104,7 +180,7 @@ export default function Profile() {
 
   const handleUpdatePost = async (postId, updatedContent) => {
     try {
-      const result = await sendPutRequest(postId, { content: updatedContent });
+      const result = await sendPutRequest(postId,  updatedContent );
       if (result === null) return;
       
       const updatedPostData = JSON.parse(localStorage.getItem('posts'));
@@ -117,15 +193,60 @@ export default function Profile() {
       console.error(error);
     }
   };
+
+  const handleFollowBtn = async () => {
+    try {
+      // if (JSON.parse(localStorage.getItem('user').following).lenght > 0 && JSON.parse(localStorage.getItem('user').following).includes(authID)){
+      //   console.log('@@@@@@Following');
+      //   const result = await requestUnfollow({ loggedUserID , authID });
+      //   console.log('!!!!!!!!!!!1', result);
+      //   //למחוק מרשימת הנעקבים ומרשימת העוקבים של המשתמש השני
+      // }
+      // else {
+      //   const result = await requestFollow({ loggedUserID , authID });
+      //   console.log('!!!!!!!!!!!2', result);
+      //   //להוסיף לרשימת הנעקבים שלי ולרשימת העוקבים של המשתמש השני
+      // }
+      const user1_ID = JSON.parse(localStorage.getItem('user'))._id;
+      const user2_ID = authID;
+
+      if(isFollowing){
+        //...
+        const result = await requestUnfollow({ user1_ID , user2_ID });
+        console.log('!!!!!!!!!!!1', result);
+        setFollowBtnContent('follow');
+        setFollowingState(false);
+      }
+      else{
+        //...
+        const result = await requestFollow({ user1_ID , user2_ID });
+        console.log('!!!!!!!!!!!2', result);
+        setFollowBtnContent('unfollow');
+        setFollowingState(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
 <Wrapper>
   <TextContainer>
     {auth ? (
       <>
-        <Title>
-          My Posts
-        </Title>
-        <Post>
+      <table>
+        <td>
+          <Title>
+            <UserPictureBig src={JSON.parse(auth).picture} alt="User Profile" /> {JSON.parse(auth).userName}
+            <br/>
+            {isFollowBtnVisible && <PostButton onClick={() => handleFollowBtn()}>{followBtnContent}</PostButton>}
+            <br/>
+            <Label>About:</Label>
+            <Label2>{JSON.parse(auth).firstName} {JSON.parse(auth).lastName}</Label2>
+            <Label2>{JSON.parse(auth).email}</Label2>
+          </Title>
+        </td>
+        <td>
+        <Post style={{ visibility: isNewPostVisible ? 'visible' : 'hidden' }}>
           <CreatePostContainer>
             <PostInput
               type="text"
@@ -134,7 +255,7 @@ export default function Profile() {
               placeholder="Write your post..."
             />
             <PostButton onClick={handlePostSubmission}>Post</PostButton>
-          </CreatePostContainer>
+          </CreatePostContainer> 
         </Post>
         <PostContainer>
         {Array.isArray(postData) && 
@@ -179,10 +300,19 @@ export default function Profile() {
             </Post>
           ))}
         </PostContainer>
+        </td>
+      </table>
+        
+        {/* <Title >My Posts</Title> */}
+        <br/>
+        <br/>
+        <br/>
+        
+        
       </>
     ) : (
       <Title>
-        Welcome to StudNet
+        Please log in to see profile.
       </Title>
     )}
   </TextContainer>

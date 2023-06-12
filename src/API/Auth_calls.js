@@ -96,3 +96,55 @@ export const requestDeleteProfile = async (params) => {
   }
   return null;
 };
+
+export const requestFollow = async (params) => {
+  try {
+    console.log('params: ', params);
+    const result = await axios.post(`${BASE_URL}follow`, params);
+    if (result.data.success) {
+      return result.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
+export const requestUnfollow = async (params) => {
+  try {
+    console.log('params: ', params);
+    const result = await axios.post(`${BASE_URL}unfollow`, params);
+    if (result.data.success) {
+      return result.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
+export const requestFollowingList = async (params) => {
+  try {
+    console.log('params: ', params);
+    const result = await axios.post(`${BASE_URL}getFollowing`, params);
+    if (result.data.success) {
+      return result.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
+export const requestFollowersList = async (params) => {
+  try {
+    console.log('params: ', params);
+    const result = await axios.post(`${BASE_URL}getFollowers`, params);
+    if (result.data.success) {
+      return result.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
