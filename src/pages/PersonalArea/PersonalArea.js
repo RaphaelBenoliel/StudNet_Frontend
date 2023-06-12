@@ -52,7 +52,6 @@ export default function PersonalArea() {
       setFollowers(parsedData.followers);
       setFollowing(parsedData.following);
     }
-
   }, []);
   //followers
   const getFollowers = async () => {
@@ -62,7 +61,6 @@ export default function PersonalArea() {
         const result = await getUsersByiD({ users: followers });
         // console.log(result);
         setFollowersUsers(result.users);
-       
       } catch (error) {
         console.error(error);
       }
@@ -72,7 +70,6 @@ export default function PersonalArea() {
         console.log(following);
         //using the same function to get the following users
         const result1 = await getUsersByiD({ users: following });
-        console.log(result1);
         setFollowingUsers(result1.users);
       } catch (error) {
         console.error(error);
@@ -98,9 +95,7 @@ export default function PersonalArea() {
     var isRegex = false;
     setCurrentPasswordMessage('');
     setNoEqualMessage('');
-    console.log (currentPassword.current.value);
     if (currentPassword.current.value === user.password) {
-    console.log('hhhh', user.password);
       setCurrentPasswordMessage('');
       if (newPassword.current.value === newPasswordAgain.current.value) {
         if (newPassword.current.value === '') {
@@ -130,8 +125,8 @@ export default function PersonalArea() {
 
 const sendChangePassword = async (user, newPassword) => {
   try {
+    localStorage.setItem('user', JSON.stringify({ ...user, password: newPassword }));
     const result = await requestUpdateProfile({ ...user, password: newPassword });
-    console.log(result);
   } catch (error) {
     console.error(error);
   }
