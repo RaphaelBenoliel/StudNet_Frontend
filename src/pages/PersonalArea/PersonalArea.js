@@ -7,6 +7,9 @@ import eyeClosed from '../../icons/eye-off.png';
 import eyeOpen from '../../icons/eye-on.png';
 import { Link } from 'react-router-dom';
 import { getUsersByiD, requestUpdateProfile } from '../../API/Auth_calls';
+import { FormControl, InputLabel, MenuItem, Select, TextField, Snackbar, MuiAlert} from '@mui/material';
+
+
 
 export default function PersonalArea() {
   const [followers, setFollowers] = useState([]);
@@ -25,11 +28,17 @@ export default function PersonalArea() {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
   const newPasswordAgain = useRef(null);
+  const [schoolYear, setSchoolYear] = useState('');
   const [editedUser, setEditedUser] = useState({
     userName: '',
     firstName: '',
     lastName: '',
+    country: '',
+    studySubject: '',
+    schoolYear: '',
+    aboutMySelf: '',
   });
+
 
   const [showPassword, setShow] = useState(false);
   const handleShow = () => {
@@ -138,6 +147,10 @@ const handleChange = (e) => {
   }));
 };
 
+// const handleChangeYear = (event) => {
+//   setSchoolYear(event.target.value);
+// };
+
 const saveProfile = async () => {
   setIsEditing(false);
   setUser(editedUser);
@@ -147,6 +160,40 @@ const saveProfile = async () => {
     console.log(result);
   } catch (error) {
     console.error(error);
+  }
+};
+
+
+
+const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+  
+
+const getSchoolYearLabel = (value) => {
+  switch (value) {
+    case 0:
+      return 'Preparing';
+    case 1:
+      return 'First year';
+    case 2:
+      return 'Second year';
+    case 3:
+      return 'Third year';
+    case 4:
+      return 'Fourth year';
+    default:
+      return '';
   }
 };
 
@@ -164,7 +211,9 @@ const toggleEdit= () => {
         // You can replace the placeholder implementation with your actual logic.
         console.log('Deleting user account...');
       };
+      
 
+        
     return (
         <div className="App">
             {user && (
@@ -196,45 +245,6 @@ const toggleEdit= () => {
               <h2>Edit account</h2>
               <div>
                 <form>
-                  <p>
-                    User Name: {' '}
-                    {isEditing ? (
-                      <TextInput
-                        type="text"
-                        name="userName"
-                        value={editedUser.userName}
-                        onChange={handleChange}
-                        autoComplete="userName" />
-                    ) : (
-                      editedUser.userName
-                    )}
-                  </p>
-                  <p>
-                    First Name: {' '}
-                    {isEditing ? (
-                      <TextInput
-                        type="text"
-                        name="firstName"
-                        value={editedUser.firstName}
-                        onChange={handleChange}
-                        autoComplete="firstName" />
-                    ) : (
-                      editedUser.firstName
-                    )}
-                  </p>
-                  <p>
-                    Last Name: {' '}
-                    {isEditing ? (
-                      <TextInput
-                        type="text"
-                        name="lastName"
-                        value={editedUser.lastName}
-                        onChange={handleChange}
-                        autoComplete="lastName" />
-                    ) : (
-                      editedUser.lastName
-                    )}
-                  </p>
                   <p>
                     User Name: {' '}
                     {isEditing ? (
@@ -331,7 +341,102 @@ const toggleEdit= () => {
             </TabPanel>
             <TabPanel>
               <div className="panel-content">
-                <h2>Any content 3</h2>
+                <h2>Edit Personal Details</h2>
+                <p>
+                    Country: {' '}
+                    {isEditing ? (
+                      <TextInput
+                        type="text"
+                        name="country"
+                        value={editedUser.country}
+                        onChange={handleChange}
+                        autoComplete="country" />
+                    ) : (
+                      editedUser.country
+                    )}
+                  </p>
+                  <p>
+                    Study subject: {' '}
+                    {isEditing ? (
+                      <TextInput
+                        type="text"
+                        name="studySubject"
+                        value={editedUser.studySubject}
+                        onChange={handleChange}
+                        autoComplete="studySubject" />
+                    ) : (
+                      editedUser.studySubject
+                    )}
+                  </p>
+                  <p>
+                    School year: {' '}
+                    {isEditing ? (
+                      <FormControl sx={{ m: 1, minWidth: '70px' }}>
+                      <InputLabel id="demo-simple-select-autowidth-label" style={{ color: 'white' }}>school year</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-autowidth-label"
+                        name="schoolYear"
+                        value={editedUser.schoolYear}
+                        onChange={handleChange}
+                        autoWidth
+                        label="schoolYear"
+                        style={{ color: 'white', backgroundColor: 'black' }}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={0}>Preparing</MenuItem>
+                        <MenuItem value={1}>First year</MenuItem>
+                        <MenuItem value={2}>Second year</MenuItem>
+                        <MenuItem value={3}>Third year</MenuItem>
+                        <MenuItem value={4}>Fourth year</MenuItem>
+
+                      </Select>
+                    </FormControl>
+                    ) : (
+                      getSchoolYearLabel(editedUser.schoolYear)
+                      )}
+                  </p>
+                  <p>
+                    About my self: {' '}
+                    {isEditing ? (
+                      <TextField
+                      sx={{ width: '230px',
+                      backgroundColor: 'black',
+                      borderRadius: '8px',
+                      border: '1px solid green',
+                      '& .MuiInputBase-input': {
+                        color: 'white',
+                      },}}
+                        type="text"
+                        name="aboutMySelf"
+                        value={editedUser.aboutMySelf}
+                        onChange={handleChange}
+                        multiline
+                        autoComplete="aboutMySelf" />
+                    ) : (
+                      editedUser.aboutMySelf
+                    )}
+                  </p>
+                  <p>
+                    Phone number: {' '}
+                    {isEditing ? (
+                      <TextInput
+                        type="number"
+                        name="phoneNumber"
+                        value={editedUser.phoneNumber}
+                        onChange={handleChange}
+                        label="Phone Number"
+                        autoComplete="phoneNumber" />
+                    ) : (
+                      editedUser.phoneNumber
+                    )}
+                  </p>
+                  <p>
+                    <button type="button" onClick={toggleEdit}>
+                      {isEditing ? 'Save' : 'Edit'}
+                    </button>
+                  </p>
               </div>
               </TabPanel>
               <TabPanel>
