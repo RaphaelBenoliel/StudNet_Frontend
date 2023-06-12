@@ -128,11 +128,18 @@ export default function Home() {
       console.log('post_id: ', postId);
       console.log('auth: ', JSON.parse(auth)._id);
       const result = await sendLikeRequest( postId, JSON.parse(auth)._id );
-      // setAuth(result.data); 
-    }catch(error) {
+      if (result) {
+        // Update the user and post data in your frontend state or variables
+        const authData = localStorage.setItem('user', JSON.stringify(result.data.user));
+        setAuth(JSON.stringify(result.data.user));
+        const postsData = JSON.parse(localStorage.getItem('posts', JSON.stringify(result.data.posts)));
+        setPostData(postsData);
+      }
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
+
 
   const handleUpdatePost = async (postId, updatedContent) => {
     try {
@@ -205,11 +212,15 @@ export default function Home() {
                 <>
                   <PostContent>{post.content}</PostContent>
                   <>
-                    <div>
-                      <EditDeleteButton onClick={() => handleLikePost(post._id)}>Like</EditDeleteButton>
-                      <EditDeleteButton onClick={() => setCommentContent(post._id)}>Comment</EditDeleteButton>
-                      <EditDeleteButton onClick={() => setShareContent(post._id)}>Share</EditDeleteButton>
-                    </div>
+                  <div>
+  {post.likes.includes(JSON.parse(auth)._id) ? (
+    <EditDeleteButton onClick={() => handleLikePost(post._id)}>Unlike</EditDeleteButton>
+  ) : (
+    <EditDeleteButton onClick={() => handleLikePost(post._id)}>Like</EditDeleteButton>
+  )}
+  <EditDeleteButton onClick={() => setCommentContent(post._id)}>Comment</EditDeleteButton>
+  <EditDeleteButton onClick={() => setShareContent(post._id)}>Share</EditDeleteButton>
+</div>
                     </>
                 </>
               )}

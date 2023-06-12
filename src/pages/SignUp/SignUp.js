@@ -16,7 +16,7 @@ function Signup() {
     }
   }, []);
   const signup = async (email, password, userName, firstName, lastName) => {
-    console.log(`EMAIL:\t${email}\nPASSWORD:\t${password}\nUSERNAME:\t${userName}`);
+    // console.log(`EMAIL:\t${email}\nPASSWORD:\t${password}\nUSERNAME:\t${userName}`);
     try {
       const result = await sendSignUpRequest({
         email, password, userName, firstName, lastName,

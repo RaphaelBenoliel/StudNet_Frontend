@@ -26,7 +26,6 @@ export const sendSignUpRequest = async (params, setMessage) => {
   setMessage('');
   try {
     const result = await axios.post(`${BASE_URL}auth`, params);
-    console.log(result);
     if (result.data.success) {
       alert(`Hello ${result.data.data.newUser.firstName}, You are now registered!`);
       return result.data.data.user;

@@ -302,7 +302,7 @@ const deleteAccount = async () => {
                         <DialogTitle>{"Delete My Account"}</DialogTitle>
                         <DialogContent>
                           <DialogContentText id="alert-dialog-slide-description"> 
-                            Are you sure?
+                          The following action will delete your account permanently and all the personal details in your account including posts you have uploaded in order to confirm this action you must click "DELETE ACCOUNT".
                           </DialogContentText>
                         </DialogContent>
                         <DialogActions>
