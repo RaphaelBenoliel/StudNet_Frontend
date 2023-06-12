@@ -87,21 +87,27 @@ export default function Home() {
       console.log(`CONTENT:\t${newPostContent}`);
       const result = await sendPostRequest({ auth, content: newPostContent });
       if (result === null) return;
-      const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
-      // Parse the auth object from the string stored in local storage
-      const parsedAuth = JSON.parse(auth);
-      // Initialize auth.posts as an array if it's not already
-      if (!Array.isArray(parsedAuth.posts)) {
-        parsedAuth.posts = [];
-      }
-      // Update the auth.posts array with the new posts
-      parsedAuth.posts.push(...updatedPosts);
-      // Stringify the updated auth object before storing it back in local storage
-      const updatedAuth = JSON.stringify(parsedAuth);
-      localStorage.setItem('user', updatedAuth);
-      setPostData([...postData, ...updatedPosts]);
-      localStorage.setItem('posts', JSON.stringify([...postData, ...updatedPosts]));
-      // Reset the new post contents
+      // // Update the user and post data in local storage and state
+      console.log('RESULT:\t', JSON.stringify(result.savedPost));
+      localStorage.setItem('user', JSON.stringify(result.user));
+      localStorage.setItem('posts', JSON.stringify(result.posts));
+      setAuth(JSON.stringify(result.user));
+      setPostData(result.posts);
+      // const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
+      // // Parse the auth object from the string stored in local storage
+      // const parsedAuth = JSON.parse(auth);
+      // // Initialize auth.posts as an array if it's not already
+      // if (!Array.isArray(parsedAuth.posts)) {
+      //   parsedAuth.posts = [];
+      // }
+      // // Update the auth.posts array with the new posts
+      // parsedAuth.posts.push(...updatedPosts);
+      // // Stringify the updated auth object before storing it back in local storage
+      // const updatedAuth = JSON.stringify(parsedAuth);
+      // localStorage.setItem('user', updatedAuth);
+      // setPostData([...postData, ...updatedPosts]);
+      // localStorage.setItem('posts', JSON.stringify([...postData, ...updatedPosts]));
+      // // Reset the new post contents
       setNewPostContent('');
       history('/');
     } catch (error) {
@@ -125,7 +131,7 @@ export default function Home() {
       if (result) {
         // Update the user and post data in local storage and state
         const authData = localStorage.setItem('user', JSON.stringify(result.data.user));
-        setAuth(JSON.stringify(result.data.user));
+        setAuth(authData);
         const postsData = JSON.parse(localStorage.getItem('posts', JSON.stringify(result.data.posts)));
         setPostData(postsData);
       }

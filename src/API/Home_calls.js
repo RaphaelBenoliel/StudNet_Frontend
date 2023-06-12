@@ -7,6 +7,7 @@ const BASE_URL = 'http://localhost:5002/';
 export const sendPostRequest = async (params) => {
   try {
     const result = await axios.post(`${BASE_URL}cpost`, params);
+    console.log('RESULT\t', result.data);
     return result.data;
   } catch (error) {
     console.error(error);

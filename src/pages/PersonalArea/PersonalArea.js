@@ -83,6 +83,7 @@ export default function PersonalArea() {
         // getUsersByiD( {_id: userID} )
         // console.log(result);
         setFollowersUsers(result.users);
+        localStorage.setItem('user.followers', JSON.stringify(result.users));
       } catch (error) {
         console.error(error);
       }
@@ -93,11 +94,12 @@ export default function PersonalArea() {
         //using the same function to get the following users
         const result1 = await getUsersByiD({ users: following });
         setFollowingUsers(result1.users);
+        localStorage.setItem('user.following', JSON.stringify(result1.users));
+        console.log(result1);
       } catch (error) {
         console.error(error);
       }
     }
-   
   };
   useEffect(() => {
       getFollowers();
