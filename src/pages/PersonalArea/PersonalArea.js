@@ -28,7 +28,6 @@ export default function PersonalArea() {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
   const newPasswordAgain = useRef(null);
-  const [schoolYear, setSchoolYear] = useState('');
   const [editedUser, setEditedUser] = useState({
     userName: '',
     firstName: '',
@@ -37,6 +36,7 @@ export default function PersonalArea() {
     studySubject: '',
     schoolYear: '',
     aboutMySelf: '',
+    phoneNumber: '',
   });
 
 
@@ -108,14 +108,14 @@ export default function PersonalArea() {
         if (newPassword.current.value === newPasswordAgain.current.value) {
           if (newPassword.current.value === '') {
             setMessagePass("Password cannot be empty.");
-            props.setMessage('');
+            setMessage('');
             isRegex = true;
             // Check if the password is in the correct format
           }else if (!newPassword.current.value.match(passRegex)) {
             setMessagePass("Password must be at least 8 characters.");
             setMessagePass1("At least one uppercase,");
             setMessagePass2("lowercase and number.");
-            props.setMessage('');
+            setMessage('');
             isRegex = true;
           } else{
             setMessagePass("");
@@ -324,7 +324,7 @@ const toggleEdit= () => {
                     <TextInput 
                       type={showPassword ? 'text' : 'password'} 
                       ref={newPasswordAgain} 
-                      placeholder="New Password Again"/>
+                      placeholder="Re-enter New Password"/>
                       <EyeLab onClick={handleShow} >
                         <img src={showPassword ? eyeClosed : eyeOpen} alt={showPassword ? 'Hide' : 'Show'} />
                       </EyeLab>
@@ -372,7 +372,7 @@ const toggleEdit= () => {
                     School year: {' '}
                     {isEditing ? (
                       <FormControl sx={{ m: 1, minWidth: '70px' }}>
-                      <InputLabel id="demo-simple-select-autowidth-label" style={{ color: 'white' }}>school year</InputLabel>
+                      <InputLabel id="demo-simple-select-autowidth-label" style={{ color: 'white' }}></InputLabel>
                       <Select
                         labelId="demo-simple-select-autowidth-label"
                         name="schoolYear"
@@ -426,7 +426,7 @@ const toggleEdit= () => {
                         name="phoneNumber"
                         value={editedUser.phoneNumber}
                         onChange={handleChange}
-                        label="Phone Number"
+                        label="PhoneNumber"
                         autoComplete="phoneNumber" />
                     ) : (
                       editedUser.phoneNumber

@@ -108,7 +108,7 @@ padding-left: 21px;
 .panel-content {
 /* text-align: center; */
 font-size: 17px;
-margin-left: 60px;
+margin-left: 55px;
 }
 
 
@@ -166,7 +166,7 @@ margin-left: 60px;
 }
 .panel-content_password input {
     width: 230px;
-    margin-bottom: 22px;
+    margin-bottom: 8px;
     border-radius: 8px;
     border: 1px solid green;
 
@@ -206,7 +206,7 @@ margin-left: 60px;
     font-size: 17px;
     margin-left: 50px;
     overflow: auto;
-    width: 260px;
+    /* width: 300px; */
 
   }
   
@@ -245,14 +245,13 @@ margin-left: 60px;
   }
   .followers-list button {
     font-size: 15px;
-    margin-left: 100px;
     background-color: #238636;
     border: 1px solid #2da042;
     border-radius: 8px;
     color:#fff;
     width: 70px;
     height: 30px;
-
+    margin-left: 40px;
     &:hover{
         cursor: pointer;
         background-color: #2da042;
