@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 import { getUsersByiD, requestUpdateProfile } from '../../API/Auth_calls';
 import { FormControl, InputLabel, MenuItem, Select, TextField, Snackbar, MuiAlert} from '@mui/material';
 
-
-
 export default function PersonalArea() {
   const [followers, setFollowers] = useState([]);
   const [followersUsers, setFollowersUsers] = useState([]);
@@ -28,6 +26,7 @@ export default function PersonalArea() {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
   const newPasswordAgain = useRef(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({
     userName: '',
     firstName: '',
@@ -38,7 +37,6 @@ export default function PersonalArea() {
     aboutMySelf: '',
     phoneNumber: '',
   });
-
 
   const [showPassword, setShow] = useState(false);
   const handleShow = () => {
@@ -85,6 +83,7 @@ export default function PersonalArea() {
   useEffect(() => {
       getFollowers();
   }, [followers, following]);
+
   const handleFollowButtonClick = (user) => {
     // Implement the desired functionality here
     // For example, you can show a message or perform an action
@@ -94,51 +93,50 @@ export default function PersonalArea() {
     // Logic for unfollowing the user goes here
     console.log(`Unfollow ${user.firstName} ${user.lastName}`);
   };
-
-    const changePassword = async () => {
+    const changePassword = () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     var isRegex = false;
     setCurrentPasswordMessage('');
     setNoEqualMessage('');
     console.log (currentPassword.current.value);
-      if (currentPassword.current.value === user.password) {
-        console.log('hhhh', user.password);
-
-        setCurrentPasswordMessage('');
-        if (newPassword.current.value === newPasswordAgain.current.value) {
-          if (newPassword.current.value === '') {
-            setMessagePass("Password cannot be empty.");
-            setMessage('');
-            isRegex = true;
-            // Check if the password is in the correct format
-          }else if (!newPassword.current.value.match(passRegex)) {
-            setMessagePass("Password must be at least 8 characters.");
-            setMessagePass1("At least one uppercase,");
-            setMessagePass2("lowercase and number.");
-            setMessage('');
-            isRegex = true;
-          } else{
-            setMessagePass("");
-            setMessagePass1("");
-            setMessagePass2("");
-          }
-          if (!isRegex){
-            try {
-              const result = await changePassword({user, newPassword});
-            } catch (error) {
-              console.error(error);
-            }
-          }
-        } else {
-          setNoEqualMessage('New password not match');
+    if (currentPassword.current.value === user.password) {
+    console.log('hhhh', user.password);
+      setCurrentPasswordMessage('');
+      if (newPassword.current.value === newPasswordAgain.current.value) {
+        if (newPassword.current.value === '') {
+          setMessagePass("Password cannot be empty.");
+          isRegex = true;
+          // Check if the password is in the correct format
+        }else if (!newPassword.current.value.match(passRegex)) {
+          setMessagePass("Password must be at least 8 characters.");
+          setMessagePass1("At least one uppercase,");
+          setMessagePass2("lowercase and number.");
+          isRegex = true;
+        } else{
+          setMessagePass("");
+          setMessagePass1("");
+          setMessagePass2("");
+        }
+        if (!isRegex){
+            sendChangePassword(user, newPassword.current.value);
         }
       } else {
-        setCurrentPasswordMessage('Current password not match');
+        setNoEqualMessage('New password not match');
       }
-  }
-  
-const [isEditing, setIsEditing] = useState(false);
+    } else {
+      setCurrentPasswordMessage('Current password not match');
+    }
+}
 
+const sendChangePassword = async (user, newPassword) => {
+  try {
+    const result = await requestUpdateProfile({ ...user, password: newPassword });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+  
 const handleChange = (e) => {
   const { name, value } = e.target;
   setEditedUser((prevUser) => ({
@@ -146,10 +144,6 @@ const handleChange = (e) => {
     [name]: value,
   }));
 };
-
-// const handleChangeYear = (event) => {
-//   setSchoolYear(event.target.value);
-// };
 
 const saveProfile = async () => {
   setIsEditing(false);
@@ -163,22 +157,6 @@ const saveProfile = async () => {
   }
 };
 
-
-
-const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-  
 
 const getSchoolYearLabel = (value) => {
   switch (value) {
@@ -204,13 +182,12 @@ const toggleEdit= () => {
   }
 };
 
-
-    const deleteAccount = () => {
-        // Implement the logic to delete the user account
-        // This can include API calls, removing data, etc.
-        // You can replace the placeholder implementation with your actual logic.
-        console.log('Deleting user account...');
-      };
+const deleteAccount = () => {
+    // Implement the logic to delete the user account
+    // This can include API calls, removing data, etc.
+    // You can replace the placeholder implementation with your actual logic.
+    console.log('Deleting user account...');
+  };
       
 
         
@@ -297,7 +274,7 @@ const toggleEdit= () => {
               <div className="panel-content_password">
                 <h2>Edit password</h2>
                 <p>Password must be at least 8 characters, At least one uppercase, lowercase, and number.</p>
-                <form onSubmit={saveProfile}>
+                <form >
                 <TextInputContainer>
                   <TextInput 
                     type={showPassword ? 'text' : 'password'} 
@@ -333,7 +310,7 @@ const toggleEdit= () => {
                   <p> Forgot password?&nbsp;
                     <Link to="/login/:fpass" className="forgot-link">Click Here</Link>
                   </p>
-                  <button className='saveButton' onClick={() => changePassword()}>
+                  <button type="button" className='saveButton' onClick={() => changePassword()}>
                     Save
                   </button>
                 </form>
