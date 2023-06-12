@@ -17,7 +17,9 @@ import {
   UserPicture,
   EditDeleteButton,
 } from './Home.style';
-import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
+import {
+   sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest , sendLikeRequest
+} from '../../API/Home_calls';
 import PopupMessage from './PopMessage';
 // import Navbar from '../Navbar/Navbar';
 // import { myUser } from '../Login/Login';
@@ -121,10 +123,12 @@ export default function Home() {
     }
   };
 
-  const handleLikePost = async (post_id) => {
+  const handleLikePost = async (postId) => {
     try {
-      const result = await sendLikeRequest({ postId: post_id, userId: auth._id });
-      setAuth(result.data); 
+      console.log('post_id: ', postId);
+      console.log('auth: ', JSON.parse(auth)._id);
+      const result = await sendLikeRequest( postId, JSON.parse(auth)._id );
+      // setAuth(result.data); 
     }catch(error) {
       console.error(error);
     }
@@ -173,7 +177,7 @@ export default function Home() {
               <UserDetails>
                 <UserPicture src={post.userID.picture} alt="User Profile" />
                 <div>
-                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;&emsp;&emsp;{post.userID._id === JSON.parse(auth)._id && (
+                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;&emsp;&emsp;{post.userID._id === JSON.parse(auth)._id && (
                     <PopupMessage onDelete={() => handleDeletePost(post._id)} onClose={handleClosePopup} onEdit={() => setEditingPostId(post._id)} />
                   )}
                 </div>

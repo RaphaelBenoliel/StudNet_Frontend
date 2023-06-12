@@ -46,9 +46,10 @@ export async function sendPutRequest(postId, updatedData) {
   return null;
 }
 
-export const sendLikeRequest = async (params) => {
+export const sendLikeRequest = async (postId, userId) => {
+  console.log('params: ', postId, userId);
   try {
-    const result = await axios.get(`${BASE_URL}liked`, params);
+    const result = await axios.post(`${BASE_URL}posts/liked`, { postId, userId });
     return result;
   } catch (error) {
     console.error(error);
