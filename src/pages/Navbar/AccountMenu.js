@@ -88,16 +88,12 @@ export default function AccountMenu({ auth, signOut }) {
           <Avatar />
           {JSON.parse(auth).firstName} {JSON.parse(auth).lastName}
         </MenuItem>
-        <MenuItem id="personal-area" onClick={handleClose}>
-          <Avatar />
-         Personal Area
-        </MenuItem>
         <Divider />
         <MenuItem id="personal-area" onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
+          Personal Area
         </MenuItem>
         <MenuItem onClick={signOut}>
           <ListItemIcon>
