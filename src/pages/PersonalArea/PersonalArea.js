@@ -316,6 +316,15 @@ const deleteAccount = async () => {
                         <Tab>
                             <p>Following</p>
                         </Tab>
+                        <Tab>
+                          <p>Posts Liked</p>
+                        </Tab>
+                        <Tab>
+                          <p>Posts Saved</p>
+                        </Tab>
+                        <Tab>
+                          <p>Statistics</p>
+                        </Tab>
                     </TabList>
                     <TabPanel>
             <div className="panel-content">
@@ -582,6 +591,29 @@ const deleteAccount = async () => {
                       </div>
                     </div>
                   </TabPanel>
+                  <TabPanel>
+                <div className="panel-content">
+                  <h2>Liked Posts</h2>
+                  <div className="like-post">
+                    
+                  </div>
+                </div>
+              </TabPanel><TabPanel>
+                <div className="panel-content">
+                  <h2>Saved Posts</h2>
+                  <div className="save-post">
+                    
+                  </div>
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="panel-content">
+                  <h2>Statistics</h2>
+                  <div className="statistic">
+                    
+                  </div>
+                </div>
+              </TabPanel>
                 </Tabs></>
             )}
         </div>
