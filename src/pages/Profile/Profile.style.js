@@ -31,7 +31,6 @@ export const Label = styled.h3`
     text-align: left;
     padding: 0;
 `;
-
 export const Label2 = styled.h3`
     color: #fff;
     font-size: 16px;

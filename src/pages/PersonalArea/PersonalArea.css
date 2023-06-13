@@ -111,6 +111,11 @@ font-size: 17px;
 margin-left: 55px;
 }
 
+.profileButton {
+    border-radius: 8px;
+
+}
+
 .panel-content_password h4 {
     font-size: 17px;
 }

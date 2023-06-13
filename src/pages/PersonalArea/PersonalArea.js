@@ -30,6 +30,9 @@ export default function PersonalArea() {
   const [savedPosts, setSavedPosts] = useState([]);
   const [statistics, setStatistics] = useState({});
   const [user, setUser] = useState(null);
+  const [messageUser, setMessageUser] = useState([]);
+  const [messageFirst, setMessageFirst] = useState([]);
+  const [messageLast, setMessageLast] = useState([]);
   const [messagePass, setMessagePass] = useState([]);
   const [messagePass1, setMessagePass1] = useState([]);
   const [messagePass2, setMessagePass2] = useState([]);
@@ -38,6 +41,9 @@ export default function PersonalArea() {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
   const newPasswordAgain = useRef(null);
+  const userName = useRef(null);
+  const firstName = useRef(null);
+  const lastName = useRef(null);
   const [profilePicture, setProfilePicture] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({
@@ -117,8 +123,6 @@ export default function PersonalArea() {
     console.log(`Unfollow ${user.firstName} ${user.lastName}`);
   };
 
-
-
     const changePassword = () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     var isRegex = false;
@@ -152,6 +156,41 @@ export default function PersonalArea() {
     }
 }
 
+const changeAccount = () => {
+  var nameRegex = /^[a-zA-Z]+$/;
+    var userNameRegex = /^[a-zA-Z0-9]+$/;
+    var isRegex = false;
+    setMessageUser('');
+    setMessageFirst('');
+    setMessageLast('');
+  if (userName.current.value === '') {
+    setMessageUser('Username cannot be empty.');
+    isRegex = true;
+  } else if (!userName.current.value.match(userNameRegex)) {
+    // Check if the usernName is in the correct format
+    setMessageUser('Username must be alphanumeric.');
+    isRegex = true;
+  }else setMessageUser('');
+  // Check if the first name is empty
+  if (firstName.current.value === '') {
+    setMessageFirst('First name cannot be empty.');
+    isRegex = true;
+  } else if (!firstName.current.value.match(nameRegex)) {
+  // Check if the first name is in the correct format
+    setMessageFirst('First name must be alphabetic.');
+    isRegex = true;
+  } else setMessageFirst('');
+  // Check if the last name is empty
+  if (lastName.current.value === '') {
+    setMessageLast('Last name cannot be empty.');
+    isRegex = true;
+  } else if (!lastName.current.value.match(nameRegex)) {
+  // Check if the last name is in the correct format
+    setMessageLast('Last name must be alphabetic.');
+    isRegex = true;
+  } else setMessageLast('');
+}
+
 const sendChangePassword = async (user, newPassword) => {
   try {
     localStorage.setItem('user', JSON.stringify({ ...user, password: newPassword }));
@@ -162,37 +201,42 @@ const sendChangePassword = async (user, newPassword) => {
 }
   
 const handleChange = (e) => {
-  const { name, value } = e.target;
-  setEditedUser((prevUser) => ({
-    ...prevUser,
-    [name]: value,
-  }));
+  const { name, value, files } = e.target;
+  if (name === "image") {
+    setProfilePicture(files[0]);
+  } else {
+    setEditedUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  }
 };
 
 const saveProfile = async () => {
   setIsEditing(false);
   setUser(editedUser);
   localStorage.setItem('user', JSON.stringify(editedUser));
-
   try {
     const formData = new FormData();
-    formData.append('profilePicture', profilePicture);
-
+    formData.append('image', profilePicture);
+    console.log('>>>>>1: ', profilePicture);
     if (profilePicture) {
       const uploadResult = await uploadProfilePicture(formData);
+      // console.log('>>>>> ', uploadResult.url);
       editedUser.picture = uploadResult.url;
+      localStorage.setItem('user', JSON.stringify(editedUser));
+      // navigate('/my-area');
     }
-
     const result = await requestUpdateProfile(editedUser);
     console.log(result);
   } catch (error) {
     console.error(error);
   }
 };
-
+const BASE_URL = 'http://localhost:5002/';
 const uploadProfilePicture = async (formData) => {
   try {
-    const response = await fetch('/api/upload', {
+    const response = await fetch(`${BASE_URL}api/upload`, {
       method: 'POST',
       body: formData,
     });
@@ -200,16 +244,13 @@ const uploadProfilePicture = async (formData) => {
     if (!response.ok) {
       throw new Error('Failed to upload profile picture');
     }
-
     const result = await response.json();
-    return result.url; // Assuming the response contains the URL of the uploaded picture
+    return result; // Assuming the response contains the URL of the uploaded picture
   } catch (error) {
     console.error(error);
     throw new Error('Failed to upload profile picture');
   }
 };
-
-
 
 const getSchoolYearLabel = (value) => {
   switch (value) {
@@ -231,6 +272,7 @@ const getSchoolYearLabel = (value) => {
 const toggleEdit= () => {
   setIsEditing(!isEditing);
   if (isEditing) {
+    // changeAccount();
     saveProfile();
   }
 };
@@ -247,7 +289,7 @@ const deleteAccount = async () => {
     }
     localStorage.removeItem('user');
     console.log('Deleting user account...');
-  };
+};
         
     return (
         <div className="App">
@@ -274,6 +316,15 @@ const deleteAccount = async () => {
                         <Tab>
                             <p>Following</p>
                         </Tab>
+                        <Tab>
+                          <p>Posts Liked</p>
+                        </Tab>
+                        <Tab>
+                          <p>Posts Saved</p>
+                        </Tab>
+                        <Tab>
+                          <p>Statistics</p>
+                        </Tab>
                     </TabList>
                     <TabPanel>
             <div className="panel-content">
@@ -286,6 +337,7 @@ const deleteAccount = async () => {
                       <TextInput
                         type="text"
                         name="userName"
+                        ref={userName} 
                         value={editedUser.userName}
                         onChange={handleChange}
                         autoComplete="userName" />
@@ -299,6 +351,7 @@ const deleteAccount = async () => {
                       <TextInput
                         type="text"
                         name="firstName"
+                        ref={firstName} 
                         value={editedUser.firstName}
                         onChange={handleChange}
                         autoComplete="firstName" />
@@ -314,6 +367,7 @@ const deleteAccount = async () => {
                         name="lastName"
                         value={editedUser.lastName}
                         onChange={handleChange}
+                        ref={lastName}
                         autoComplete="lastName" />
                     ) : (
                       editedUser.lastName
@@ -346,7 +400,6 @@ const deleteAccount = async () => {
                           <Button onClick={deleteAccount} style={{ color: 'green' }}>Delete Account</Button>
                         </DialogActions>
                       </Dialog>
-                   
                 </form>
               </div>
             </div>
@@ -404,7 +457,7 @@ const deleteAccount = async () => {
     Profile Picture:{' '}
     {isEditing ? (
       <TextInput
-      name="picture"
+      name="image"
         type="file"
         accept="image/*"
         onChange={handleChange}
@@ -528,7 +581,7 @@ const deleteAccount = async () => {
                     <div className="panel-content-followers">
                       <h2>My Following</h2>
                       <div className="followers-list">
-                        {followingUsers.map((user) => (
+                        {followingUsers.map(user => (
                           <div key={user.email}>
                             <img src={user.picture} alt={user.firstName} />
                             <p>{`${user.firstName} ${user.lastName}`}</p>
@@ -538,6 +591,29 @@ const deleteAccount = async () => {
                       </div>
                     </div>
                   </TabPanel>
+                  <TabPanel>
+                <div className="panel-content">
+                  <h2>Liked Posts</h2>
+                  <div className="like-post">
+                    
+                  </div>
+                </div>
+              </TabPanel><TabPanel>
+                <div className="panel-content">
+                  <h2>Saved Posts</h2>
+                  <div className="save-post">
+                    
+                  </div>
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="panel-content">
+                  <h2>Statistics</h2>
+                  <div className="statistic">
+                    
+                  </div>
+                </div>
+              </TabPanel>
                 </Tabs></>
             )}
         </div>
