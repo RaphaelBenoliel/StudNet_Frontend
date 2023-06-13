@@ -38,7 +38,7 @@ export default function PersonalArea() {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
   const newPasswordAgain = useRef(null);
-  const [profilePicture, setProfilePicture] = useState(null);
+  const [profilePicture, setProfilePicture] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({
     userName: '',
@@ -49,7 +49,7 @@ export default function PersonalArea() {
     schoolYear: '',
     aboutMySelf: '',
     phoneNumber: '',
-    profilePicture: '',
+    picture: '',
   });
   const [open, setOpen] = useState(false);
 
@@ -64,11 +64,6 @@ export default function PersonalArea() {
   const [showPassword, setShow] = useState(false);
   const handleShow = () => {
     setShow(!showPassword);
-  };
-
-  const handleProfilePictureChange = (event) => {
-    const file = event.target.files[0];
-    setProfilePicture(file);
   };
    
   useEffect(() => {
@@ -171,6 +166,26 @@ const handleChange = (e) => {
   }));
 };
 
+const uploadProfilePicture = async (formData) => {
+  try {
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to upload profile picture');
+    }
+
+    const result = await response.json();
+    return result.url; // Assuming the response contains the URL of the uploaded picture
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to upload profile picture');
+  }
+};
+
+
 const saveProfile = async () => {
   setIsEditing(false);
   setUser(editedUser);
@@ -179,6 +194,7 @@ const saveProfile = async () => {
     const formData = new FormData();
     formData.append('profilePicture', profilePicture);
   if (profilePicture) {
+    // Upload the profile picture
     const uploadResult = await uploadProfilePicture(formData);
     editedUser.picture = uploadResult.url;
       }
@@ -187,6 +203,11 @@ const saveProfile = async () => {
     } catch (error) {
       console.error(error);
     }
+};
+
+const handleProfilePictureChange = (event) => {
+  const file = event.target.files[0];
+  setProfilePicture(file);
 };
 
 
@@ -384,11 +405,13 @@ const deleteAccount = async () => {
     Profile Picture:{' '}
     {isEditing ? (
       <input
+      name='picture'
         type="file"
         accept="image/*"
         onChange={handleProfilePictureChange}
       />
     ) : (
+      editedUser.picture,
       <img src={user.picture} alt="User Profile" />
     )}
   </p>
