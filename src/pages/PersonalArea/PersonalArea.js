@@ -404,7 +404,7 @@ const deleteAccount = async () => {
   <p>
     Profile Picture:{' '}
     {isEditing ? (
-      <input
+      <TextInput
       name='picture'
         type="file"
         accept="image/*"
