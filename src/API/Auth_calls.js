@@ -72,6 +72,18 @@ export const getUsersByiD = async (params) => {
   return null;
 };
 
+export const getUserByID = async (params) => {
+  try {
+    const result = await axios.post(`${BASE_URL}getuserbyid`, params);
+    if (result.data.success) {
+      return result.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
 export const requestUpdateProfile = async (params) => {
   try {
     const result = await axios.put(`${BASE_URL}update`, params);

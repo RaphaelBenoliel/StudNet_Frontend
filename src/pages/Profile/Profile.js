@@ -22,7 +22,7 @@ import {
 } from './Profile.style';
 import { useNavigate } from 'react-router-dom';
 import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
-import { getUsersByiD, requestFollow, requestFollowersList, requestFollowingList, requestUnfollow }  from '../../API/Auth_calls';
+import { getUserByID, requestFollow, requestFollowersList, requestFollowingList, requestUnfollow }  from '../../API/Auth_calls';
 import { isVisible } from '@testing-library/user-event/dist/utils';
 import PopupMessage from '../Home/PopMessage';
 
@@ -60,11 +60,12 @@ export default function Profile() {
       }
       else
       {
-        const getUserByID = async () => {
+        const getUserById = async () => {
           try {
-            const result = await getUsersByiD({users: userId});
-            //console.log('1111111111', result.users[0]);
-            const tmp = result.users[0];
+            const result = await getUserByID({users: userId});
+            //console.log('111111', result.users.data[0]);
+            //const tmp = result.users[0];
+            const tmp = result.users.data[0];
             try {
               var jsonData = JSON.stringify(eval(tmp));
               if (JSON.parse(jsonData)) {
@@ -79,7 +80,7 @@ export default function Profile() {
             console.error(error);
           }
         };
-        getUserByID(userId);
+        getUserById(userId);
       }
     }
   }, []);
@@ -267,18 +268,27 @@ navigate('/my-area')
       <table>
         <td>
           <Title>
-            {/* <UserPictureBig src={JSON.parse(auth).picture} alt="User Profile" /> */} {JSON.parse(auth).userName} 
+            <UserPictureBig src={JSON.parse(auth).picture} alt="User Profile" /> {JSON.parse(auth).userName} 
             <br/>
             {isFollowBtnVisible && <PostButton onClick={() => handleFollowBtn()}>{followBtnContent}</PostButton>}
             {!isFollowBtnVisible && <PostButton onClick={() => retunArea()}>personal area</PostButton>}
 
             {/* {!isFollowBtnVisible &&<button onClick={retunArea} style={{backgroundColor: 'green', color: 'white',   borderRadius: '25px', border: 'none', cursor: 'pointer', fontSize: '17px', padding: '10px'}}>personal area</button>} */}
             <br/>
-            <Label>About:</Label>
             <Label2>{followersCount} Followers</Label2>
             <Label2>{followingCount} Following</Label2>
-            <Label2>{JSON.parse(auth).firstName} {JSON.parse(auth).lastName}</Label2>
-            <Label2>{JSON.parse(auth).email}</Label2>
+            <br/>
+            <Label>About:</Label>
+            <Label2>Name: {JSON.parse(auth).firstName} {JSON.parse(auth).lastName}</Label2>
+            <Label2>Email: {JSON.parse(auth).email}</Label2>
+            <Label2>Country: {JSON.parse(auth).country}</Label2>
+            <Label2>Study subject: {JSON.parse(auth).studySubject}</Label2>
+            <Label2>School year: {JSON.parse(auth).schoolYear}</Label2>
+            <Label2>Phone number: {JSON.parse(auth).phoneNumber}</Label2>
+            <Label2>About my self: {JSON.parse(auth).aboutMySelf}</Label2>
+
+
+
           </Title>
         </td>
         <TD></TD>
