@@ -164,36 +164,38 @@ export default function PersonalArea() {
 const changeAccount = () => {
   var nameRegex = /^[a-zA-Z]+$/;
     var userNameRegex = /^[a-zA-Z0-9]+$/;
-   
+   var isRegex=false;
     setMessageUser('');
     setMessageFirst('');
     setMessageLast('');
   if (userName.current.value === '') {
     setMessageUser('Username cannot be empty.');
-    return false;
+    isRegex= false;
   } else if (!userName.current.value.match(userNameRegex)) {
     // Check if the usernName is in the correct format
     setMessageUser('Username must be alphanumeric.');
-    isRegex = true;
+    isRegex= false;
   }else setMessageUser('');
   // Check if the first name is empty
   if (firstName.current.value === '') {
     setMessageFirst('First name cannot be empty.');
-    isRegex = true;
+    isRegex= false;
   } else if (!firstName.current.value.match(nameRegex)) {
   // Check if the first name is in the correct format
     setMessageFirst('First name must be alphabetic.');
-    isRegex = true;
+    isRegex= false;
   } else setMessageFirst('');
   // Check if the last name is empty
   if (lastName.current.value === '') {
     setMessageLast('Last name cannot be empty.');
-    isRegex = true;
+    isRegex= false;
   } else if (!lastName.current.value.match(nameRegex)) {
   // Check if the last name is in the correct format
     setMessageLast('Last name must be alphabetic.');
-    isRegex = true;
+    isRegex= false;
   } else setMessageLast('');
+  if(isRegex === false) return false;
+  else return true;
 }
 
 const sendChangePassword = async (user, newPassword) => {
@@ -277,7 +279,7 @@ const getSchoolYearLabel = (value) => {
 const toggleEdit= () => {
   setIsEditing(!isEditing);
   if (isEditing) {
-    if ( changeAccount()===true) saveProfile();
+    if ( changeAccount() === true) saveProfile();
   }
 };
 
@@ -345,10 +347,12 @@ const deleteAccount = async () => {
                         value={editedUser.userName}
                         onChange={handleChange}
                         autoComplete="userName" />
+                        
                     ) : (
-                      editedUser.userName,
-                      <p>{messageUser}</p>
+                      editedUser.userName
                     )}
+                    
+                        <p className='error-message'>{messageUser}</p>
                   </p>
                   <p>
                     First Name: {' '}
@@ -364,6 +368,8 @@ const deleteAccount = async () => {
                     ) : (
                       editedUser.firstName
                     )}
+                    <p className='error-message'>{messageFirst}</p>
+
                   </p>
                   <p>
                     Last Name: {' '}
@@ -378,6 +384,7 @@ const deleteAccount = async () => {
                     ) : (
                       editedUser.lastName
                     )}
+                       <p className='error-message'>{messageLast}</p>
                   </p>
                   <p>
                     <button type="button" className='accountButton' onClick={toggleEdit}>

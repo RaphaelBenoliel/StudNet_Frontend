@@ -175,6 +175,11 @@ margin-left: 55px;
     border: 1px solid green;
 
 }
+
+.error-message {
+    color: red;
+}
+
 .saveButton {
     font-size: 17px;
     background-color: #238636;
