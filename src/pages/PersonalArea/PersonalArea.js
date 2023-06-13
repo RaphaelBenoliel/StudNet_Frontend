@@ -201,37 +201,42 @@ const sendChangePassword = async (user, newPassword) => {
 }
   
 const handleChange = (e) => {
-  const { name, value } = e.target;
-  setEditedUser((prevUser) => ({
-    ...prevUser,
-    [name]: value,
-  }));
+  const { name, value, files } = e.target;
+  if (name === "image") {
+    setProfilePicture(files[0]);
+  } else {
+    setEditedUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  }
 };
 
 const saveProfile = async () => {
   setIsEditing(false);
   setUser(editedUser);
   localStorage.setItem('user', JSON.stringify(editedUser));
-
   try {
     const formData = new FormData();
-    formData.append('profilePicture', profilePicture);
-
+    formData.append('image', profilePicture);
+    console.log('>>>>>1: ', profilePicture);
     if (profilePicture) {
       const uploadResult = await uploadProfilePicture(formData);
+      // console.log('>>>>> ', uploadResult.url);
       editedUser.picture = uploadResult.url;
+      localStorage.setItem('user', JSON.stringify(editedUser));
+      // navigate('/my-area');
     }
-
     const result = await requestUpdateProfile(editedUser);
     console.log(result);
   } catch (error) {
     console.error(error);
   }
 };
-
+const BASE_URL = 'http://localhost:5002/';
 const uploadProfilePicture = async (formData) => {
   try {
-    const response = await fetch('/api/upload', {
+    const response = await fetch(`${BASE_URL}api/upload`, {
       method: 'POST',
       body: formData,
     });
@@ -239,15 +244,13 @@ const uploadProfilePicture = async (formData) => {
     if (!response.ok) {
       throw new Error('Failed to upload profile picture');
     }
-
     const result = await response.json();
-    return result.url; // Assuming the response contains the URL of the uploaded picture
+    return result; // Assuming the response contains the URL of the uploaded picture
   } catch (error) {
     console.error(error);
     throw new Error('Failed to upload profile picture');
   }
 };
-
 
 const getSchoolYearLabel = (value) => {
   switch (value) {
@@ -445,7 +448,7 @@ const deleteAccount = async () => {
     Profile Picture:{' '}
     {isEditing ? (
       <TextInput
-      name="picture"
+      name="image"
         type="file"
         accept="image/*"
         onChange={handleChange}
