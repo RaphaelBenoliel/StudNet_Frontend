@@ -21,7 +21,9 @@ export default function AccountMenu({ auth, signOut }) {
     if (id === 'personal-area') {
       navigate('/my-area');
     }
-}
+    if (id === 'profile') {
+      navigate('/profile');
+    }}
   };
 
   return (
@@ -82,7 +84,7 @@ export default function AccountMenu({ auth, signOut }) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem id="profile" onClick={handleClose}>
           <Avatar />
           {JSON.parse(auth).firstName} {JSON.parse(auth).lastName}
         </MenuItem>
@@ -91,13 +93,7 @@ export default function AccountMenu({ auth, signOut }) {
          Personal Area
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem id="personal-area" onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>

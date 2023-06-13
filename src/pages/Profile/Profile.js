@@ -19,6 +19,7 @@ import {
   Label,
   Label2
 } from './Profile.style';
+import { useNavigate } from 'react-router-dom';
 import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
 import { getUsersByiD, requestFollow, requestFollowingList, requestUnfollow }  from '../../API/Auth_calls';
 import { isVisible } from '@testing-library/user-event/dist/utils';
@@ -34,6 +35,8 @@ export default function Profile() {
   const [newPostContent, setNewPostContent] = useState('');
   const [editingPostId, setEditingPostId] = useState(null);
   const [updatedPostContent, setUpdatedPostContent] = useState(''); 
+  const navigate = useNavigate();
+
   var urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get('id');
   // console.log(userId);
@@ -228,6 +231,10 @@ export default function Profile() {
       console.error(error);
     }
   };
+
+  const retunArea = () => {
+navigate('/my-area')
+  }
   return (
 <Wrapper>
   <TextContainer>
@@ -239,6 +246,7 @@ export default function Profile() {
             <UserPictureBig src={JSON.parse(auth).picture} alt="User Profile" /> {JSON.parse(auth).userName}
             <br/>
             {isFollowBtnVisible && <PostButton onClick={() => handleFollowBtn()}>{followBtnContent}</PostButton>}
+            <button onClick={retunArea} style={{backgroundColor: 'green', color: 'white',   borderRadius: '25px', border: 'none', cursor: 'pointer', fontSize: '17px', padding: '10px'}}>personal area</button>
             <br/>
             <Label>About:</Label>
             <Label2>{JSON.parse(auth).firstName} {JSON.parse(auth).lastName}</Label2>
