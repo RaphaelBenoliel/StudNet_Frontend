@@ -17,7 +17,8 @@ import {
   UserPictureBig,
   Button,
   Label,
-  Label2
+  Label2,
+  TD
 } from './Profile.style';
 import { useNavigate } from 'react-router-dom';
 import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
@@ -246,13 +247,14 @@ navigate('/my-area')
             <UserPictureBig src={JSON.parse(auth).picture} alt="User Profile" /> {JSON.parse(auth).userName}
             <br/>
             {isFollowBtnVisible && <PostButton onClick={() => handleFollowBtn()}>{followBtnContent}</PostButton>}
-            <button onClick={retunArea} style={{backgroundColor: 'green', color: 'white',   borderRadius: '25px', border: 'none', cursor: 'pointer', fontSize: '17px', padding: '10px'}}>personal area</button>
+            {!isFollowBtnVisible &&<button onClick={retunArea} style={{backgroundColor: 'green', color: 'white',   borderRadius: '25px', border: 'none', cursor: 'pointer', fontSize: '17px', padding: '10px'}}>personal area</button>}
             <br/>
             <Label>About:</Label>
             <Label2>{JSON.parse(auth).firstName} {JSON.parse(auth).lastName}</Label2>
             <Label2>{JSON.parse(auth).email}</Label2>
           </Title>
         </td>
+        <TD></TD>
         <td>
         <Post style={{ visibility: isNewPostVisible ? 'visible' : 'hidden' }}>
           <CreatePostContainer>
