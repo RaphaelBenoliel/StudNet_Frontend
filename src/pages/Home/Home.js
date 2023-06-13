@@ -58,12 +58,10 @@ export default function Home() {
 
         const user_ID = JSON.parse(localStorage.getItem('user'))._id;
         if(user_ID === null) return;
-        //console.log('!!!!!!!!!!1', user_ID);
-
+      
         const result = await requestFollowingList({ user_ID });
         if (!result) return;
         result.push(user_ID);
-        console.log('!!!!!!!!!!123232323', result);
         setFollowingList(result);
 
       } catch (error) {
@@ -124,21 +122,7 @@ export default function Home() {
       localStorage.setItem('posts', JSON.stringify(result.posts));
       setAuth(JSON.stringify(result.user));
       setPostData(result.posts);
-      // const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
-      // // Parse the auth object from the string stored in local storage
-      // const parsedAuth = JSON.parse(auth);
-      // // Initialize auth.posts as an array if it's not already
-      // if (!Array.isArray(parsedAuth.posts)) {
-      //   parsedAuth.posts = [];
-      // }
-      // // Update the auth.posts array with the new posts
-      // parsedAuth.posts.push(...updatedPosts);
-      // // Stringify the updated auth object before storing it back in local storage
-      // const updatedAuth = JSON.stringify(parsedAuth);
-      // localStorage.setItem('user', updatedAuth);
-      // setPostData([...postData, ...updatedPosts]);
-      // localStorage.setItem('posts', JSON.stringify([...postData, ...updatedPosts]));
-      // // Reset the new post contents
+
       setNewPostContent('');
       history('/');
     } catch (error) {
@@ -263,7 +247,7 @@ export default function Home() {
   ) : (
     <EditDeleteButton onClick={() => handleLikePost(post._id)}>Like</EditDeleteButton>
   )}
-  <EditDeleteButton onClick={() => setCommentContent(post._id)}>Comment</EditDeleteButton>
+  <EditDeleteButton onClick={() => setCommentContent(post._id)}>Save</EditDeleteButton>
   <EditDeleteButton onClick={() => setShareContent(post._id)}>Share</EditDeleteButton>
 </div>
                     </>

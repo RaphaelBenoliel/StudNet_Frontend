@@ -72,7 +72,7 @@ export default function Search() {
 
   const handleItemClick = (user) => {
     setSearchText(`${user.firstName} ${user.lastName}`);
-    console.log('$$$$$$', user._id);
+    // console.log('$$$$$$', user._id);
     var url = '/profile?id=' + user._id;
     navigate(url);
     setShowDropdown(false);

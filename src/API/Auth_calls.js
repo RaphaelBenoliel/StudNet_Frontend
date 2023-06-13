@@ -5,8 +5,8 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5002/';
-// const BASE_URL = 'https://studnet.onrender.com/';
+// const BASE_URL = 'http://localhost:5002/';
+const BASE_URL = 'https://studnet.onrender.com/';
 export const sendLoginRequest = async (params, setMessage) => {
   setMessage('');
   try {
@@ -98,7 +98,6 @@ export const requestUpdateProfile = async (params) => {
 
 export const requestDeleteProfile = async (params) => {
   try {
-    console.log('params: ', params);
     const result = await axios.put(`${BASE_URL}delete`, params);
     if (result.data.success) {
       return result.data.data;
@@ -111,7 +110,6 @@ export const requestDeleteProfile = async (params) => {
 
 export const requestFollow = async (params) => {
   try {
-    console.log('params: ', params);
     const result = await axios.post(`${BASE_URL}follow`, params);
     if (result.data.success) {
       return result.data.data;
@@ -124,7 +122,6 @@ export const requestFollow = async (params) => {
 
 export const requestUnfollow = async (params) => {
   try {
-    console.log('params: ', params);
     const result = await axios.post(`${BASE_URL}unfollow`, params);
     if (result.data.success) {
       return result.data.data;
@@ -137,7 +134,6 @@ export const requestUnfollow = async (params) => {
 
 export const requestFollowingList = async (params) => {
   try {
-    console.log('params: ', params);
     const result = await axios.post(`${BASE_URL}getFollowing`, params);
     if (result.data.success) {
       return result.data.data;
@@ -150,7 +146,6 @@ export const requestFollowingList = async (params) => {
 
 export const requestFollowersList = async (params) => {
   try {
-    console.log('params: ', params);
     const result = await axios.post(`${BASE_URL}getFollowers`, params);
     if (result.data.success) {
       return result.data.data;

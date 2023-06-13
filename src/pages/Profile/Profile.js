@@ -121,7 +121,7 @@ export default function Profile() {
           setNewPostVisibility(false);
 
           const user_ID = loggedUserID;
-          console.log('!!!!!!!!!!1', user_ID);
+          // console.log('!!!!!!!!!!1', user_ID);
 
           const result = await requestFollowingList({ user_ID });
           if (!result) return;
@@ -147,9 +147,8 @@ export default function Profile() {
     const getFollowingFollowersCounts = async () => {
       try {
           const user_ID = authID;
-          console.log('!!!!!!!!!!2', authID);
-          console.log('!!!!!!!!!!3', user_ID);
-
+          // console.log('!!!!!!!!!!2', authID);
+          // console.log('!!!!!!!!!!3', user_ID);
           const result2 = await requestFollowingList({ user_ID });
           if (!result2) return;
           const result3 = await requestFollowersList({ user_ID });
@@ -239,7 +238,7 @@ export default function Profile() {
       if(isFollowing){
         //...
         const result = await requestUnfollow({ user1_ID , user2_ID });
-        console.log('!!!!!!!!!!!1', result);
+        // console.log('!!!!!!!!!!!1', result);
         setFollowBtnContent('follow');
         setFollowingState(false);
         setFollowersCount(followersCount - 1);
@@ -247,7 +246,7 @@ export default function Profile() {
       else{
         //...
         const result = await requestFollow({ user1_ID , user2_ID });
-        console.log('!!!!!!!!!!!2', result);
+        // console.log('!!!!!!!!!!!2', result);
         setFollowBtnContent('unfollow');
         setFollowingState(true);
         setFollowersCount(followersCount + 1);
