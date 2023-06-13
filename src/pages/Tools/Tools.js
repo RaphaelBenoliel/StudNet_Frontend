@@ -27,6 +27,8 @@ export default function Tools() {
       <br />
       <br />
       <br />
+      <br />
+      <br />
       <STitle1>General</STitle1>
       <br />
       <a href="https://openai.com/blog/chatgpt">
