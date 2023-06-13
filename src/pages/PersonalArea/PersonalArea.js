@@ -38,6 +38,7 @@ export default function PersonalArea() {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
   const newPasswordAgain = useRef(null);
+  const [profilePicture, setProfilePicture] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({
     userName: '',
@@ -48,6 +49,7 @@ export default function PersonalArea() {
     schoolYear: '',
     aboutMySelf: '',
     phoneNumber: '',
+    profilePicture: '',
   });
   const [open, setOpen] = useState(false);
 
@@ -62,6 +64,11 @@ export default function PersonalArea() {
   const [showPassword, setShow] = useState(false);
   const handleShow = () => {
     setShow(!showPassword);
+  };
+
+  const handleProfilePictureChange = (event) => {
+    const file = event.target.files[0];
+    setProfilePicture(file);
   };
    
   useEffect(() => {
@@ -169,11 +176,17 @@ const saveProfile = async () => {
   setUser(editedUser);
   localStorage.setItem('user', JSON.stringify(editedUser));
   try {
-    const result = await requestUpdateProfile(editedUser);
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
+    const formData = new FormData();
+    formData.append('profilePicture', profilePicture);
+  if (profilePicture) {
+    const uploadResult = await uploadProfilePicture(formData);
+    editedUser.picture = uploadResult.url;
+      }
+      const result = await requestUpdateProfile(editedUser);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
 };
 
 
@@ -291,7 +304,7 @@ const deleteAccount = async () => {
                     </button>
                   </p>
                 
-                      <Button variant="outlined" onClick={handleClickOpen} style={{ color: 'green', border: '1px solid #2da042'}}>
+                      <Button variant="outlined" onClick={handleClickOpen} style={{ color: 'red', border: '1px solid red'}}>
                         Delete My Account
                       </Button>
                       <Dialog
@@ -309,7 +322,7 @@ const deleteAccount = async () => {
                         </DialogContent>
                         <DialogActions>
                           <Button onClick={handleClose} style={{ color: 'green' }}>Cancel</Button>
-                          <Button onClick={deleteAccount} style={{ color: 'green' }}>Delete Account</Button>
+                          <Button onClick={deleteAccount} style={{ color: 'red' }}>Delete Account</Button>
                         </DialogActions>
                       </Dialog>
                    
@@ -366,6 +379,19 @@ const deleteAccount = async () => {
             <TabPanel>
               <div className="panel-content">
                 <h2>Edit Personal Details</h2>
+                
+  <p>
+    Profile Picture:{' '}
+    {isEditing ? (
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleProfilePictureChange}
+      />
+    ) : (
+      <img src={user.picture} alt="User Profile" />
+    )}
+  </p>
                 <p>
                     Country: {' '}
                     {isEditing ? (

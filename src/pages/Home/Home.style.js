@@ -108,6 +108,20 @@ export const PostButton = styled.button`
   cursor: pointer;
 `;
 
+export const CancelButton = styled.button`
+padding: 5px;
+/* margin-right: 10px; */
+background-color: rgba(200, 200, 200, 0.3);
+color: #fff;
+border-radius: 15px;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-size: 15px;
+border: none;
+cursor: pointer;
+margin-top: -28px;
+margin-left: 50px;
+`;
+
 export const EditDeleteButton = styled.button`
   padding: 5px;
   /* margin-right: 10px; */

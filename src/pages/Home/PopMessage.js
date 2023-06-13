@@ -22,10 +22,10 @@ export default function PopupMessage({ onClose, onDelete, onEdit }) {
     onClose(); // Close the popup
   };
   const handleEdit = () => {
+    onClose(); // Close the popup
     if (typeof onEdit === 'function') {
       onEdit(); // Call the delete function
     }
-    onClose(); // Close the popup
   };
 
   return (

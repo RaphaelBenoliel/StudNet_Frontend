@@ -16,10 +16,13 @@ import {
   UserDetails,
   UserPicture,
   EditDeleteButton,
+  CancelButton,
 } from './Home.style';
 import {
    sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest , sendLikeRequest
 } from '../../API/Home_calls';
+import { TextField} from '@mui/material';
+
 import PopupMessage from './PopMessage';
 // import Navbar from '../Navbar/Navbar';
 // import { myUser } from '../Login/Login';
@@ -73,6 +76,8 @@ export default function Home() {
     setShowPopup(false);
   };
 
+
+
   const cleanDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString();
@@ -113,6 +118,12 @@ export default function Home() {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const [showInputText, setShowInputText] = useState(true);
+
+  const handleCancelClick = () => {
+    setShowInputText(false);
   };
 
   const handleDeletePost = async (postId) => {
@@ -184,27 +195,36 @@ export default function Home() {
                 <UserPicture src={post.userID.picture} alt="User Profile" />
                 <div>
                   {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;&emsp;&emsp;{post.userID._id === JSON.parse(auth)._id && (
-                    <PopupMessage onDelete={() => handleDeletePost(post._id)} onClose={handleClosePopup} onEdit={() => setEditingPostId(post._id)} />
+                    <PopupMessage onClose={handleClosePopup} onDelete={() => handleDeletePost(post._id)} onEdit={() => setEditingPostId(post._id)} />
                   )}
                 </div>
               </UserDetails>
               {editingPostId === post._id ? (
-                <>
-                  <input
-                    type="text"
-                    value={editingPostId === post._id ? updatedPostContent : post.content}
-                    onChange={(e) => {
-                      if (editingPostId === post._id) {
-                        setUpdatedPostContent(e.target.value);
-                      } else {
-                        setNewPostContent(e.target.value);
-                      }
-                    }}
-                  />
+                <>                  
+                <TextField
+                      sx={{ backgroundColor: 'rgba(200, 200, 200, 0.3)',
+                         width: '450px',
+                         margin: '10px',
+                         borderRadius: '8px',
+                         border: '1px solid #ccc',
+                      '& .MuiInputBase-input': {
+                        color: 'white',
+                      },}}
+                        type="text"
+                        value={editingPostId === post._id ? updatedPostContent : post.content}
+                        onChange={(e) => {
+                          if (editingPostId === post._id) {
+                            setUpdatedPostContent(e.target.value);
+                          } else {
+                            setNewPostContent(e.target.value);
+                          }
+                        }}                        
+                        multiline
+                        />
                   {post.userID._id === JSON.parse(auth)._id && (
                     <><EditDeleteButton onClick={() => handleUpdatePost(post._id, updatedPostContent)}>
                       Post
-                    </EditDeleteButton><EditDeleteButton onClick={() => handleClosePopup}>Cancel</EditDeleteButton></>
+                    </EditDeleteButton><CancelButton onClick={() => handleCancelClick}>Cancel</CancelButton></>
                   )}
                 </>
               ) : (
