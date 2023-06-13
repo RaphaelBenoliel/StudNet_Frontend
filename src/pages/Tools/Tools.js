@@ -27,7 +27,7 @@ export default function Tools() {
       <br />
       <br />
       <br />
-      <Title>General</Title>
+      <STitle1>General</STitle1>
       <br />
       <a href="https://openai.com/blog/chatgpt">
       <img src={ChatGpt} alt="ChatGpt" title="Chatbot GPT (Generative Pre-trained Transformer) is a language model developed by OpenAI. It is designed to generate human-like responses in conversational contexts. GPT-based models, such as ChatGPT, utilize deep learning techniques to understand and generate human-like text based on the input received." style={{ width: 100, height: 100, margin: 30 }} />
@@ -48,7 +48,7 @@ export default function Tools() {
       <br />
       <br />
       <br />
-      <Title>Math</Title>
+      <STitle1>Math</STitle1>
       <br />
       <a href="https://he.symbolab.com/">
       <img src={Symbolab} alt="Symbolab" title="Symbolab is an advanced math education tool. It allows users to learn, practice and discover math topics using mathematical symbols and scientific notations as well as text. Symbolab provides automated step by step solutions to algebraic, trigonometric and calculus topics covering from middle school through college. Symbolab offers a wealth of smart calculators including: equations, simultaneous equations, inequalities, integrals, derivatives, limits , tangent line, trigonometric equations, functions and more. The stated goal of the site is to make scientific content universally accessible by expanding the searchable data space onto scientific notations, expressions, equations and formulas. This is done by applying proprietary machine learning algorithms in order to understand the meaning and context of the queries. Symbolab, making math simpler." style={{ width: 100, height: 100, margin: 20 }} />
@@ -63,7 +63,7 @@ export default function Tools() {
     <br />
     <br />
     <br />
-    <Title>Software</Title>    <br />
+    <STitle1>Software</STitle1>    <br />
     <a href="https://stackoverflow.com/">
       <img src={StackOverFlow} alt="StackOverFlow" title="Stack Overflow is a popular question and answer website that focuses on programming and software development topics. It serves as a community-driven platform where developers can ask questions, provide answers, and engage in discussions related to programming, coding, and technology." style={{ width: 100, height: 100, margin: 20 }} />
     </a>
@@ -89,7 +89,7 @@ export default function Tools() {
     <br />
     <br />
     <br />
-    <Title>Online learning in groups</Title>    <br />
+    <STitle1>Online learning in groups</STitle1>    <br />
     <a href="https://zoom.us/">
       <img src={Zoom} alt="Zoom" title="Zoom is a popular video conferencing and collaboration platform that allows users to conduct online meetings, webinars, and virtual events. It provides a range of features and tools for remote communication and collaboration." style={{ width: 100, height: 100, margin: 30 }} />
       </a>
