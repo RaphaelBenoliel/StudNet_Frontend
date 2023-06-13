@@ -116,6 +116,9 @@ export default function PersonalArea() {
     // Logic for unfollowing the user goes here
     console.log(`Unfollow ${user.firstName} ${user.lastName}`);
   };
+
+
+
     const changePassword = () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     var isRegex = false;
@@ -166,6 +169,27 @@ const handleChange = (e) => {
   }));
 };
 
+const saveProfile = async () => {
+  setIsEditing(false);
+  setUser(editedUser);
+  localStorage.setItem('user', JSON.stringify(editedUser));
+
+  try {
+    const formData = new FormData();
+    formData.append('profilePicture', profilePicture);
+
+    if (profilePicture) {
+      const uploadResult = await uploadProfilePicture(formData);
+      editedUser.picture = uploadResult.url;
+    }
+
+    const result = await requestUpdateProfile(editedUser);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const uploadProfilePicture = async (formData) => {
   try {
     const response = await fetch('/api/upload', {
@@ -185,30 +209,6 @@ const uploadProfilePicture = async (formData) => {
   }
 };
 
-
-const saveProfile = async () => {
-  setIsEditing(false);
-  setUser(editedUser);
-  localStorage.setItem('user', JSON.stringify(editedUser));
-  try {
-    const formData = new FormData();
-    formData.append('profilePicture', profilePicture);
-  if (profilePicture) {
-    // Upload the profile picture
-    const uploadResult = await uploadProfilePicture(formData);
-    editedUser.picture = uploadResult.url;
-      }
-      const result = await requestUpdateProfile(editedUser);
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
-};
-
-const handleProfilePictureChange = (event) => {
-  const file = event.target.files[0];
-  setProfilePicture(file);
-};
 
 
 const getSchoolYearLabel = (value) => {
@@ -325,7 +325,7 @@ const deleteAccount = async () => {
                     </button>
                   </p>
                 
-                      <Button variant="outlined" onClick={handleClickOpen} style={{ color: 'red', border: '1px solid red'}}>
+                      <Button variant="outlined" onClick={handleClickOpen} style={{ color: 'green', border: '1px solid #2da042'}}>
                         Delete My Account
                       </Button>
                       <Dialog
@@ -343,7 +343,7 @@ const deleteAccount = async () => {
                         </DialogContent>
                         <DialogActions>
                           <Button onClick={handleClose} style={{ color: 'green' }}>Cancel</Button>
-                          <Button onClick={deleteAccount} style={{ color: 'red' }}>Delete Account</Button>
+                          <Button onClick={deleteAccount} style={{ color: 'green' }}>Delete Account</Button>
                         </DialogActions>
                       </Dialog>
                    
@@ -400,19 +400,17 @@ const deleteAccount = async () => {
             <TabPanel>
               <div className="panel-content">
                 <h2>Edit Personal Details</h2>
-                
-  <p>
+                <p>
     Profile Picture:{' '}
     {isEditing ? (
       <TextInput
-      name='picture'
+      name="picture"
         type="file"
         accept="image/*"
-        onChange={handleProfilePictureChange}
+        onChange={handleChange}
       />
     ) : (
-      editedUser.picture,
-      <img src={user.picture} alt="User Profile" />
+       <img src={user.picture} alt="User Profile" />
     )}
   </p>
                 <p>
