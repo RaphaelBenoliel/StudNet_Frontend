@@ -21,6 +21,8 @@ import {
 import {
    sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest , sendLikeRequest
 } from '../../API/Home_calls';
+import { requestFollowingList }  from '../../API/Auth_calls';
+
 import { TextField} from '@mui/material';
 
 import PopupMessage from './PopMessage';
@@ -36,6 +38,7 @@ export default function Home() {
   const [shareContent, setShareContent] = useState('');
   const [editingPostId, setEditingPostId] = useState(null);
   const [updatedPostContent, setUpdatedPostContent] = useState(''); 
+  const [followingList, setFollowingList] = useState(''); 
   const history = useNavigate();
   // const [postCon, setPost] = useState(null);
   
@@ -50,14 +53,35 @@ export default function Home() {
   }, []);
  
   useEffect(() => {
+    const getFollowingList = async () => {
+      try {
+
+        const user_ID = JSON.parse(localStorage.getItem('user'))._id;
+        if(user_ID === null) return;
+        //console.log('!!!!!!!!!!1', user_ID);
+
+        const result = await requestFollowingList({ user_ID });
+        if (!result) return;
+        result.push(user_ID);
+        console.log('!!!!!!!!!!123232323', result);
+        setFollowingList(result);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getFollowingList();
+  }, [auth]);
+
+  useEffect(() => {
     const getPosts = async () => {
       try {
         if (auth) {
           const result = await sendGetRequest();
           if (result && result.data) {
-            // const updatedPosts = result.data.posts ? result.data.posts : [];
-            setPostData(result.data);
-            localStorage.setItem('posts', JSON.stringify(result.data));
+            const filteredPosts = result.data.filter((post) => followingList.includes(post.userID._id));
+            setPostData(filteredPosts);
+            localStorage.setItem('posts', JSON.stringify(filteredPosts));
           }
         }
       } catch (error) {
@@ -65,7 +89,9 @@ export default function Home() {
       }
     };
     getPosts();
-  }, [auth]);
+  }, [auth, followingList]);
+
+
   const [showPopup, setShowPopup] = useState(false);
 
   const handleShowPopup = () => {
