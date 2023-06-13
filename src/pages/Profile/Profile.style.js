@@ -31,10 +31,6 @@ export const Label = styled.h3`
     text-align: left;
     padding: 0;
 `;
-<<<<<<< HEAD
-=======
-
->>>>>>> cab2be2a75bbb7ef29caa939d57cdf9746f22e6e
 export const Label2 = styled.h3`
     color: #fff;
     font-size: 16px;
