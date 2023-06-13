@@ -22,8 +22,9 @@ import {
 } from './Profile.style';
 import { useNavigate } from 'react-router-dom';
 import { sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest} from '../../API/Home_calls';
-import { getUsersByiD, requestFollow, requestFollowingList, requestUnfollow }  from '../../API/Auth_calls';
+import { getUsersByiD, requestFollow, requestFollowersList, requestFollowingList, requestUnfollow }  from '../../API/Auth_calls';
 import { isVisible } from '@testing-library/user-event/dist/utils';
+import PopupMessage from '../Home/PopMessage';
 
 export default function Profile() {
   const [auth, setAuth] = useState(null);
@@ -31,11 +32,15 @@ export default function Profile() {
   const [isFollowing, setFollowingState] = useState(null);
   const [isFollowBtnVisible, setFollowBtnVisibility] = useState(null);
   const [followBtnContent, setFollowBtnContent] = useState(null);
+  const [followersCount, setFollowersCount] = useState(null);
+  const [followingCount, setFollowingCount] = useState(null);
   const [postData, setPostData] = useState([]);
   const [isNewPostVisible, setNewPostVisibility] = useState(null);
   const [newPostContent, setNewPostContent] = useState('');
   const [editingPostId, setEditingPostId] = useState(null);
   const [updatedPostContent, setUpdatedPostContent] = useState(''); 
+  const [showPopup, setShowPopup] = useState(false);
+
   const navigate = useNavigate();
 
   var urlParams = new URLSearchParams(window.location.search);
@@ -101,6 +106,9 @@ export default function Profile() {
   useEffect(() => {
     const getFollowingState = async () => {
       try {
+        setFollowingCount(0);
+        setFollowersCount(0);
+
         const loggedUserID = JSON.parse(localStorage.getItem('user'))._id;
         if(authID === null) return;
         else if (authID === loggedUserID) {
@@ -110,12 +118,14 @@ export default function Profile() {
         else {
           setFollowBtnVisibility(true);
           setNewPostVisibility(false);
-          //לבדוק אם אני עוקבת אחרי המשתמש
+
           const user_ID = loggedUserID;
+          console.log('!!!!!!!!!!1', user_ID);
+
           const result = await requestFollowingList({ user_ID });
-          console.log('^^^^^^^^^^', result.find((value) => value === authID));
           if (!result) return;
 
+          //לבדוק אם אני עוקבת אחרי המשתמש
           if (result.find((value) => value === authID)){
             setFollowingState(true);
             setFollowBtnContent('unfollow');
@@ -132,6 +142,35 @@ export default function Profile() {
     getFollowingState();
   }, [authID]);
 
+  useEffect(() => {
+    const getFollowingFollowersCounts = async () => {
+      try {
+          const user_ID = authID;
+          console.log('!!!!!!!!!!2', authID);
+          console.log('!!!!!!!!!!3', user_ID);
+
+          const result2 = await requestFollowingList({ user_ID });
+          if (!result2) return;
+          const result3 = await requestFollowersList({ user_ID });
+          if (!result3) return;
+          setFollowingCount(result2.length);
+          setFollowersCount(result3.length);
+        }
+      catch (error) {
+        console.error(error);
+      }
+    };
+    getFollowingFollowersCounts();
+  }, [authID]);
+
+  const handleShowPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
   const cleanDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString();
@@ -146,23 +185,12 @@ export default function Profile() {
       console.log(`CONTENT:\t${newPostContent}`);
       const result = await sendPostRequest({ auth, content: newPostContent });
       if (result === null) return;
-  
-      const updatedPosts = result.data && result.data.posts ? result.data.posts : [];
-      // Parse the auth object from the string stored in local storage
-      const parsedAuth = JSON.parse(auth);
-      // Initialize auth.posts as an array if it's not already
-      if (!Array.isArray(parsedAuth.posts)) {
-        parsedAuth.posts = [];
-      }
-      // Update the auth.posts array with the new posts
-      parsedAuth.posts.push(...updatedPosts);
-      // Stringify the updated auth object before storing it back in local storage
-      const updatedAuth = JSON.stringify(parsedAuth);
-      localStorage.setItem('user', updatedAuth);
-  
-      setPostData([...postData, ...updatedPosts]);
-      localStorage.setItem('posts', JSON.stringify([...postData, ...updatedPosts]));
-      // Reset the new post contents
+
+      console.log('RESULT:\t', JSON.stringify(result.savedPost));
+      localStorage.setItem('user', JSON.stringify(result.user));
+      localStorage.setItem('posts', JSON.stringify(result.posts));
+      setAuth(JSON.stringify(result.user));
+      setPostData(result.posts);
       setNewPostContent('');
       location.reload();
     } catch (error) {
@@ -170,11 +198,15 @@ export default function Profile() {
     }
   };
 
+  const [showInputText, setShowInputText] = useState(true);
+
+  const handleCancelClick = () => {
+    setShowInputText(false);
+  };
+
   const handleDeletePost = async (postId) => {
     try {
-      console.log('postId: ', postId);
-      console.log('auth: ', JSON.parse(auth)._id);
-      await sendDeleteRequest(postId, JSON.parse(auth)._id ); //good
+      await sendDeleteRequest(postId, JSON.parse(auth)._id );
       const updatedPostData = postData.filter((post) => post._id !== postId);
       setPostData(updatedPostData);
     } catch (error) {
@@ -186,7 +218,6 @@ export default function Profile() {
     try {
       const result = await sendPutRequest(postId,  updatedContent );
       if (result === null) return;
-      
       const updatedPostData = JSON.parse(localStorage.getItem('posts'));
       setPostData(updatedPostData);
       localStorage.setItem('posts', JSON.stringify(result.data));
@@ -198,19 +229,9 @@ export default function Profile() {
     }
   };
 
+
   const handleFollowBtn = async () => {
     try {
-      // if (JSON.parse(localStorage.getItem('user').following).lenght > 0 && JSON.parse(localStorage.getItem('user').following).includes(authID)){
-      //   console.log('@@@@@@Following');
-      //   const result = await requestUnfollow({ loggedUserID , authID });
-      //   console.log('!!!!!!!!!!!1', result);
-      //   //למחוק מרשימת הנעקבים ומרשימת העוקבים של המשתמש השני
-      // }
-      // else {
-      //   const result = await requestFollow({ loggedUserID , authID });
-      //   console.log('!!!!!!!!!!!2', result);
-      //   //להוסיף לרשימת הנעקבים שלי ולרשימת העוקבים של המשתמש השני
-      // }
       const user1_ID = JSON.parse(localStorage.getItem('user'))._id;
       const user2_ID = authID;
 
@@ -220,6 +241,7 @@ export default function Profile() {
         console.log('!!!!!!!!!!!1', result);
         setFollowBtnContent('follow');
         setFollowingState(false);
+        setFollowersCount(followersCount - 1);
       }
       else{
         //...
@@ -227,6 +249,7 @@ export default function Profile() {
         console.log('!!!!!!!!!!!2', result);
         setFollowBtnContent('unfollow');
         setFollowingState(true);
+        setFollowersCount(followersCount + 1);
       }
     } catch (error) {
       console.error(error);
@@ -244,12 +267,16 @@ navigate('/my-area')
       <table>
         <td>
           <Title>
-            <UserPictureBig src={JSON.parse(auth).picture} alt="User Profile" /> {JSON.parse(auth).userName}
+            {/* <UserPictureBig src={JSON.parse(auth).picture} alt="User Profile" /> */} {JSON.parse(auth).userName} 
             <br/>
             {isFollowBtnVisible && <PostButton onClick={() => handleFollowBtn()}>{followBtnContent}</PostButton>}
-            {!isFollowBtnVisible &&<button onClick={retunArea} style={{backgroundColor: 'green', color: 'white',   borderRadius: '25px', border: 'none', cursor: 'pointer', fontSize: '17px', padding: '10px'}}>personal area</button>}
+            {!isFollowBtnVisible && <PostButton onClick={() => retunArea()}>personal area</PostButton>}
+
+            {/* {!isFollowBtnVisible &&<button onClick={retunArea} style={{backgroundColor: 'green', color: 'white',   borderRadius: '25px', border: 'none', cursor: 'pointer', fontSize: '17px', padding: '10px'}}>personal area</button>} */}
             <br/>
             <Label>About:</Label>
+            <Label2>{followersCount} Followers</Label2>
+            <Label2>{followingCount} Following</Label2>
             <Label2>{JSON.parse(auth).firstName} {JSON.parse(auth).lastName}</Label2>
             <Label2>{JSON.parse(auth).email}</Label2>
           </Title>
@@ -273,9 +300,11 @@ navigate('/my-area')
             <Post key={post._id}>
               <UserDetails>
                 <UserPicture src={post.userID.picture} alt="User Profile" />
-                <p>
-                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;{post.userID._id === JSON.parse(auth)._id}
-                </p>
+                <div>
+                  {post.userID.firstName} {post.userID.lastName}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{cleanDate(post.date)}&emsp;&emsp;&emsp;{post.userID._id === JSON.parse(auth)._id && (
+                    <PopupMessage onClose={handleClosePopup} onDelete={() => handleDeletePost(post._id)} onEdit={() => setEditingPostId(post._id)} />
+                  )}
+                </div>
               </UserDetails>
               {editingPostId === post._id ? (
                 <>
@@ -290,21 +319,15 @@ navigate('/my-area')
                       }
                     }}
                   />
-                  {post.userID._id === JSON.parse(auth)._id && (
-                    <Button onClick={() => handleUpdatePost(post._id, updatedPostContent)}>
+                   {post.userID._id === JSON.parse(auth)._id && (
+                    <><Button onClick={() => handleUpdatePost(post._id, updatedPostContent)}>
                       Post
-                    </Button>
+                    </Button><Button onClick={() => handleCancelClick}>Cancel</Button></>
                   )}
                 </>
               ) : (
                 <>
                   <PostContent>{post.content}</PostContent>
-                  <>
-                    <div>
-                      <Button onClick={() => setEditingPostId(post._id)}>Edit</Button>
-                      <Button onClick={() => handleDeletePost(post._id)}>Delete</Button>
-                    </div>
-                    </>
                 </>
               )}
             </Post>
