@@ -84,6 +84,7 @@ export default function PersonalArea() {
   }, []);
   //followers
   const getFollowers = async () => {
+    const userf = JSON.parse(localStorage.getItem('user'));
     if (followers.length !== 0) {
       try {
         // console.log(followers);
@@ -91,7 +92,9 @@ export default function PersonalArea() {
         // getUsersByiD( {_id: userID} )
         // console.log(result);
         setFollowersUsers(result.users);
-        localStorage.setItem('user.followers', JSON.stringify(result.users));
+        // console.log(userf.followers);
+        userf.followers = followers;
+        localStorage.setItem('user', JSON.stringify(userf));
       } catch (error) {
         console.error(error);
       }
@@ -102,7 +105,9 @@ export default function PersonalArea() {
         //using the same function to get the following users
         const result1 = await getUsersByiD({ users: following });
         setFollowingUsers(result1.users);
-        localStorage.setItem('user.following', JSON.stringify(result1.users));
+
+        userf.following = following;
+        localStorage.setItem('user', JSON.stringify(userf));
         console.log(result1);
       } catch (error) {
         console.error(error);
@@ -159,13 +164,13 @@ export default function PersonalArea() {
 const changeAccount = () => {
   var nameRegex = /^[a-zA-Z]+$/;
     var userNameRegex = /^[a-zA-Z0-9]+$/;
-    var isRegex = false;
+   
     setMessageUser('');
     setMessageFirst('');
     setMessageLast('');
   if (userName.current.value === '') {
     setMessageUser('Username cannot be empty.');
-    isRegex = true;
+    return false;
   } else if (!userName.current.value.match(userNameRegex)) {
     // Check if the usernName is in the correct format
     setMessageUser('Username must be alphanumeric.');
@@ -272,8 +277,7 @@ const getSchoolYearLabel = (value) => {
 const toggleEdit= () => {
   setIsEditing(!isEditing);
   if (isEditing) {
-    // changeAccount();
-    saveProfile();
+    if ( changeAccount()===true) saveProfile();
   }
 };
 
@@ -342,7 +346,8 @@ const deleteAccount = async () => {
                         onChange={handleChange}
                         autoComplete="userName" />
                     ) : (
-                      editedUser.userName
+                      editedUser.userName,
+                      <p>{messageUser}</p>
                     )}
                   </p>
                   <p>
@@ -355,6 +360,7 @@ const deleteAccount = async () => {
                         value={editedUser.firstName}
                         onChange={handleChange}
                         autoComplete="firstName" />
+                        
                     ) : (
                       editedUser.firstName
                     )}
@@ -607,13 +613,17 @@ const deleteAccount = async () => {
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="panel-content">
-                  <h2>Statistics</h2>
-                  <div className="statistic">
-                    
+                  <div className="panel-content_statistics">
+                    <h2>User Statistics</h2>
+                    {/* {userStatistics && ( */}
+                      <div>
+                        <p>likes : {user.likedPosts.length}</p>
+                        <p>Posts: {user.posts.length}</p>
+                        {/* Display other statistics */}
+                      </div>
+                    {/* )} */}
                   </div>
-                </div>
-              </TabPanel>
+                </TabPanel>
                 </Tabs></>
             )}
         </div>
