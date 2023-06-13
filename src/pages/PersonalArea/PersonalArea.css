@@ -9,7 +9,6 @@ padding-bottom: 100px;
 /* box-sizing: border-box; */
 }
 
-
 .title{
     margin-top: 100px;
     margin-left: 100px; 
@@ -173,6 +172,10 @@ margin-left: 55px;
     margin-bottom: 8px;
     border-radius: 8px;
     border: 1px solid green;
+
+}
+
+.panel-content_statistics{
 
 }
 

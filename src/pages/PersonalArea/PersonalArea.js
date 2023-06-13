@@ -15,7 +15,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import GroupIcon from '@mui/icons-material/Group';
+import ThumbsUpDownOutlinedIcon from '@mui/icons-material/ThumbsUpDownOutlined';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -164,38 +167,37 @@ export default function PersonalArea() {
 const changeAccount = () => {
   var nameRegex = /^[a-zA-Z]+$/;
     var userNameRegex = /^[a-zA-Z0-9]+$/;
-   var isRegex=false;
+   
     setMessageUser('');
     setMessageFirst('');
     setMessageLast('');
   if (userName.current.value === '') {
     setMessageUser('Username cannot be empty.');
-    isRegex= false;
+    return false;
   } else if (!userName.current.value.match(userNameRegex)) {
     // Check if the usernName is in the correct format
     setMessageUser('Username must be alphanumeric.');
-    isRegex= false;
+    return false;
   }else setMessageUser('');
   // Check if the first name is empty
   if (firstName.current.value === '') {
     setMessageFirst('First name cannot be empty.');
-    isRegex= false;
+    return false;
   } else if (!firstName.current.value.match(nameRegex)) {
   // Check if the first name is in the correct format
     setMessageFirst('First name must be alphabetic.');
-    isRegex= false;
+    return false;
   } else setMessageFirst('');
   // Check if the last name is empty
   if (lastName.current.value === '') {
     setMessageLast('Last name cannot be empty.');
-    isRegex= false;
+    return false;
   } else if (!lastName.current.value.match(nameRegex)) {
   // Check if the last name is in the correct format
     setMessageLast('Last name must be alphabetic.');
-    isRegex= false;
+    return false;
   } else setMessageLast('');
-  if(isRegex === false) return false;
-  else return true;
+  return true;
 }
 
 const sendChangePassword = async (user, newPassword) => {
@@ -608,14 +610,14 @@ const deleteAccount = async () => {
                 <div className="panel-content">
                   <h2>Liked Posts</h2>
                   <div className="like-post">
-                    
+                  <p>I like posts: {user.likedPosts.length} <br></br><br></br><br></br>
+                  <ThumbsUpDownOutlinedIcon></ThumbsUpDownOutlinedIcon></p>
                   </div>
                 </div>
               </TabPanel><TabPanel>
                 <div className="panel-content">
                   <h2>Saved Posts</h2>
                   <div className="save-post">
-                    
                   </div>
                 </div>
               </TabPanel>
@@ -624,11 +626,11 @@ const deleteAccount = async () => {
                     <h2>User Statistics</h2>
                     {/* {userStatistics && ( */}
                       <div>
-                        <p>likes : {user.likedPosts.length}</p>
-                        <p>Posts: {user.posts.length}</p>
-                        {/* Display other statistics */}
+                        <p><ThumbUpAltIcon></ThumbUpAltIcon> Number of likes : {user.likedPosts.length}</p>
+                        <p><PostAddIcon></PostAddIcon> Number of Posts: {user.posts.length}</p>
+                        <p><GroupIcon></GroupIcon> Number of Followers: {user.followers.length}</p>
+                        <p><GroupIcon></GroupIcon> Number of Following: {user.following.length}</p>
                       </div>
-                    {/* )} */}
                   </div>
                 </TabPanel>
                 </Tabs></>
