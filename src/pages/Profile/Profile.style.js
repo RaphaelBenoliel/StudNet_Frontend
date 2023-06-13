@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
     min-height: 120vh;
     flex-direction: column;
     justify-content: left;
+    margin-left: -260px;
 `;
 export const STitle = styled.h3`
     color: #2da042;
@@ -30,6 +31,10 @@ export const Label = styled.h3`
     text-align: left;
     padding: 0;
 `;
+<<<<<<< HEAD
+=======
+
+>>>>>>> cab2be2a75bbb7ef29caa939d57cdf9746f22e6e
 export const Label2 = styled.h3`
     color: #fff;
     font-size: 16px;
@@ -37,6 +42,11 @@ export const Label2 = styled.h3`
     text-align: left;
     padding: 0;
 `;
+
+export const TD = styled.td`
+    width: 80px;
+`;
+
 export const TextContainer = styled.div`
     display: flex;
     flex-direction: column;

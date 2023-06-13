@@ -30,6 +30,9 @@ export default function PersonalArea() {
   const [savedPosts, setSavedPosts] = useState([]);
   const [statistics, setStatistics] = useState({});
   const [user, setUser] = useState(null);
+  const [messageUser, setMessageUser] = useState([]);
+  const [messageFirst, setMessageFirst] = useState([]);
+  const [messageLast, setMessageLast] = useState([]);
   const [messagePass, setMessagePass] = useState([]);
   const [messagePass1, setMessagePass1] = useState([]);
   const [messagePass2, setMessagePass2] = useState([]);
@@ -38,6 +41,9 @@ export default function PersonalArea() {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
   const newPasswordAgain = useRef(null);
+  const userName = useRef(null);
+  const firstName = useRef(null);
+  const lastName = useRef(null);
   const [profilePicture, setProfilePicture] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({
@@ -117,8 +123,6 @@ export default function PersonalArea() {
     console.log(`Unfollow ${user.firstName} ${user.lastName}`);
   };
 
-
-
     const changePassword = () => {
     var passRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     var isRegex = false;
@@ -150,6 +154,41 @@ export default function PersonalArea() {
     } else {
       setCurrentPasswordMessage('Current password not match');
     }
+}
+
+const changeAccount = () => {
+  var nameRegex = /^[a-zA-Z]+$/;
+    var userNameRegex = /^[a-zA-Z0-9]+$/;
+    var isRegex = false;
+    setMessageUser('');
+    setMessageFirst('');
+    setMessageLast('');
+  if (userName.current.value === '') {
+    setMessageUser('Username cannot be empty.');
+    isRegex = true;
+  } else if (!userName.current.value.match(userNameRegex)) {
+    // Check if the usernName is in the correct format
+    setMessageUser('Username must be alphanumeric.');
+    isRegex = true;
+  }else setMessageUser('');
+  // Check if the first name is empty
+  if (firstName.current.value === '') {
+    setMessageFirst('First name cannot be empty.');
+    isRegex = true;
+  } else if (!firstName.current.value.match(nameRegex)) {
+  // Check if the first name is in the correct format
+    setMessageFirst('First name must be alphabetic.');
+    isRegex = true;
+  } else setMessageFirst('');
+  // Check if the last name is empty
+  if (lastName.current.value === '') {
+    setMessageLast('Last name cannot be empty.');
+    isRegex = true;
+  } else if (!lastName.current.value.match(nameRegex)) {
+  // Check if the last name is in the correct format
+    setMessageLast('Last name must be alphabetic.');
+    isRegex = true;
+  } else setMessageLast('');
 }
 
 const sendChangePassword = async (user, newPassword) => {
@@ -233,6 +272,7 @@ const getSchoolYearLabel = (value) => {
 const toggleEdit= () => {
   setIsEditing(!isEditing);
   if (isEditing) {
+    // changeAccount();
     saveProfile();
   }
 };
@@ -249,7 +289,7 @@ const deleteAccount = async () => {
     }
     localStorage.removeItem('user');
     console.log('Deleting user account...');
-  };
+};
         
     return (
         <div className="App">
@@ -288,6 +328,7 @@ const deleteAccount = async () => {
                       <TextInput
                         type="text"
                         name="userName"
+                        ref={userName} 
                         value={editedUser.userName}
                         onChange={handleChange}
                         autoComplete="userName" />
@@ -301,6 +342,7 @@ const deleteAccount = async () => {
                       <TextInput
                         type="text"
                         name="firstName"
+                        ref={firstName} 
                         value={editedUser.firstName}
                         onChange={handleChange}
                         autoComplete="firstName" />
@@ -316,6 +358,7 @@ const deleteAccount = async () => {
                         name="lastName"
                         value={editedUser.lastName}
                         onChange={handleChange}
+                        ref={lastName}
                         autoComplete="lastName" />
                     ) : (
                       editedUser.lastName
@@ -348,7 +391,6 @@ const deleteAccount = async () => {
                           <Button onClick={deleteAccount} style={{ color: 'green' }}>Delete Account</Button>
                         </DialogActions>
                       </Dialog>
-                   
                 </form>
               </div>
             </div>
