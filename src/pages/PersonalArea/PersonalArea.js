@@ -249,7 +249,6 @@ const uploadProfilePicture = async (formData) => {
 };
 
 
-
 const getSchoolYearLabel = (value) => {
   switch (value) {
     case 0:
@@ -570,7 +569,7 @@ const deleteAccount = async () => {
                     <div className="panel-content-followers">
                       <h2>My Following</h2>
                       <div className="followers-list">
-                        {followingUsers.map((user) => (
+                        {followingUsers.map(user => (
                           <div key={user.email}>
                             <img src={user.picture} alt={user.firstName} />
                             <p>{`${user.firstName} ${user.lastName}`}</p>
